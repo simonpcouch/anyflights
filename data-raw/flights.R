@@ -1,12 +1,14 @@
 library(dplyr)
 library(readr)
 
-flight_url <- function(year = 2013, month) {
+last_year <- 2014#as.numeric(substr(Sys.time(), 1, 4)) - 1
+
+flight_url <- function(year = last_year, month) {
   base_url <- "http://www.transtats.bts.gov/Download/"
   sprintf(paste0(base_url, "On_Time_On_Time_Performance_%d_%d.zip"), year, month)
 }
 
-download_month <- function(year = 2013, month) {
+download_month <- function(year = last_year, month) {
   url <- flight_url(year, month)
 
   temp <- tempfile(fileext = ".zip")
@@ -19,15 +21,15 @@ download_month <- function(year = 2013, month) {
   unzip(temp, exdir = "data-raw/flights", junkpaths = TRUE, files = csv)
 
   src <- paste0("data-raw/flights/", csv)
-  dst <- paste0("data-raw/flights/", "2013-", month, ".csv")
+  dst <- paste0("data-raw/flights/", last_year, "-", month, ".csv")
   file.rename(src, dst)
 }
 
 months <- 1:12
-needed <- paste0("2013-", months, ".csv")
+needed <- paste0(last_year, "-", months, ".csv")
 missing <- months[!(needed %in% dir("data-raw/flights"))]
 
-lapply(missing, download_month, year = 2013)
+lapply(missing, download_month, year = last_year)
 
 get_nyc <- function(path) {
   col_types <- cols(
