@@ -10,7 +10,7 @@ if (!file.exists("data-raw/airports.dat")) {
 }
 
 raw <- read_csv("data-raw/airports.dat",
-  col_names = c("id", "name", "city", "country", "faa", "icao", "lat", "lon", "alt", "tz", "dst", "tzone")
+  col_names = c("id", "name", "city", "country", "faa", "icao", "lat", "lon", "alt", "tz", "dst", "tzone", "type", "source")
 )
 
 airports <- raw %>%
