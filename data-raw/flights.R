@@ -1,10 +1,10 @@
 library(dplyr)
 library(readr)
 
-last_year <- 2014#as.numeric(substr(Sys.time(), 1, 4)) - 1
+last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1
 
 flight_url <- function(year = last_year, month) {
-  base_url <- "http://www.transtats.bts.gov/Download/"
+  base_url <- "http://www.transtats.bts.gov/PREZIP/"
   sprintf(paste0(base_url, "On_Time_On_Time_Performance_%d_%d.zip"), year, month)
 }
 
