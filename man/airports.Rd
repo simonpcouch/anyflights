@@ -17,7 +17,7 @@
  \item{tzone}{IANA time zone, as determined by GeoNames webservice}
 }}
 \source{
-\url{http://openflights.org/data.html}, downloaded 2014-06-27
+\url{http://openflights.org/data.html}, downloaded 2014-02-26
 }
 \usage{
 airports
