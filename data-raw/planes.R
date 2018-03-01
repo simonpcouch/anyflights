@@ -1,9 +1,11 @@
 library(dplyr)
 library(readr)
 
+last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1
+
 # Update URL from
 # http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/
-src <- "http://registry.faa.gov/database/yearly/ReleasableAircraft.2017.zip"
+src <- paste0("http://registry.faa.gov/database/yearly/ReleasableAircraft.", last_year, ".zip")
 lcl <- "data-raw/planes"
 
 if (!file.exists(lcl)) {
