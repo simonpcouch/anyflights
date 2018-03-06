@@ -10,9 +10,10 @@ flight_url <- function(year = last_year, month) {
 
 download_month <- function(year = last_year, month) {
   url <- flight_url(year, month)
-
-  temp <- tempfile(fileext = ".zip")
-  download.file(url, temp)
+  if (url.exists("url")) {
+    temp <- tempfile(fileext = ".zip")
+    download.file(url, temp)
+  } else stop(sprintf("Can't access link for month %d (%s) in %d. \n Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp", month, month.name[month], year))
 
   files <- unzip(temp, list = TRUE)
   # Only extract biggest file

@@ -1,12 +1,14 @@
 library(dplyr)
 library(readr)
 library(purrr)
+library(RCurl)
 
 if (!file.exists("data-raw/airports.dat")) {
-  download.file(
-    "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat",
-    "data-raw/airports.dat"
-  )
+  if (url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
+    download.file(
+      "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat",
+      "data-raw/airports.dat")
+  } else stop("Can't access `airports` link in 'data-raw/airports.R'")
 }
 
 raw <- read_delim("data-raw/airports.dat", ",",

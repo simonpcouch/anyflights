@@ -1,7 +1,10 @@
 library(dplyr)
 library(readr)
 
-raw <- read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")
+if (url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
+  raw <- read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")
+} else stop("Can't access `airlines` link in 'data-raw/airlines.R'")
+
 
 load("data/flights.rda")
 
