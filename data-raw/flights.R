@@ -13,7 +13,7 @@ download_month <- function(year = last_year, month) {
   if (url.exists("url")) {
     temp <- tempfile(fileext = ".zip")
     download.file(url, temp)
-  } else stop(sprintf("Can't access link for month %d (%s) in %d. \n Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp", month, month.name[month], year))
+  } else stop(sprintf("Can't access `flights` link in 'data-raw.flights.R' for month %d (%s) in %d. \n Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp", month, month.name[month], year))
 
   files <- unzip(temp, list = TRUE)
   # Only extract biggest file
