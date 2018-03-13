@@ -4,6 +4,7 @@ library(httr)
 library(dplyr)
 library(lubridate)
 library(readr)
+library(RCurl)
 
 # Download ---------------------------------------------------------------------
 
@@ -19,7 +20,7 @@ get_asos <- function(station) {
   
   dir.create("data-raw/weather", showWarnings = FALSE, recursive = TRUE)
   r <- GET(url, query = query, write_disk(paste0("./data-raw/weather/", station, ".csv")))
-  stop_for_status(r)
+  stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS`")
 }
 
 stations <- c("JFK", "LGA", "EWR")
