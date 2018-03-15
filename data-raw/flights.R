@@ -11,7 +11,7 @@ flight_url <- function(year = last_year, month) {
 
 download_month <- function(year = last_year, month) {
   url <- flight_url(year, month)
-  if (url.exists("url")) {
+  if (url.exists(url)) {
     temp <- tempfile(fileext = ".zip")
     download.file(url, temp)
   } else stop(sprintf("Can't access `flights` link in 'data-raw.flights.R' for month %d (%s) in %d. \n Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp", month, month.name[month], year))
@@ -42,7 +42,7 @@ get_nyc <- function(path) {
     Carrier = col_character(),
     UniqueCarrier = col_character()
   )
-  read_csv(path, col_types = col_types) %>%
+  suppressWarnings(read_csv(path, col_types = col_types)) %>%
     select(
       year = Year, month = Month, day = DayofMonth,
       dep_time = DepTime, sched_dep_time = CRSDepTime, dep_delay = DepDelay,
