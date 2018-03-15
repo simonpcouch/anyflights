@@ -1,5 +1,6 @@
 library(dplyr)
 library(readr)
+library(RCurl)
 
 last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1
 
