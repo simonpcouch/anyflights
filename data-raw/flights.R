@@ -64,4 +64,5 @@ all <- lapply(dir("data-raw/flights", full.names = TRUE), get_nyc)
 flights <- bind_rows(all)
 flights$tailnum[flights$tailnum == ""] <- NA
 
+dir.create("data", showWarnings = FALSE)
 save(flights, file = "data/flights.rda", compress = "bzip2")
