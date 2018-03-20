@@ -4,7 +4,7 @@
 \name{weather}
 \alias{weather}
 \title{Hourly weather data}
-\format{A data frame with columns
+\format{A data frame with 26201 rows and 15 variables:
 \describe{
 \item{origin}{Weather station. Named origin to faciliate merging with
   \code{\link{flights}} data}

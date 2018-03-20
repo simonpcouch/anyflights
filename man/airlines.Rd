@@ -4,7 +4,7 @@
 \name{airlines}
 \alias{airlines}
 \title{Airline names.}
-\format{Data frame with columns
+\format{A data frame with 12 rows and 2 variables:
 \describe{
 \item{carrier}{Two letter abbreviation}
 \item{name}{Full name}

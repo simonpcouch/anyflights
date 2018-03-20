@@ -4,7 +4,7 @@
 \name{planes}
 \alias{planes}
 \title{Plane metadata.}
-\format{A data frame with columns:
+\format{A data frame with 3512 rows and 9 variables:
 \describe{
 \item{tailnum}{Tail number}
 \item{year}{Year manufactured}

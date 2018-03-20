@@ -7,7 +7,7 @@
 #'
 #' @source FAA Aircraft registry,
 #'  \url{http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/}
-#' @format A data frame with columns:
+#' @format A data frame with 3512 rows and 9 variables:
 #' \describe{
 #' \item{tailnum}{Tail number}
 #' \item{year}{Year manufactured}

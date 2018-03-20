@@ -4,7 +4,7 @@
 \name{flights}
 \alias{flights}
 \title{Flights data}
-\format{Data frame with columns
+\format{A data frame with 303748 rows anf 19 variables:
 \describe{
 \item{year,month,day}{Date of departure}
 \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}
