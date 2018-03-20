@@ -9,8 +9,11 @@ src <- paste0("http://registry.faa.gov/database/yearly/ReleasableAircraft.", las
 lcl <- "data-raw/planes"
 
 if (!file.exists(lcl)) {
-  tmp <- tempfile(fileext = ".zip")
-  download.file(src, tmp)
+  if (url.exists(src)) {
+    tmp <- tempfile(fileext = ".zip")
+    download.file(src, tmp)
+  } else stop("Can't access `planes` link in 'data-raw/planes.R'")
+
 
   dir.create(lcl)
   unzip(tmp, exdir = lcl, junkpaths = TRUE)

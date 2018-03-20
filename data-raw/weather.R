@@ -12,6 +12,7 @@ last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1
 
 get_asos <- function(station) {
   url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
+  if(!(url.exists(url))) stop("Can't access `weather` link in 'data-raw/weather.R'")
   query <- list(
     station = station, data = "all",
     year1 = as.character(last_year), month1 = "1", day1 = "1",
