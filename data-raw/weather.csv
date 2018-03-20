@@ -1,4 +1,4 @@
-station,year,month,day,hour,temp,dewp,humid,wind_dir,wind_speed,wind_gust,precip,pressure,visib,time_hour
+origin,year,month,day,hour,temp,dewp,humid,wind_dir,wind_speed,wind_gust,precip,pressure,visib,time_hour
 EWR,2017,1,1,0,NA,NA,NA,200,17.261699999999998,19.864419125999994,NA,NA,10,2017-01-01T08:00:00Z
 EWR,2017,1,1,1,NA,NA,NA,220,16.11092,18.5401245176,NA,NA,10,2017-01-01T09:00:00Z
 EWR,2017,1,1,2,NA,NA,NA,190,11.5078,13.242946083999998,NA,NA,10,2017-01-01T10:00:00Z
