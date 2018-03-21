@@ -1,5 +1,5 @@
 Package: nycflights
-Title: Flights that Departed NYC in 2017
+Title: Flights that Departed NYC in the Last Year
 Version: 0.0.1
 Authors@R: c(
     person("Simon", "Couch", , "simonpatrickcouch@gmail.com", "aut"),
