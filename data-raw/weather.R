@@ -76,4 +76,4 @@ weather <-
     time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
 
 write_csv(weather, "data-raw/weather.csv")
-save(weather, file = "data/weather.rda")
+save(weather, file = "data/weather.rda", compress = "xz")

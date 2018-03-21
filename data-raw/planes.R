@@ -67,4 +67,4 @@ planes <- all %>%
   arrange(tailnum)
 
 write_csv(planes, "data-raw/planes.csv")
-save(planes, file = "data/planes.rda")
+save(planes, file = "data/planes.rda", compress = "xz")

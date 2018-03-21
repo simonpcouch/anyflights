@@ -14,4 +14,4 @@ airlines <- raw %>%
   arrange(carrier)
 
 write_csv(airlines, "data-raw/airlines.csv")
-save(airlines, file = "data/airlines.rda")
+save(airlines, file = "data/airlines.rda", compress = "bzip2")
