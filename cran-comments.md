@@ -1,26 +1,28 @@
-This is a minor update to fix the NOTE I accidentally introduced in the last release.
+This is an initial release. Our plan is to update yearly (February/March) to update the data to the previous year. Since the current size of the data is smaller than that of `nycflights13`, we're confident that the size of this data won't blow up over time.
 
 ---
 
 ## Test environments
-* local OS X install, R 3.3.2
-* ubuntu 12.04 (on travis-ci), R 3.3.2
+* local OS X install, R 3.3.3
+* ubuntu 14.04 (on travis-ci), R 3.4.4
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
-* Checking installed package size:
-  installed size is  6.9Mb
+* Checking installed package size ... NOTE
+  installed size is  6.2Mb
   sub-directories of 1Mb or more:
-    data   6.9Mb
-
+    data   6.1Mb
+  
   This is a data package that will be rarely updated.
+
+* checking CRAN incoming feasibility ... NOTE
+  Maintainer: 'Jay Lee <jaylee@reed.edu>'
+
+  This is my first package as maintainer, but I am an active coauthor on `rcv` and was involved in all but name in previously submitting that to CRAN.
 
 ## Reverse dependencies
 
-* I have run R CMD check on the 5 downstream dependencies.
-  (Summary at https://github.com/hadley/nycflights13/tree/master/revdep). 
-  
-* All passed with no errors or warnings.
+Initial release, none exist.
