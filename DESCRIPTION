@@ -2,7 +2,7 @@ Package: nycflights
 Title: Flights that Departed NYC in the Last Year
 Version: 0.0.1
 Authors@R: c(
-    person("Simon", "Couch", , "simonpatrickcouch@gmail.com", "aut"),
+    person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", "aut"),
     person("Jay", "Lee", , "jaylee@reed.edu", c("aut", "cre")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut")
     )
