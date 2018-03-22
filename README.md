@@ -1,4 +1,4 @@
-# nycflights13
+# nycflights
 
 [![Build Status](https://travis-ci.org/jayleetx/nycflights.svg?branch=master)](https://travis-ci.org/jayleetx/nycflights)
 
