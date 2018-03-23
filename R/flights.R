@@ -5,7 +5,7 @@
 #'
 #' @source RITA, Bureau of transportation statistics,
 #'  \url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
-#' @format A data frame with 303748 rows anf 19 variables:
+#' @format A data frame with 303748 rows and 19 variables:
 #' \describe{
 #' \item{year,month,day}{Date of departure}
 #' \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}
