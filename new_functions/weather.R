@@ -8,19 +8,25 @@ library(RCurl)
 
 # Download ---------------------------------------------------------------------
 
-# test arguments: station = c("PDX", "SEA")
+# test arguments: station = c("PDX", "SEA"), year = 2015
 
-get_weather <- function(station) {
+get_weather <- function(station, year = last_year, ...) {
 
 last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1  
+
+#extract year1 and year2 from arguments
+year1 <- year[1]
+year2 <- ifelse(is.na(year[2]), year[1], year[2])
   
-get_asos <- function(station) {
+get_asos <- function(station, year = last_year, ...) {
+  year1 <- year[1]
+  year2 <- ifelse(is.na(year[2]), year[1], year[2])
   url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
   if(!(url.exists(url))) stop("Can't access `weather` link in 'data-raw/weather.R'")
   query <- list(
     station = station, data = "all",
-    year1 = as.character(last_year), month1 = "1", day1 = "1",
-    year2 = as.character(last_year), month2 = "12", day2 = "31", tz = "GMT",
+    year1 = year1, month1 = "1", day1 = "1",
+    year2 = year2, month2 = "12", day2 = "31", tz = "GMT",
     format = "comma", latlon = "no", direct = "yes")
 
   dir.create("data-raw/weather", showWarnings = FALSE, recursive = TRUE)
@@ -28,7 +34,7 @@ get_asos <- function(station) {
   stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml`")
 }
 
-paths <- paste0(stations, ".csv")
+paths <- paste0(station, ".csv")
 lapply(station, get_asos)
 
 paths <- dir("data-raw/weather", full.names = TRUE)
@@ -63,7 +69,7 @@ weather <-
     time = ~as.POSIXct(strptime(time, "%Y-%m-%d %H:%M")),
     wind_speed = ~as.numeric(wind_speed) * 1.15078, # convert to mpg
     wind_gust = ~as.numeric(wind_speed) * 1.15078,
-    year = last_year,
+    year = ~lubridate::year(time),
     month = ~lubridate::month(time),
     day = ~lubridate::mday(time),
     hour = ~lubridate::hour(time)) %>%
