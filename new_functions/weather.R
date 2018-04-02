@@ -1,3 +1,5 @@
+get_weather <- function(station, year, ...) {
+
 # From https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS
 
 library(httr)
@@ -7,35 +9,30 @@ library(readr)
 library(RCurl)
 
 # Download ---------------------------------------------------------------------
-
-# test arguments: station = c("PDX", "SEA"), year = 2015
-
-get_weather <- function(station, year = last_year, ...) {
-
-last_year <- as.numeric(substr(Sys.time(), 1, 4)) - 1  
-
-#extract year1 and year2 from arguments
-year1 <- year[1]
-year2 <- ifelse(is.na(year[2]), year[1], year[2])
+year <- year
   
-get_asos <- function(station, year = last_year, ...) {
+get_asos <- function(station, ...) {
   year1 <- year[1]
   year2 <- ifelse(is.na(year[2]), year[1], year[2])
   url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
   if(!(url.exists(url))) stop("Can't access `weather` link in 'data-raw/weather.R'")
   query <- list(
     station = station, data = "all",
-    year1 = year1, month1 = "1", day1 = "1",
-    year2 = year2, month2 = "12", day2 = "31", tz = "GMT",
+    year1 = as.character(year1), month1 = "1", day1 = "1",
+    year2 = as.character(year2), month2 = "12", day2 = "31", tz = "GMT",
     format = "comma", latlon = "no", direct = "yes")
 
   dir.create("data-raw/weather", showWarnings = FALSE, recursive = TRUE)
   r <- GET(url, query = query, write_disk(paste0("./data-raw/weather/", station, ".csv")))
-  stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml`")
+  stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS`")
 }
 
-paths <- paste0(station, ".csv")
-lapply(station, get_asos)
+stations <- station
+paths <- paste0(stations, ".csv")
+missing <- stations[!(paths %in% dir("data-raw/weather/"))]
+lapply(missing, get_asos)
+
+# Load ------------------------------------------------------------------------
 
 paths <- dir("data-raw/weather", full.names = TRUE)
 col_types <- cols(
@@ -69,7 +66,7 @@ weather <-
     time = ~as.POSIXct(strptime(time, "%Y-%m-%d %H:%M")),
     wind_speed = ~as.numeric(wind_speed) * 1.15078, # convert to mpg
     wind_gust = ~as.numeric(wind_speed) * 1.15078,
-    year = ~lubridate::year(time),
+    year = year,
     month = ~lubridate::month(time),
     day = ~lubridate::mday(time),
     hour = ~lubridate::hour(time)) %>%
@@ -81,5 +78,6 @@ weather <-
   mutate_(
     time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
 
-write_csv(weather, "data-raw/weather.csv")
-save(weather, file = "data/weather.rda", compress = "xz") }
+save(weather, file = "data/weather.rda", compress = "xz")
+
+}
