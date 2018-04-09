@@ -8,10 +8,7 @@ library(lubridate)
 library(readr)
 library(RCurl)
 
-# Download ---------------------------------------------------------------------
-year <- year
-  
-get_asos <- function(station, ...) {
+  year <- year
   year1 <- year[1]
   year2 <- ifelse(is.na(year[2]), year[1], year[2])
   url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
@@ -23,16 +20,8 @@ get_asos <- function(station, ...) {
     format = "comma", latlon = "no", direct = "yes")
 
   dir.create("data-raw/weather", showWarnings = FALSE, recursive = TRUE)
-  r <- GET(url, query = query, write_disk(paste0("./data-raw/weather/", station, ".csv")))
+  r <- GET(url, query = query, write_disk(paste0("./data-raw/weather/", station, ".csv"), overwrite = TRUE))
   stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS`")
-}
-
-stations <- station
-paths <- paste0(stations, ".csv")
-missing <- stations[!(paths %in% dir("data-raw/weather/"))]
-lapply(missing, get_asos)
-
-# Load ------------------------------------------------------------------------
 
 paths <- dir("data-raw/weather", full.names = TRUE)
 col_types <- cols(
@@ -46,6 +35,7 @@ col_types <- cols(
   wxcodes = col_character(),
   metar = col_character()
 )
+
 all <- lapply(paths, read_csv, comment = "#", na = "M",
               col_names = TRUE, col_types = col_types)
 raw <- bind_rows(all)
@@ -78,6 +68,13 @@ weather <-
   mutate_(
     time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
 
-save(weather, file = "data/weather.rda", compress = "xz")
+station_low <- tolower(station)
+year_substr <- substr(year[1], 3, 4)
+subdir <- paste0("data/", station_low, "flights", year_substr)
+file_path <- paste0(subdir, "/weather.rda")
+if (!dir.exists(path = subdir)) {
+  dir.create(path = subdir) }
+
+save(weather, file = file_path, compress = "xz")
 
 }
