@@ -64,6 +64,12 @@ flights <- bind_rows(all)
 flights$tailnum[flights$tailnum == ""] <- NA
 
 dir.create("data", showWarnings = FALSE)
-save(flights, file = "data/flights.rda", compress = "bzip2")
+station_low <- tolower(station)
+year_substr <- substr(year[1], 3, 4)
+subdir <- paste0("data/", station_low, "flights", year_substr)
+file_path <- paste0(subdir, "/flights.rda")
+if (!dir.exists(path = subdir)) {
+  dir.create(path = subdir) }
+save(flights, file = file_path, compress = "bzip2")
 
 }
