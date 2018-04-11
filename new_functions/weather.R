@@ -1,4 +1,4 @@
-get_weather <- function(station, year, ...) {
+get_weather <- function(station, year) {
 
 # From https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS
 
