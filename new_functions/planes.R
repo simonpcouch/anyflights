@@ -1,5 +1,7 @@
 get_planes <- function(year) {
- 
+#still needs the subdirectory functionality, inherited from other functions
+  
+  
 # Update URL from
 # http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/
 src <- paste0("http://registry.faa.gov/database/yearly/ReleasableAircraft.", year, ".zip")
