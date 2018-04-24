@@ -10,7 +10,6 @@ download.file(src, tmp)
 
   dir.create(lcl)
   unzip(tmp, exdir = lcl, junkpaths = TRUE)
-}
 
 master <- read.csv("data-raw/planes/MASTER.txt", stringsAsFactors = FALSE, strip.white = TRUE)
 names(master) <- tolower(names(master))
