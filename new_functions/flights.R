@@ -1,22 +1,16 @@
 get_flights <- function(station, year) {
 
-library(dplyr)
-library(readr)
-library(RCurl)
-
-year <- year
-
 flight_url <- function(year, month) {
   base_url <- "http://www.transtats.bts.gov/PREZIP/"
   paste0(base_url, "On_Time_On_Time_Performance_", year, "_", month, ".zip")
 }
 
 download_month <- function(year = year, month) {
-  url <- flight_url(year, month)
-  if (url.exists(url)) {
+  fl_url <- flight_url(year, month)
+  if (url.exists(fl_url)) {
     temp <- tempfile(fileext = ".zip")
-    download.file(url, temp)
-  } else stop(sprintf("Can't access `flights` link in 'data-raw.flights.R' \n Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp", month, month.name[month], year))
+    download.file(fl_url, temp)
+  } else stop(sprintf("Can't access flight data for supplied year. Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp"))
 
   files <- unzip(temp, list = TRUE)
   # Only extract biggest file
@@ -72,4 +66,5 @@ if (!dir.exists(path = subdir)) {
   dir.create(path = subdir) }
 save(flights, file = file_path, compress = "bzip2")
 
+save(flights, file = "data/flights.rda", compress = "bzip2")
 }
