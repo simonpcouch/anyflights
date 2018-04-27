@@ -2,29 +2,21 @@ get_weather <- function(station, year) {
 
 # From https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS
 
-library(httr)
-library(dplyr)
-library(lubridate)
-library(readr)
-library(RCurl)
-
-  year <- year
-  year1 <- year[1]
-  year2 <- ifelse(is.na(year[2]), year[1], year[2])
-  url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
-  if(!(url.exists(url))) stop("Can't access `weather` link in 'data-raw/weather.R'")
-  query <- list(
+  weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
+  if(!(url.exists(weather_url))) stop("Can't access `weather` querying link")
+  weather_query <- list(
     station = station, data = "all",
-    year1 = as.character(year1), month1 = "1", day1 = "1",
-    year2 = as.character(year2), month2 = "12", day2 = "31", tz = "GMT",
+    year1 = as.character(year), month1 = "1", day1 = "1",
+    year2 = as.character(year), month2 = "12", day2 = "31", tz = "GMT",
     format = "comma", latlon = "no", direct = "yes")
 
-  dir.create("data-raw/weather", showWarnings = FALSE, recursive = TRUE)
-  r <- GET(url, query = query, write_disk(paste0("./data-raw/weather/", station, ".csv"), overwrite = TRUE))
-  stop_for_status(r, "Can't access `weather` link in 'data-raw.weather.R' for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu/request/download.phtml?network=NY_ASOS`")
+  weather_subdir <- paste(subdir, "/weather")
+  dir.create(weather_subdir, showWarnings = FALSE, recursive = FALSE)
+  r <- GET(weather_url, query = weather_query, write_disk(paste0("./", weather_subdir, "/", station, ".csv"), overwrite = TRUE))
+  stop_for_status(r, "Can't access `weather` link for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu`")
 
-paths <- dir("data-raw/weather", full.names = TRUE)
-col_types <- cols(
+weather_paths <- dir(weather_subdir, full.names = TRUE)
+weather_col_types <- cols(
   .default = col_double(),
   station = col_character(),
   valid = col_datetime(format = ""),
@@ -36,16 +28,16 @@ col_types <- cols(
   metar = col_character()
 )
 
-all <- lapply(paths, read_csv, comment = "#", na = "M",
-              col_names = TRUE, col_types = col_types)
-raw <- bind_rows(all)
-names(raw) <- c("origin", "valid", "tmpf", "dwpf", "relh", "drct", "sknt",
+weather_all <- lapply(weather_paths, read_csv, comment = "#", na = "M",
+              col_names = TRUE, col_types = weather_col_types)
+weather_raw <- bind_rows(weather_all)
+names(weather_raw) <- c("origin", "valid", "tmpf", "dwpf", "relh", "drct", "sknt",
                 "p01i", "alti", "mslp", "vsby", "gust",
                 "skyc1", "skyc2", "skyc3", "skyc4",
                 "skyl1", "skyl2", "skyl3", "skyl4", "wxcodes", "metar")
 
 weather <-
-  raw %>%
+  weather_raw %>%
   rename_(time = ~valid) %>%
   select_(
     ~origin, ~time, temp = ~tmpf, dewp = ~dwpf, humid = ~relh,
@@ -68,12 +60,7 @@ weather <-
   mutate_(
     time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
 
-station_low <- tolower(station)
-year_substr <- substr(year[1], 3, 4)
-subdir <- paste0("data/", station_low, "flights", year_substr)
 file_path <- paste0(subdir, "/weather.rda")
-if (!dir.exists(path = subdir)) {
-  dir.create(path = subdir) }
 
 save(weather, file = file_path, compress = "xz")
 
