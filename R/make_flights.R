@@ -248,4 +248,18 @@ make_flights <- function(station, year) {
     } else { return("Can't access airports data.") }
     
   # Download Airlines Data -------------------
+    
+    if (url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
+      airlines_raw <- read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")
+      
+      airlines <- airlines_raw %>%
+        select(carrier = Code, name = Description) %>%
+        semi_join(flights) %>%
+        arrange(carrier)
+      
+      airlines_filepath <- paste0(subdir, "/airlines.rda")
+      save(airlines, file = "data/airlines.rda", compress = "bzip2")
+      
+    } else {return("Can't access link for airlines data.")}
+    
 }
