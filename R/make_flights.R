@@ -1,6 +1,7 @@
 make_flights <- function(station, year) {
   
   # Create Subdirectory ----------------------
+  
   station_low <- tolower(station)
   year_substr <- substr(year[1], 3, 4)
   subdir <- paste0(station_low, "flights", year_substr)
@@ -245,12 +246,19 @@ make_flights <- function(station, year) {
       save(airports, file = paste0(subdir, "/airports.rda"), compress = "xz")
       unlink(x = airports_subdir, recursive = TRUE)
       
-    } else { return("Can't access airports data.") }
+    } else {return("Can't access airports data.")}
     
   # Download Airlines Data -------------------
     
     if (url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
-      airlines_raw <- read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")
+      
+      airlines_cols <- cols(
+        Code = col_character(),
+        Description = col_character()
+      )
+      
+      airlines_raw <- read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS",
+                               col_types = airlines_cols)
       
       airlines <- airlines_raw %>%
         select(carrier = Code, name = Description) %>%
