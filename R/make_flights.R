@@ -258,7 +258,7 @@ make_flights <- function(station, year) {
         arrange(carrier)
       
       airlines_filepath <- paste0(subdir, "/airlines.rda")
-      save(airlines, file = "data/airlines.rda", compress = "bzip2")
+      save(airlines, file = airlines_filepath, compress = "bzip2")
       
     } else {return("Can't access link for airlines data.")}
     
