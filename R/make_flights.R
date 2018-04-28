@@ -262,7 +262,7 @@ make_flights <- function(station, year) {
       
       airlines <- airlines_raw %>%
         select(carrier = Code, name = Description) %>%
-        semi_join(flights) %>%
+        semi_join(flights, by = "carrier") %>%
         arrange(carrier)
       
       airlines_filepath <- paste0(subdir, "/airlines.rda")
