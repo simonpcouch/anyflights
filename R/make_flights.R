@@ -202,5 +202,50 @@ make_flights <- function(station, year) {
     unlink(x = planes_lcl, recursive = TRUE)
     
   # Download Airports Data -------------------
+    
+    if (url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
+      
+      airports_subdir <- paste0(subdir, "/airports")
+      dir.create(airports_subdir)
+      
+      airports_data_path <- paste0(airports_subdir, "/airports.dat")
+      download.file(
+        "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat",
+        airports_data_path)
+      
+      airports_cols <- cols(
+        id = col_integer(),
+        name = col_character(),
+        city = col_character(),
+        country = col_character(),
+        faa = col_character(),
+        icao = col_character(),
+        lat = col_double(),
+        lon = col_double(),
+        alt = col_integer(),
+        tz = col_double(),
+        dst = col_character(),
+        tzone = col_character(),
+        type = col_character(),
+        source = col_character()
+      )
+      
+      airports_raw <- read_delim(airports_data_path, ",",
+                                 col_names = c("id", "name", "city", "country", "faa", "icao", "lat", "lon", "alt", "tz", "dst", "tzone", "type", "source"),
+                                 escape_double = FALSE, na = c("", "NA", "\\N"), 
+                                 col_types = airports_cols)
+      
+      
+      airports <- airports_raw %>%
+        filter(country == "United States", faa != "") %>%
+        select(faa, name, lat, lon, alt, tz, dst, tzone) %>%
+        group_by(faa) %>% slice(1) %>% ungroup()
+      
+      
+      save(airports, file = paste0(subdir, "/airports.rda"), compress = "xz")
+      unlink(x = airports_subdir, recursive = TRUE)
+      
+    } else { return("Can't access airports data.") }
+    
   # Download Airlines Data -------------------
 }
