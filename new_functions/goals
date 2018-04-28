@@ -1,3 +1,0 @@
-Goals:
-Modify each .R file in data-raw to grab data based on a user-specified location (as vectors of strings) and times (as two arguments or a vector.)
-Next, consoldiate into one master function, that saves all five datasets to one folder when executed.

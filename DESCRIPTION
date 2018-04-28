@@ -1,21 +1,19 @@
-Package: nycflights
-Title: Flights that Departed NYC in the Last Year
-Version: 0.0.1
+Package: anyflights
+Title: Download Flight Data For Specified Years and Airports
+Version: 1.0.0
 Authors@R: c(
-    person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", "aut"),
-    person("Jay", "Lee", , "jaylee@reed.edu", c("aut", "cre")),
+    person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", "aut", "cre"),
+    person("Jay", "Lee", , "jaylee@reed.edu", c("aut")),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut")
     )
-Description: Airline on-time data for all flights departing NYC in 2017.
+Description: Airline on-time data for all flights departing specified airports and years.
     Also includes useful 'metadata' on airlines, airports, weather, and planes.
 License: CC0
 LazyData: true
 Depends:
     R (>= 2.10)
 Imports:
-    tibble
-Suggests:
-    dplyr
-URL: http://github.com/jayleetx/nycflights
-BugReports: https://github.com/jayleetx/nycflights/issues
-RoxygenNote: 6.0.1
+    tidyverse,
+    RCurl
+URL: http://github.com/simonpcouch/anyflights
+BugReports: https://github.com/simonpcouch/anyflights/issues
