@@ -1,11 +1,10 @@
 #' Flights data
 #'
-#' On-time data for all flights that departed NYC (i.e. JFK, LGA or EWR) in
-#' 2017.
+#' On-time data for all flights that departed the specified airport in the specified year.
 #'
 #' @source RITA, Bureau of transportation statistics,
 #'  \url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
-#' @format A data frame with 303748 rows and 19 variables:
+#' @format A data frame with ~10k-500k rows and 19 variables:
 #' \describe{
 #' \item{year,month,day}{Date of departure}
 #' \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}

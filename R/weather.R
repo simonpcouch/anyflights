@@ -1,10 +1,10 @@
 #' Hourly weather data
 #'
-#' Hourly meteorological data for LGA, JFK and EWR.
+#' Hourly meteorological data for the selected airport.
 #'
 #' @source ASOS download from Iowa Environmental Mesonet,
 #'   https://mesonet.agron.iastate.edu/request/download.phtml.
-#' @format A data frame with 26201 rows and 15 variables:
+#' @format A data frame with ~25,000 rows and 15 variables:
 #' \describe{
 #' \item{origin}{Weather station. Named origin to facilitate merging with
 #'   \code{\link{flights}} data}

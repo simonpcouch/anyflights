@@ -2,8 +2,8 @@
 #'
 #' Useful metadata about airports.
 #'
-#' @source \url{http://openflights.org/data.html}, downloaded 2018-03-15
-#' @format A data frame with 1333 rows and 8 variables:
+#' @source \url{http://openflights.org/data.html}
+#' @format A data frame with ~1350 rows and 8 variables:
 #' \describe{
 #'  \item{faa}{FAA airport code}
 #'  \item{name}{Usual name of the airport}
