@@ -65,7 +65,7 @@ make_flights <- function(station, year) {
     }
     
     all <- lapply(dir(flight_exdir, full.names = TRUE), get_flight_data)
-    flights <- bind_rows(all)
+    flights <- dplyr::bind_rows(all)
     flights$tailnum[flights$tailnum == ""] <- NA
     flight_file_path <- paste0(subdir, "/flights.rda")
     save(flights, file = flight_file_path, compress = "bzip2")
@@ -102,7 +102,7 @@ make_flights <- function(station, year) {
     
     weather_all <- lapply(weather_paths, read_csv, comment = "#", na = "M",
                           col_names = TRUE, col_types = weather_col_types)
-    weather_raw <- bind_rows(weather_all)
+    weather_raw <- dplyr::bind_rows(weather_all)
     names(weather_raw) <- c("origin", "valid", "tmpf", "dwpf", "relh", "drct", "sknt",
                             "p01i", "alti", "mslp", "vsby", "gust",
                             "skyc1", "skyc2", "skyc3", "skyc4",
@@ -231,7 +231,7 @@ make_flights <- function(station, year) {
         source = readr::col_character()
       )
       
-      airports_raw <- read_delim(airports_data_path, ",",
+      airports_raw <- readr::read_delim(airports_data_path, ",",
                                  col_names = c("id", "name", "city", "country", "faa", "icao", "lat", "lon", "alt", "tz", "dst", "tzone", "type", "source"),
                                  escape_double = FALSE, na = c("", "NA", "\\N"), 
                                  col_types = airports_cols)
