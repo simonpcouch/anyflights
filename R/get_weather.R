@@ -1,0 +1,68 @@
+get_weather <- function(station, year, subdir) {
+ 
+   # Download Weather Data --------------------
+  
+  weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
+  if(!(RCurl::url.exists(weather_url))) stop("Can't access `weather` querying link")
+  weather_query <- list(
+    station = station, data = "all",
+    year1 = as.character(year), month1 = "1", day1 = "1",
+    year2 = as.character(year), month2 = "12", day2 = "31", tz = "GMT",
+    format = "comma", latlon = "no", direct = "yes")
+  
+  weather_subdir <- paste(subdir, "/weather")
+  dir.create(weather_subdir, showWarnings = FALSE, recursive = FALSE)
+  
+  r <- httr::GET(weather_url, query = weather_query, write_disk(paste0("./", weather_subdir, "/", station, ".csv"), overwrite = TRUE))
+  httr::stop_for_status(r, "Can't access `weather` link for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu`")
+  
+  weather_paths <- dir(weather_subdir, full.names = TRUE)
+  weather_col_types <- readr::cols(
+    .default = readr::col_double(),
+    station = readr::col_character(),
+    valid = col_datetime(format = ""),
+    skyc1 = readr::col_character(),
+    skyc2 = readr::col_character(),
+    skyc3 = readr::col_character(),
+    skyc4 = readr::col_character(),
+    wxcodes = readr::col_character(),
+    metar = readr::col_character()
+  )
+  
+  weather_all <- lapply(weather_paths, read_csv, comment = "#", na = "M",
+                        col_names = TRUE, col_types = weather_col_types)
+  weather_raw <- dplyr::bind_rows(weather_all)
+  names(weather_raw) <- c("origin", "valid", "tmpf", "dwpf", "relh", "drct", "sknt",
+                          "p01i", "alti", "mslp", "vsby", "gust",
+                          "skyc1", "skyc2", "skyc3", "skyc4",
+                          "skyl1", "skyl2", "skyl3", "skyl4", "wxcodes", "metar")
+  
+  weather <-
+    weather_raw %>%
+    dplyr::rename(time = ~valid) %>%
+    dplyr::select(
+      ~origin, ~time, temp = ~tmpf, dewp = ~dwpf, humid = ~relh,
+      wind_dir = ~drct, wind_speed = ~sknt, wind_gust = ~gust,
+      precip = ~p01i, pressure = ~mslp, visib = ~vsby
+    ) %>%
+    dplyr::mutate(
+      time = ~as.POSIXct(strptime(time, "%Y-%m-%d %H:%M")),
+      wind_speed = ~as.numeric(wind_speed) * 1.15078, # convert to mpg
+      wind_gust = ~as.numeric(wind_speed) * 1.15078,
+      year = year,
+      month = ~lubridate::month(time),
+      day = ~lubridate::mday(time),
+      hour = ~lubridate::hour(time)) %>%
+    dplyr::group_by(~origin, ~month, ~day, ~hour) %>%
+    dplyr::filter(~ row_number() == 1) %>%
+    dplyr::select(~origin, ~year:hour, ~temp:visib) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(~!is.na(month)) %>%
+    dplyr::mutate(
+      time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
+  
+  file_path <- paste0(subdir, "/weather.rda")
+  
+  save(weather, file = file_path, compress = "xz")
+  
+}
