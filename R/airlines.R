@@ -10,4 +10,3 @@
 #' }
 #' @examples
 #'   airlines
-"airlines"

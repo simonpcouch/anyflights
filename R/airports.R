@@ -24,4 +24,3 @@
 #' airports %>% mutate(origin = faa) %>% semi_join(flights)
 #'
 #' }
-"airports"

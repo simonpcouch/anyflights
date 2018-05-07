@@ -25,4 +25,3 @@
 #' flights %>% anti_join(planes, "tailnum")
 #'
 #' }
-"planes"

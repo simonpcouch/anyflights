@@ -18,4 +18,3 @@
 #' \item{visib}{Visibility in miles}
 #' \item{time_hour}{Date and hour of the recording as a \code{POSIXct} date}
 #' }
-"weather"
