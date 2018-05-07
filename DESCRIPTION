@@ -1,9 +1,9 @@
 Package: anyflights
 Title: Download Flight Data For Specified Years and Airports
-Version: 1.0.0
+Version: 0.1.0
 Authors@R: c(
-    person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", "aut", "cre"),
-    person("Jay", "Lee", , "jaylee@reed.edu", c("aut")),
+    person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
+    person("Jay", "Lee", , "jaylee@reed.edu", "aut"),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut")
     )
 Description: Airline on-time data for all flights departing specified airports and years.
@@ -13,7 +13,10 @@ LazyData: true
 Depends:
     R (>= 2.10)
 Imports:
-    tidyverse,
+    httr,
+    dplyr,
+    readr,
     RCurl
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
+RoxygenNote: 6.0.1.9000
