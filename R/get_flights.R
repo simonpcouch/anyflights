@@ -1,3 +1,37 @@
+#' Generate a flights dataset for a given year and airport
+#' 
+#' @param station The airport of interest (use the airport code)
+#' @param year The year of interest, as an integer
+#' @param dir The folder for the dataset to be saved in
+#' @return A .Rda dataset of flight data
+#' @source RITA, Bureau of transportation statistics,
+#'  \url{http://www.transtats.bts.gov}
+#' @format A data frame with ~10k-500k rows and 19 variables:
+#' \describe{
+#' \item{year,month,day}{Date of departure}
+#' \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}
+#' \item{sched_dep_time,sched_arr_time}{Scheduled departure and arrival times, local tz.}
+#' \item{dep_delay,arr_delay}{Departure and arrival delays, in minutes.
+#'   Negative times represent early departures/arrivals.}
+#' \item{hour,minute}{Time of scheduled departure broken into hour and minutes.}
+#' \item{carrier}{Two letter carrier abbreviation. See \code{\link{get_airlines}}
+#'   to get name}
+#' \item{tailnum}{Plane tail number}
+#' \item{flight}{Flight number}
+#' \item{origin,dest}{Origin and destination. See \code{\link{get_airports}} for
+#'   additional metadata.}
+#' \item{air_time}{Amount of time spent in the air, in minutes}
+#' \item{distance}{Distance between airports, in miles}
+#' \item{time_hour}{Scheduled date and hour of the flight as a \code{POSIXct} date.
+#'   Along with \code{origin}, can be used to join flights data to weather data.}
+#' }
+#' @examples
+#' get_flights(station = "PDX", year = 2015, dir = tempdir())
+#' @seealso \code{\link{get_airports}} for airport data, \code{\link{get_planes}} for plane
+#' data, \code{\link{get_weather}} for weather data, \code{\link{get_weather}} for airline
+#' data, and \code{\link{make_flights}} for a wrapper function  
+#' @export
+
 get_flights <- function(station, year, dir) {
   
   # Download Flights Data --------------------

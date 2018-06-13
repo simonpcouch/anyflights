@@ -1,6 +1,35 @@
+#' Generate a weather dataset for the specified year and airport
+#' 
+#' @param station The airport of interest (use the airport code)
+#' @param year The year of interest, as an integer
+#' @param dir The folder for the dataset to be saved in
+#' @return A .Rda dataset of airport data
+#' @source ASOS download from Iowa Environmental Mesonet,
+#'   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
+#' @format A data frame with ~25,000 rows and 15 variables:
+#' \describe{
+#' \item{origin}{Weather station. Named origin to facilitate merging with
+#'   flights data}
+#' \item{year,month,day,hour}{Time of recording}
+#' \item{temp,dewp}{Temperature and dewpoint in F}
+#' \item{humid}{Relative humidity}
+#' \item{wind_dir,wind_speed,wind_gust}{Wind direction (in degrees), speed
+#'   and gust speed (in mph)}
+#' \item{precip}{Precipitation, in inches}
+#' \item{pressure}{Sea level pressure in millibars}
+#' \item{visib}{Visibility in miles}
+#' \item{time_hour}{Date and hour of the recording as a \code{POSIXct} date}
+#' }
+#' @examples
+#' get_weather(station = "PDX", year = 2015, dir = tempdir())
+#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
+#' data, \code{\link{get_planes}} for plane data, \code{\link{get_weather}} for airline
+#' data, and \code{\link{make_flights}} for a wrapper function  
+#' @export
+
 get_weather <- function(station, year, dir) {
- 
-   # Download Weather Data --------------------
+  
+  # Download Weather Data --------------------
   
   weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
   if(!(RCurl::url.exists(weather_url))) stop("Can't access `weather` querying link")
