@@ -4,16 +4,17 @@
 \alias{make_flights}
 \title{Generate a folder of flights datasets for a given year and airport}
 \usage{
-make_flights(station, year)
+make_flights(station, year, dir = tempdir())
 }
 \arguments{
 \item{station}{The airport of interest (use the airport code)}
 
 \item{year}{The year of interest, as an integer}
+
+\item{dir}{The folder for the datasets to be saved in}
 }
 \value{
-A folder named with "airport code" "flights" "year" convention 
-(i.e. pdxflights15) containing datasets about flights & relevant metadata
+A folder containing datasets about air travel
 }
 \description{
 Generate a folder of flights datasets for a given year and airport
