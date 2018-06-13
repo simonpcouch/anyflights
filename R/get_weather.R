@@ -1,4 +1,4 @@
-get_weather <- function(station, year, subdir) {
+get_weather <- function(station, year, dir) {
  
    # Download Weather Data --------------------
   
@@ -10,13 +10,13 @@ get_weather <- function(station, year, subdir) {
     year2 = as.character(year), month2 = "12", day2 = "31", tz = "GMT",
     format = "comma", latlon = "no", direct = "yes")
   
-  weather_subdir <- paste(subdir, "/weather")
-  dir.create(weather_subdir, showWarnings = FALSE, recursive = FALSE)
+  weather_dir <- paste(dir, "/weather")
+  dir.create(weather_dir, showWarnings = FALSE, recursive = FALSE)
   
-  r <- httr::GET(weather_url, query = weather_query, write_disk(paste0("./", weather_subdir, "/", station, ".csv"), overwrite = TRUE))
+  r <- httr::GET(weather_url, query = weather_query, write_disk(paste0("./", weather_dir, "/", station, ".csv"), overwrite = TRUE))
   httr::stop_for_status(r, "Can't access `weather` link for requested location and date range. \n Check data availability at `https://mesonet.agron.iastate.edu`")
   
-  weather_paths <- dir(weather_subdir, full.names = TRUE)
+  weather_paths <- dir(weather_dir, full.names = TRUE)
   weather_col_types <- readr::cols(
     .default = readr::col_double(),
     station = readr::col_character(),
@@ -61,7 +61,7 @@ get_weather <- function(station, year, subdir) {
     dplyr::mutate(
       time_hour = ~ISOdatetime(year, month, day, hour, 0, 0))
   
-  file_path <- paste0(subdir, "/weather.rda")
+  file_path <- paste0(dir, "/weather.rda")
   
   save(weather, file = file_path, compress = "xz")
   

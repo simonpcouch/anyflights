@@ -1,4 +1,4 @@
-get_flights <- function(station, year, subdir) {
+get_flights <- function(station, year, dir) {
   
   # Download Flights Data --------------------
   
@@ -7,7 +7,7 @@ get_flights <- function(station, year, subdir) {
     paste0(base_url, "On_Time_On_Time_Performance_", year, "_", month, ".zip")
   }
   
-  flight_exdir <- paste0(subdir, "/flights")
+  flight_exdir <- paste0(dir, "/flights")
   
   download_month <- function(year = year, month) {
     fl_url <- flight_url(year, month)
@@ -21,8 +21,8 @@ get_flights <- function(station, year, subdir) {
     flight_csv <- flight_files$Name[order(flight_files$Length, decreasing = TRUE)[1]]
     utils::unzip(flight_temp, exdir = flight_exdir, junkpaths = TRUE, files = flight_csv)
     
-    flight_src <- paste0(subdir, "/flights/", flight_csv)
-    flight_dst <- paste0(subdir, "/flights/", year, "-", month, ".csv")
+    flight_src <- paste0(dir, "/flights/", flight_csv)
+    flight_dst <- paste0(dir, "/flights/", year, "-", month, ".csv")
     file.rename(flight_src, flight_dst)
   }
   
@@ -60,7 +60,7 @@ get_flights <- function(station, year, subdir) {
   all <- lapply(dir(flight_exdir, full.names = TRUE), get_flight_data)
   flights <- dplyr::bind_rows(all)
   flights$tailnum[flights$tailnum == ""] <- NA
-  flight_file_path <- paste0(subdir, "/flights.rda")
+  flight_file_path <- paste0(dir, "/flights.rda")
   save(flights, file = flight_file_path, compress = "bzip2")
   unlink(x = flight_exdir, recursive = TRUE)
   

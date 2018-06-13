@@ -1,4 +1,4 @@
-get_airlines <- function(subdir) {
+get_airlines <- function(dir) {
   
   # Download Airlines Data -------------------
   
@@ -17,7 +17,7 @@ get_airlines <- function(subdir) {
       dplyr::semi_join(flights, by = "carrier") %>%
       dplyr::arrange(carrier)
     
-    airlines_filepath <- paste0(subdir, "/airlines.rda")
+    airlines_filepath <- paste0(dir, "/airlines.rda")
     save(airlines, file = airlines_filepath, compress = "bzip2")
     
   } else {return("Can't access link for airlines data.")}

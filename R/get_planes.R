@@ -1,4 +1,4 @@
-get_planes <- function(year, subdir) {
+get_planes <- function(year, dir) {
   
   # needs to somehow load flights over
   
@@ -7,7 +7,7 @@ get_planes <- function(year, subdir) {
   # Update URL from
   # http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/
   planes_src <- paste0("http://registry.faa.gov/database/yearly/ReleasableAircraft.", year, ".zip")
-  planes_lcl <- paste0(subdir, "/planes")
+  planes_lcl <- paste0(dir, "/planes")
   
   planes_tmp <- tempfile(fileext = ".zip")
   utils::download.file(planes_src, planes_tmp) 
@@ -53,7 +53,7 @@ get_planes <- function(year, subdir) {
   
   planes_all$tailnum <- paste0("N", planes_all$nnum)
   
-  flights_ds <- paste0(subdir, "/flights.rda")
+  flights_ds <- paste0(dir, "/flights.rda")
   load(flights_ds)
   
   planes <- planes_all %>%
@@ -64,7 +64,7 @@ get_planes <- function(year, subdir) {
     dplyr::semi_join(flights, "tailnum") %>%
     dplyr::arrange(tailnum)
   
-  planes_filepath <- paste0(subdir, "/planes.rda")
+  planes_filepath <- paste0(dir, "/planes.rda")
   save(planes, file = planes_filepath, compress = "xz")
   unlink(x = planes_lcl, recursive = TRUE)
   

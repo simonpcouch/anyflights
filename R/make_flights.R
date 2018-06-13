@@ -7,18 +7,15 @@
 #' @examples
 #' make_flights(station = "PDX", year = 2015)
 #' @export
-make_flights <- function(station, year) {
+make_flights <- function(station, year, dir = tempdir()) {
   
   # Create Subdirectory ----------------------
+  dir.create(dir, showWarnings = FALSE)
   
-  station_low <- tolower(station)
-  year_substr <- substr(year[1], 3, 4)
-  subdir <- paste0(station_low, "flights", year_substr)
-  dir.create(subdir, showWarnings = FALSE)
-  
-  get_flights(station = station, year = year, subdir = subdir)
-  get_airlines(subdir = subdir)
-  get_airports(subdir = subdir)
-  get_weather(station = station, year = year, subdir = subdir)
-  get_planes(year = year, subdir = subdir)
+  # Call get_ Functions
+  get_flights(station = station, year = year, subdir = dir)
+  get_airlines(subdir = dir)
+  get_airports(subdir = dir)
+  get_weather(station = station, year = year, subdir = dir)
+  get_planes(year = year, subdir = dir)
 }
