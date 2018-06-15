@@ -3,11 +3,6 @@
 \name{get_airlines}
 \alias{get_airlines}
 \title{Generate an airlines dataset}
-\format{A data frame with ~12 rows and 2 variables:
-\describe{
-\item{carrier}{Two letter abbreviation}
-\item{name}{Full name}
-}}
 \source{
 http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236
 }
@@ -18,7 +13,11 @@ get_airlines(dir)
 \item{dir}{The folder for the dataset to be saved in}
 }
 \value{
-A .Rda dataset of airline data
+A data frame with ~12 rows and 2 variables:
+\describe{
+\item{carrier}{Two letter abbreviation}
+\item{name}{Full name}
+}
 }
 \description{
 Generate an airlines dataset

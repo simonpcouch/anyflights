@@ -3,7 +3,22 @@
 \name{get_flights}
 \alias{get_flights}
 \title{Generate a flights dataset for a given year and airport}
-\format{A data frame with ~10k-500k rows and 19 variables:
+\source{
+RITA, Bureau of transportation statistics,
+ \url{http://www.transtats.bts.gov}
+}
+\usage{
+get_flights(station, year, dir)
+}
+\arguments{
+\item{station}{The airport of interest (use the airport code)}
+
+\item{year}{The year of interest, as an integer}
+
+\item{dir}{The folder for the dataset to be saved in}
+}
+\value{
+A data frame with ~10k-500k rows and 19 variables:
 \describe{
 \item{year,month,day}{Date of departure}
 \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}
@@ -21,23 +36,7 @@
 \item{distance}{Distance between airports, in miles}
 \item{time_hour}{Scheduled date and hour of the flight as a \code{POSIXct} date.
   Along with \code{origin}, can be used to join flights data to weather data.}
-}}
-\source{
-RITA, Bureau of transportation statistics,
- \url{http://www.transtats.bts.gov}
 }
-\usage{
-get_flights(station, year, dir)
-}
-\arguments{
-\item{station}{The airport of interest (use the airport code)}
-
-\item{year}{The year of interest, as an integer}
-
-\item{dir}{The folder for the dataset to be saved in}
-}
-\value{
-A .Rda dataset of flight data
 }
 \description{
 Generate a flights dataset for a given year and airport
@@ -47,6 +46,6 @@ get_flights(station = "PDX", year = 2015, dir = tempdir())
 }
 \seealso{
 \code{\link{get_airports}} for airport data, \code{\link{get_planes}} for plane
-data, \code{\link{get_weather}} for weather data, \code{\link{get_weather}} for airline
+data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
 data, and \code{\link{make_flights}} for a wrapper function
 }

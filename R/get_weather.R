@@ -3,10 +3,7 @@
 #' @param station The airport of interest (use the airport code)
 #' @param year The year of interest, as an integer
 #' @param dir The folder for the dataset to be saved in
-#' @return A .Rda dataset of airport data
-#' @source ASOS download from Iowa Environmental Mesonet,
-#'   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
-#' @format A data frame with ~25,000 rows and 15 variables:
+#' @return A data frame with ~25,000 rows and 15 variables:
 #' \describe{
 #' \item{origin}{Weather station. Named origin to facilitate merging with
 #'   flights data}
@@ -20,10 +17,12 @@
 #' \item{visib}{Visibility in miles}
 #' \item{time_hour}{Date and hour of the recording as a \code{POSIXct} date}
 #' }
+#' @source ASOS download from Iowa Environmental Mesonet,
+#'   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
 #' @examples
 #' get_weather(station = "PDX", year = 2015, dir = tempdir())
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
-#' data, \code{\link{get_planes}} for plane data, \code{\link{get_weather}} for airline
+#' data, \code{\link{get_planes}} for plane data, \code{\link{get_airlines}} for airline
 #' data, and \code{\link{make_flights}} for a wrapper function  
 #' @export
 

@@ -1,9 +1,7 @@
 #' Generate an airports dataset
 #' 
 #' @param dir The folder for the dataset to be saved in
-#' @return A .Rda dataset of airport data
-#' @source \url{http://openflights.org/data.html}
-#' @format A data frame with ~1350 rows and 8 variables:
+#' @return A data frame with ~1350 rows and 8 variables:
 #' \describe{
 #'  \item{faa}{FAA airport code}
 #'  \item{name}{Usual name of the airport}
@@ -15,6 +13,7 @@
 #'     U = unknown. N = no dst.}
 #'  \item{tzone}{IANA time zone, as determined by GeoNames webservice}
 #' }
+#' @source \url{http://openflights.org/data.html}
 #' @examples
 #' get_airports(dir = tempdir())
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_planes}} for plane

@@ -1,13 +1,12 @@
 #' Generate an airlines dataset
 #' 
 #' @param dir The folder for the dataset to be saved in
-#' @return A .Rda dataset of airline data
-#' @source http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236
-#' @format A data frame with ~12 rows and 2 variables:
+#' @return A data frame with ~12 rows and 2 variables:
 #' \describe{
 #' \item{carrier}{Two letter abbreviation}
 #' \item{name}{Full name}
 #' }
+#' @source http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236
 #' @examples
 #' get_airlines(dir = tempdir())
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_planes}} for plane

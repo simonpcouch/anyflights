@@ -3,10 +3,7 @@
 #' @param station The airport of interest (use the airport code)
 #' @param year The year of interest, as an integer
 #' @param dir The folder for the dataset to be saved in
-#' @return A .Rda dataset of flight data
-#' @source RITA, Bureau of transportation statistics,
-#'  \url{http://www.transtats.bts.gov}
-#' @format A data frame with ~10k-500k rows and 19 variables:
+#' @return A data frame with ~10k-500k rows and 19 variables:
 #' \describe{
 #' \item{year,month,day}{Date of departure}
 #' \item{dep_time,arr_time}{Actual departure and arrival times, local tz.}
@@ -25,10 +22,13 @@
 #' \item{time_hour}{Scheduled date and hour of the flight as a \code{POSIXct} date.
 #'   Along with \code{origin}, can be used to join flights data to weather data.}
 #' }
+#' @source RITA, Bureau of transportation statistics,
+#'  \url{http://www.transtats.bts.gov}
+
 #' @examples
 #' get_flights(station = "PDX", year = 2015, dir = tempdir())
 #' @seealso \code{\link{get_airports}} for airport data, \code{\link{get_planes}} for plane
-#' data, \code{\link{get_weather}} for weather data, \code{\link{get_weather}} for airline
+#' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
 #' data, and \code{\link{make_flights}} for a wrapper function  
 #' @export
 
