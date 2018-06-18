@@ -29,12 +29,14 @@
 #' get_flights(station = "PDX", year = 2015, dir = tempdir())
 #' @seealso \code{\link{get_airports}} for airport data, \code{\link{get_planes}} for plane
 #' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{make_flights}} for a wrapper function  
+#' data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_flights <- function(station, year, dir) {
   
   # Download Flights Data --------------------
+  
+  if (!dir.exists(dir)) {dir.create(dir)}
   
   flight_url <- function(year, month) {
     base_url <- "http://www.transtats.bts.gov/PREZIP/"

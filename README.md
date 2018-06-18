@@ -1,11 +1,11 @@
 # anyflights
 
-This package, derived from `nycflights13`, includes functions to download information about all flights for user-specified airports and time frames. To help understand 
-what causes delays, it also includes a number of other useful datasets:
+This package, derived from `nycflights13`, includes functions to query datasets about air travel for user-specified airports and years.
 
-* `weather`: hourly meteorological data for the airport
-* `planes`: construction information about each plane
-* `airports`: airport name and location
+* `flights`: all flights that departed a given airport in a given year
+* `weather`: hourly meterological data for a given airport in a given year
+* `planes`: construction information about relevant planes
+* `airports`: airport names and locations
 * `airlines`: translation between two letter carrier codes and names
 
-Beginning with functionality from `nycflights`, a package based on `nycflights13`, `anyflights` includes a user function to query and save datasets similar to that housed in both of these packages for user-specified airports and time-frames, but will not include any data itself.
+Beginning with functionality from `nycflights13`, `anyflights` supplies a set of user functions to query and save datasets similar to that housed in `nycflights13` for user-specified airports and time-frames, but does not include any data itself.

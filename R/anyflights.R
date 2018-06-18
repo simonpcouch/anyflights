@@ -1,6 +1,6 @@
 #' Generate a folder of flights datasets for a given year and airport
 #' 
-#' \code{make_flights} is a wrapper function for \code{get_flights},
+#' \code{anyflights} is a wrapper function for \code{get_flights},
 #' \code{get_airports}, \code{get_planes}, \code{get_weather}, and
 #' \code{get_airlines}
 #' 
@@ -9,13 +9,13 @@
 #' @param dir The folder for the datasets to be saved in
 #' @return A folder containing datasets about air travel
 #' @examples
-#' make_flights(station = "PDX", year = 2015)
+#' anyflights(station = "PDX", year = 2015)
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
 #' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{make_planes}} for plane data
+#' data, and \code{\link{get_planes}} for plane data
 #' @export
 
-make_flights <- function(station, year, dir = tempdir()) {
+anyflights <- function(station, year, dir = tempdir()) {
   
   # Create Subdirectory ----------------------
   dir.create(dir, showWarnings = FALSE)

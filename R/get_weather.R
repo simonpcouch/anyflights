@@ -23,7 +23,7 @@
 #' get_weather(station = "PDX", year = 2015, dir = tempdir())
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
 #' data, \code{\link{get_planes}} for plane data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{make_flights}} for a wrapper function  
+#' data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_weather <- function(station, year, dir) {
