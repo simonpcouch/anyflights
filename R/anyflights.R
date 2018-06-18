@@ -15,7 +15,7 @@
 #' data, and \code{\link{get_planes}} for plane data
 #' @export
 
-anyflights <- function(station, year, dir = tempdir()) {
+anyflights <- function(station, year, dir) {
   
   # Create Subdirectory ----------------------
   dir.create(dir, showWarnings = FALSE)
