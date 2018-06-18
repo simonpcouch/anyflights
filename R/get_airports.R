@@ -26,7 +26,8 @@ get_airports <- function(dir) {
   
   # Download Airports Data -------------------
   
-  if (RCurl::url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
+  if (!RCurl::url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
+    return("Can't access airports data.")}
     
     if (!dir.exists(dir)) {dir.create(dir)}
     
@@ -66,6 +67,5 @@ get_airports <- function(dir) {
     
     save(airports, file = paste0(dir, "/airports.rda"), compress = "xz")
     unlink(x = paste0(dir, "/airports.dat"))
-    
-  } else {return("Can't access airports data.")}
+
 }
