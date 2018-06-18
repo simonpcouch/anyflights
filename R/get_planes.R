@@ -24,7 +24,11 @@
 
 get_planes <- function(year, dir) {
   
-  # needs to somehow load flights over
+  # Check that the flights dataset exists before running
+  if (!file.exists(paste0(dir, "/flights.rda"))) {stop(
+    "The corresponding flights dataset does not seem to exist. Please run get_flights()
+    with the same dir argument."
+  )}
   
   # Download Planes Data ---------------------
   
