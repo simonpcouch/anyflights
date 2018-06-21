@@ -21,9 +21,9 @@ anyflights <- function(station, year, dir) {
   dir.create(dir, showWarnings = FALSE)
   
   # Call get_ Functions
-  get_flights(station = station, year = year, subdir = dir)
-  get_airlines(subdir = dir)
-  get_airports(subdir = dir)
-  get_weather(station = station, year = year, subdir = dir)
-  get_planes(year = year, subdir = dir)
+  get_flights(station = station, year = year, dir = dir)
+  get_airlines(dir = dir)
+  get_airports(dir = dir)
+  get_weather(station = station, year = year, dir = dir)
+  get_planes(year = year, dir = dir)
 }
