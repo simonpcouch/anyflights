@@ -45,6 +45,8 @@ get_flights <- function(station, year, dir) {
   
   flight_exdir <- paste0(dir, "/flights")
   
+  if (!dir.exists(flight_exdir)) {
+  
   download_month <- function(year = year, month) {
     fl_url <- flight_url(year, month)
     if (RCurl::url.exists(fl_url)) {
@@ -64,6 +66,8 @@ get_flights <- function(station, year, dir) {
   
   months <- 1:12
   lapply(months, download_month, year = year)
+  
+  }
   
   get_flight_data <- function(path) {
     col_types <- readr::cols(

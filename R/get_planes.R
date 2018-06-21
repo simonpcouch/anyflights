@@ -48,7 +48,7 @@ get_planes <- function(year, dir) {
   
   keep <- planes_master %>%
     dplyr::tbl_df() %>%
-    dplyr::select(nnum = n.number, code = aircraftmfrmodelcode, year = year.mfr)
+    dplyr::select(nnum = n.number, code = mfr.model.code, year = year.mfr)
   
   planes_col_names <- c("mfr", "model", "type.acft", "type.eng", "ac", 
                         "amat", "no.eng", "no.seats", "speed", "na3", "code", "na1", "na2")

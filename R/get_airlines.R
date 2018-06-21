@@ -18,15 +18,21 @@ get_airlines <- function(dir) {
   
   # Download Airlines Data -------------------
   
-  if (RCurl::url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
-    
-    airlines_cols <- readr::cols(
+  if (!RCurl::url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
+    return("Can't access link for airlines data.")}
+
+  if (!file.exists(paste0(dir, "/flights.rda"))) stop("`flights.rda` dataset not found. Please run
+                                                      get_flights() with the same `dir` argument first.")
+  
+      airlines_cols <- readr::cols(
       Code = readr::col_character(),
       Description = readr::col_character()
     )
     
     airlines_raw <- readr::read_csv("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS",
                                     col_types = airlines_cols)
+    
+    load(paste0(dir, "/flights.rda"))
     
     airlines <- airlines_raw %>%
       dplyr::select(carrier = Code, name = Description) %>%
@@ -36,6 +42,5 @@ get_airlines <- function(dir) {
     airlines_filepath <- paste0(dir, "/airlines.rda")
     save(airlines, file = airlines_filepath, compress = "bzip2")
     
-  } else {return("Can't access link for airlines data.")}
   
 }
