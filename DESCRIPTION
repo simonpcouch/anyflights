@@ -16,7 +16,8 @@ Imports:
     httr,
     dplyr,
     readr,
-    RCurl
+    RCurl,
+    utils
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 6.0.1.9000
