@@ -40,7 +40,7 @@ get_planes <- function(year, dir) {
   planes_tmp <- tempfile(fileext = ".zip")
   utils::download.file(planes_src, planes_tmp) 
   
-  dir.create(planes_lcl)
+  if (!dir.exists(planes_lcl)) {dir.create(planes_lcl)}
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
   
   planes_master <- read.csv(paste0(planes_lcl, "/MASTER.txt"), stringsAsFactors = FALSE, strip.white = TRUE)
@@ -50,12 +50,20 @@ get_planes <- function(year, dir) {
     dplyr::tbl_df() %>%
     dplyr::select(nnum = n.number, code = mfr.mdl.code, year = year.mfr)
   
+  # the file structure changed in 2017.. thus, arguments must be a bit different
+  if (year >= 2017) {
+  planes_col_names <- c("code", "mfr", "model", "type.acft", "type.eng", "ac", 
+                        "amat", "no.eng", "no.seats", "speed", "na3", "na1", "na2")   
+    
+  planes_ref <- read.csv(paste0(planes_lcl, "/ACFTREF.txt"), stringsAsFactors = FALSE,
+                         strip.white = TRUE, header = FALSE, col.names = planes_col_names) 
+  } else {
   planes_col_names <- c("mfr", "model", "type.acft", "type.eng", "ac", 
-                        "amat", "no.eng", "no.seats", "speed", "na3", "code", "na1", "na2")
-  
-  
+                        "amat", "no.eng", "no.seats", "speed", "na3", "code", "na1", "na2")   
+    
   planes_ref <- read.csv(paste0(planes_lcl, "/AcftRef.txt"), stringsAsFactors = FALSE,
-                         strip.white = TRUE, header = FALSE, col.names = planes_col_names)
+                          strip.white = TRUE, header = FALSE, col.names = planes_col_names) 
+  }
   
   planes_ref <- planes_ref %>%
     dplyr::tbl_df() %>%
