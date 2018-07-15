@@ -40,7 +40,7 @@ Generate a weather dataset for the specified year and airport
 get_weather(station = "PDX", year = 2015, dir = tempdir())
 }
 \seealso{
-\code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
-data, \code{\link{get_planes}} for plane data, \code{\link{get_airlines}} for airline
-data, and \code{\link{anyflights}} for a wrapper function
+\code{\link{get_flights}} for flight data, 
+\code{\link{get_airports}} for airport data, \code{\link{get_airlines}} 
+for airline data, and \code{\link{anyflights}} for a wrapper function
 }

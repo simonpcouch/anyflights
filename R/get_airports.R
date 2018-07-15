@@ -16,8 +16,8 @@
 #' @source \url{http://openflights.org/data.html}
 #' @examples
 #' get_airports(dir = tempdir())
-#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_planes}} for plane
-#' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
+#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_weather}}
+#' for weather data, \code{\link{get_airlines}} for airline
 #' data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
@@ -54,8 +54,13 @@ get_airports <- function(dir) {
     )
     
     airports_raw <- readr::read_delim(airports_data_path, ",",
-                                      col_names = c("id", "name", "city", "country", "faa", "icao", "lat", "lon", "alt", "tz", "dst", "tzone", "type", "source"),
-                                      escape_double = FALSE, na = c("", "NA", "\\N"), 
+                                      col_names = c("id", "name", "city", 
+                                                    "country", "faa", "icao", 
+                                                    "lat", "lon", "alt", "tz", 
+                                                    "dst", "tzone", "type", 
+                                                    "source"),
+                                      escape_double = FALSE, na = c("", "NA", 
+                                                                    "\\N"), 
                                       col_types = airports_cols)
     
     

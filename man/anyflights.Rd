@@ -4,7 +4,7 @@
 \alias{anyflights}
 \title{Generate a folder of flights datasets for a given year and airport}
 \usage{
-anyflights(station, year, dir = tempdir())
+anyflights(station, year, dir)
 }
 \arguments{
 \item{station}{The airport of interest (use the airport code)}
@@ -18,14 +18,13 @@ A folder containing datasets about air travel
 }
 \description{
 \code{anyflights} is a wrapper function for \code{get_flights},
-\code{get_airports}, \code{get_planes}, \code{get_weather}, and
-\code{get_airlines}
+\code{get_airports}, \code{get_weather}, and \code{get_airlines}
 }
 \examples{
 anyflights(station = "PDX", year = 2015)
 }
 \seealso{
-\code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
-data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
-data, and \code{\link{get_planes}} for plane data
+\code{\link{get_flights}} for flight data, 
+\code{\link{get_airports}} for airport data, \code{\link{get_weather}} 
+for weather data, and \code{\link{get_airlines}} for airline data
 }

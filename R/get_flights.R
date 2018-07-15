@@ -27,9 +27,9 @@
 
 #' @examples
 #' get_flights(station = "PDX", year = 2015, dir = tempdir())
-#' @seealso \code{\link{get_airports}} for airport data, \code{\link{get_planes}} for plane
-#' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{anyflights}} for a wrapper function  
+#' @seealso \code{\link{get_airports}} for airport data, 
+#' \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} 
+#' for airline data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_flights <- function(station, year, dir) {
@@ -56,8 +56,10 @@ get_flights <- function(station, year, dir) {
     
     flight_files <- utils::unzip(flight_temp, list = TRUE)
     # Only extract biggest file
-    flight_csv <- flight_files$Name[order(flight_files$Length, decreasing = TRUE)[1]]
-    utils::unzip(flight_temp, exdir = flight_exdir, junkpaths = TRUE, files = flight_csv)
+    flight_csv <- flight_files$Name[order(flight_files$Length, 
+                                          decreasing = TRUE)[1]]
+    utils::unzip(flight_temp, exdir = flight_exdir, 
+                 junkpaths = TRUE, files = flight_csv)
     
     flight_src <- paste0(dir, "/flights/", flight_csv)
     flight_dst <- paste0(dir, "/flights/", year, "-", month, ".csv")

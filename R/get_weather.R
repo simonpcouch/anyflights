@@ -21,9 +21,9 @@
 #'   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
 #' @examples
 #' get_weather(station = "PDX", year = 2015, dir = tempdir())
-#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
-#' data, \code{\link{get_planes}} for plane data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{anyflights}} for a wrapper function  
+#' @seealso \code{\link{get_flights}} for flight data, 
+#' \code{\link{get_airports}} for airport data, \code{\link{get_airlines}} 
+#' for airline data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_weather <- function(station, year, dir) {
@@ -55,12 +55,13 @@ get_weather <- function(station, year, dir) {
     metar = readr::col_character()
   )
   
-  weather_raw <- read_csv(file = paste0("./", dir, "/weather.csv"), comment = "#", na = "M",
-           col_names = TRUE, col_types = weather_col_types)
-  names(weather_raw) <- c("station", "valid", "tmpf", "dwpf", "relh", "drct", "sknt",
-                          "p01i", "alti", "mslp", "vsby", "gust",
-                          "skyc1", "skyc2", "skyc3", "skyc4",
-                          "skyl1", "skyl2", "skyl3", "skyl4", "wxcodes", "metar")
+  weather_raw <- read_csv(file = paste0("./", dir, "/weather.csv"), 
+                          comment = "#", na = "M", col_names = TRUE, 
+                          col_types = weather_col_types)
+  names(weather_raw) <- c("station", "valid", "tmpf", "dwpf", "relh", "drct", 
+                          "sknt", "p01i", "alti", "mslp", "vsby", "gust",
+                          "skyc1", "skyc2", "skyc3", "skyc4", "skyl1", 
+                          "skyl2", "skyl3", "skyl4", "wxcodes", "metar")
   
   weather <-
     weather_raw %>%

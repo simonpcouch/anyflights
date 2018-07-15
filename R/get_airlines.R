@@ -9,9 +9,9 @@
 #' @source http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236
 #' @examples
 #' get_airlines(dir = tempdir())
-#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_planes}} for plane
-#' data, \code{\link{get_weather}} for weather data, \code{\link{get_airports}} for airport
-#' data, and \code{\link{anyflights}} for a wrapper function  
+#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_weather}} 
+#' for weather data, \code{\link{get_airports}} for airport data, and 
+#' \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_airlines <- function(dir) {

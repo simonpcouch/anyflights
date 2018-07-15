@@ -26,7 +26,7 @@ Generate an airlines dataset
 get_airlines(dir = tempdir())
 }
 \seealso{
-\code{\link{get_flights}} for flight data, \code{\link{get_planes}} for plane
-data, \code{\link{get_weather}} for weather data, \code{\link{get_airports}} for airport
-data, and \code{\link{anyflights}} for a wrapper function
+\code{\link{get_flights}} for flight data, \code{\link{get_weather}} 
+for weather data, \code{\link{get_airports}} for airport data, and 
+\code{\link{anyflights}} for a wrapper function
 }

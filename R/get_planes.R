@@ -1,26 +1,5 @@
-#' Generate a planes dataset for the specified year
-#' 
-#' @param year The year of interest, as an integer
-#' @param dir The folder for the dataset to be saved in
-#' @return A data frame with ~3500 rows and 9 variables:
-#' \describe{
-#' \item{tailnum}{Tail number}
-#' \item{year}{Year manufactured}
-#' \item{type}{Type of plane}
-#' \item{manufacturer,model}{Manufacturer and model}
-#' \item{engines,seats}{Number of engines and seats}
-#' \item{speed}{Average cruising speed in mph}
-#' \item{engine}{Type of engine}
-#' }
-#' @source FAA Aircraft registry,
-#'  \url{http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/}
-#' @examples
-#' get_planes(year = 2015, dir = tempdir())
-#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_airports}} for airport
-#' data, \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} for airline
-#' data, and \code{\link{anyflights}} for a wrapper function  
-#' @export
-
+# this function is deprecated for now--the file format changes every year,
+# and for now, it doesn't seem worth it to make queries for every year.
 
 get_planes <- function(year, dir) {
   
@@ -43,31 +22,64 @@ get_planes <- function(year, dir) {
   if (!dir.exists(planes_lcl)) {dir.create(planes_lcl)}
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
   
-  planes_master <- read.csv(paste0(planes_lcl, "/MASTER.txt"), stringsAsFactors = FALSE, strip.white = TRUE)
+  planes_master <- read.csv(paste0(planes_lcl, "/MASTER.txt"), 
+                            stringsAsFactors = FALSE, strip.white = TRUE)
   names(planes_master) <- tolower(names(planes_master))
   
-  keep <- planes_master %>%
+  if (year == 2015)
+  { keep <- planes_master %>%
     dplyr::tbl_df() %>%
-    dplyr::select(nnum = n.number, code = mfr.mdl.code, year = year.mfr)
+    dplyr::select(nnum = n.number, code = aircraftmfrmdlcode, year = year.mfr) 
+  } else {
+    keep <- planes_master %>%
+      dplyr::tbl_df() %>%
+      dplyr::select(nnum = n.number, code = mfr.mdl.code, year = year.mfr) 
+  }
   
-  # the file structure changed in 2017.. thus, arguments must be a bit different
+  # the file structure changed in 2017.. thus, arguments need to be a bit different
   if (year >= 2017) {
   planes_col_names <- c("code", "mfr", "model", "type.acft", "type.eng", "ac", 
-                        "amat", "no.eng", "no.seats", "speed", "na3", "na1", "na2")   
-    
-  planes_ref <- read.csv(paste0(planes_lcl, "/ACFTREF.txt"), stringsAsFactors = FALSE,
-                         strip.white = TRUE, header = FALSE, col.names = planes_col_names) 
+                        "amat", "no.eng", "no.seats", "na1", "speed", "na2")   
+
+  planes_col_types <- cols(
+    code = col_character(),
+    mfr = col_character(),
+    model = col_character(),
+    type.acft = col_integer(),
+    type.eng = col_integer(),
+    ac = col_integer(),
+    amat = col_integer(),
+    no.eng = col_integer(),
+    no.seats = col_integer(),
+    na1 = col_character(),
+    speed = col_character(),
+    na2 = col_character()
+  )       
+  
+  planes_ref <- read_csv(paste0(planes_lcl, "/ACFTREF.txt"),
+                         col_names = planes_col_names,
+                         col_types = planes_col_types,
+                         skip = 1,
+                         trim_ws = TRUE,
+                         guess_max = Inf)
+  
+  planes_ref <- read.csv(paste0(planes_lcl, "/ACFTREF.txt"))
+  
+  
   } else {
   planes_col_names <- c("mfr", "model", "type.acft", "type.eng", "ac", 
-                        "amat", "no.eng", "no.seats", "speed", "na3", "code", "na1", "na2")   
+                        "amat", "no.eng", "no.seats", "speed", "na3", 
+                        "code", "na1", "na2")   
     
-  planes_ref <- read.csv(paste0(planes_lcl, "/AcftRef.txt"), stringsAsFactors = FALSE,
-                          strip.white = TRUE, header = FALSE, col.names = planes_col_names) 
+  planes_ref <- read.csv(paste0(planes_lcl, "/AcftRef.txt"), 
+                         stringsAsFactors = FALSE, strip.white = TRUE, 
+                         header = FALSE, col.names = planes_col_names) 
   }
   
   planes_ref <- planes_ref %>%
     dplyr::tbl_df() %>%
-    dplyr::select(code, mfr, model, type.acft, type.eng, no.eng, no.seats, speed)
+    dplyr::select(code, mfr, model, type.acft, type.eng, 
+                  no.eng, no.seats, speed)
   
   planes_all <- keep %>%
     dplyr::inner_join(planes_ref, by = "code") %>%
@@ -76,8 +88,9 @@ get_planes <- function(year, dir) {
   planes_all$no.eng[planes_all$no.eng == 0] <- NA
   planes_all$no.seats[planes_all$no.seats == 0] <- NA
   
-  engine <- c("None", "Reciprocating", "Turbo-prop", "Turbo-shaft", "Turbo-jet",
-              "Turbo-fan", "Ramjet", "2 Cycle", "4 Cycle", "Unknown", "Electric", "Rotary")
+  engine <- c("None", "Reciprocating", "Turbo-prop", "Turbo-shaft", 
+              "Turbo-jet", "Turbo-fan", "Ramjet", "2 Cycle", "4 Cycle", 
+              "Unknown", "Electric", "Rotary")
   planes_all$engine <- engine[planes_all$type.eng + 1]
   planes_all$type.eng <- NULL
   
