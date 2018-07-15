@@ -10,7 +10,7 @@
 get_airports(dir)
 }
 \arguments{
-\item{dir}{The folder for the dataset to be saved in}
+\item{dir}{A character string--the folder for the dataset to be saved in}
 }
 \value{
 A data frame with ~1350 rows and 8 variables:
@@ -30,7 +30,7 @@ A data frame with ~1350 rows and 8 variables:
 Generate an airports dataset
 }
 \examples{
-get_airports(dir = tempdir())
+\donttest{get_airports(dir = tempdir())}
 }
 \seealso{
 \code{\link{get_flights}} for flight data, \code{\link{get_weather}}

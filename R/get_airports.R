@@ -1,6 +1,6 @@
 #' Generate an airports dataset
 #' 
-#' @param dir The folder for the dataset to be saved in
+#' @param dir A character string--the folder for the dataset to be saved in
 #' @return A data frame with ~1350 rows and 8 variables:
 #' \describe{
 #'  \item{faa}{FAA airport code}
@@ -15,7 +15,7 @@
 #' }
 #' @source \url{http://openflights.org/data.html}
 #' @examples
-#' get_airports(dir = tempdir())
+#' \donttest{get_airports(dir = tempdir())}
 #' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_weather}}
 #' for weather data, \code{\link{get_airlines}} for airline
 #' data, and \code{\link{anyflights}} for a wrapper function  
@@ -23,8 +23,6 @@
 
 
 get_airports <- function(dir) {
-  
-  # Download Airports Data -------------------
   
   if (!RCurl::url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
     return("Can't access airports data.")}

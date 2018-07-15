@@ -37,7 +37,7 @@ A data frame with ~25,000 rows and 15 variables:
 Generate a weather dataset for the specified year and airport
 }
 \examples{
-get_weather(station = "PDX", year = 2015, dir = tempdir())
+\donttest{get_weather(station = "PDX", year = 2015, dir = tempdir())}
 }
 \seealso{
 \code{\link{get_flights}} for flight data, 

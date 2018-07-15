@@ -20,15 +20,13 @@
 #' @source ASOS download from Iowa Environmental Mesonet,
 #'   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
 #' @examples
-#' get_weather(station = "PDX", year = 2015, dir = tempdir())
+#' \donttest{get_weather(station = "PDX", year = 2015, dir = tempdir())}
 #' @seealso \code{\link{get_flights}} for flight data, 
 #' \code{\link{get_airports}} for airport data, \code{\link{get_airlines}} 
 #' for airline data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_weather <- function(station, year, dir) {
-  
-  # Download Weather Data --------------------
   
   weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
 
@@ -40,13 +38,13 @@ get_weather <- function(station, year, dir) {
   
   if (!dir.exists(dir)) {dir.create(dir, showWarnings = FALSE, recursive = TRUE)}
   r <- httr::GET(weather_url, query = weather_query, 
-                 write_disk(paste0("./", dir, "/weather.csv"), overwrite = TRUE))
+                 httr::write_disk(paste0("./", dir, "/weather.csv"), overwrite = TRUE))
   httr::stop_for_status(r)                     
                         
   weather_col_types <- readr::cols(
     .default = readr::col_double(),
     station = readr::col_character(),
-    valid = col_datetime(format = ""),
+    valid = readr::col_datetime(format = ""),
     skyc1 = readr::col_character(),
     skyc2 = readr::col_character(),
     skyc3 = readr::col_character(),
@@ -55,7 +53,7 @@ get_weather <- function(station, year, dir) {
     metar = readr::col_character()
   )
   
-  weather_raw <- read_csv(file = paste0("./", dir, "/weather.csv"), 
+  weather_raw <- readr::read_csv(file = paste0("./", dir, "/weather.csv"), 
                           comment = "#", na = "M", col_names = TRUE, 
                           col_types = weather_col_types)
   names(weather_raw) <- c("station", "valid", "tmpf", "dwpf", "relh", "drct", 

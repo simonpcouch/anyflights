@@ -1,8 +1,10 @@
 #' Generate a flights dataset for a given year and airport
 #' 
 #' @param station The airport of interest (use the airport code)
-#' @param year The year of interest, as an integer
-#' @param dir The folder for the dataset to be saved in
+#' @param year The year of interest, as an integer. The more recent the year,
+#' the less likely the file structure has changed (and thus the more likely
+#' the function will run without error)
+#' @param dir A character string--the folder for the dataset to be saved in
 #' @return A data frame with ~10k-500k rows and 19 variables:
 #' \describe{
 #' \item{year,month,day}{Date of departure}
@@ -26,15 +28,13 @@
 #'  \url{http://www.transtats.bts.gov}
 
 #' @examples
-#' get_flights(station = "PDX", year = 2015, dir = tempdir())
+#' \donttest{get_flights(station = "MCI", year = 2016, dir = tempdir())}
 #' @seealso \code{\link{get_airports}} for airport data, 
 #' \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} 
 #' for airline data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
 
 get_flights <- function(station, year, dir) {
-  
-  # Download Flights Data --------------------
   
   if (!dir.exists(dir)) {dir.create(dir)}
   

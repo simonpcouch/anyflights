@@ -13,9 +13,11 @@ get_flights(station, year, dir)
 \arguments{
 \item{station}{The airport of interest (use the airport code)}
 
-\item{year}{The year of interest, as an integer}
+\item{year}{The year of interest, as an integer. The more recent the year,
+the less likely the file structure has changed (and thus the more likely
+the function will run without error)}
 
-\item{dir}{The folder for the dataset to be saved in}
+\item{dir}{A character string--the folder for the dataset to be saved in}
 }
 \value{
 A data frame with ~10k-500k rows and 19 variables:
@@ -42,7 +44,7 @@ A data frame with ~10k-500k rows and 19 variables:
 Generate a flights dataset for a given year and airport
 }
 \examples{
-get_flights(station = "PDX", year = 2015, dir = tempdir())
+\donttest{get_flights(station = "MCI", year = 2016, dir = tempdir())}
 }
 \seealso{
 \code{\link{get_airports}} for airport data, 

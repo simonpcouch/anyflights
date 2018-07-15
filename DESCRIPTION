@@ -4,7 +4,8 @@ Version: 0.1.0
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
     person("Jay", "Lee", , "jaylee@reed.edu", "aut"),
-    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut")
+    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
+    person("RStudio", role = "cph")
     )
 Description: Airline on-time data for all flights departing specified airports and years.
     Also includes useful 'metadata' on airlines, airports, weather, and planes.
@@ -17,7 +18,9 @@ Imports:
     dplyr,
     readr,
     RCurl,
-    utils
+    utils,
+    tibble,
+    lubridate
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 6.0.1.9000

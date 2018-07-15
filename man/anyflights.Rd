@@ -11,7 +11,7 @@ anyflights(station, year, dir)
 
 \item{year}{The year of interest, as an integer}
 
-\item{dir}{The folder for the datasets to be saved in}
+\item{dir}{A character string--the folder for the dataset to be saved in}
 }
 \value{
 A folder containing datasets about air travel
@@ -21,10 +21,11 @@ A folder containing datasets about air travel
 \code{get_airports}, \code{get_weather}, and \code{get_airlines}
 }
 \examples{
-anyflights(station = "PDX", year = 2015)
+\donttest{anyflights(station = "PDX", year = 2015, dir = tempdir())}
 }
 \seealso{
 \code{\link{get_flights}} for flight data, 
 \code{\link{get_airports}} for airport data, \code{\link{get_weather}} 
-for weather data, and \code{\link{get_airlines}} for airline data
+for weather data, \code{\link{get_flights}} for flight data, and 
+\code{\link{get_airlines}} for airline data
 }

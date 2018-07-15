@@ -4,13 +4,13 @@
 \alias{get_airlines}
 \title{Generate an airlines dataset}
 \source{
-http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236
+\url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
 }
 \usage{
 get_airlines(dir)
 }
 \arguments{
-\item{dir}{The folder for the dataset to be saved in}
+\item{dir}{A character string--the folder for the dataset to be saved in}
 }
 \value{
 A data frame with ~12 rows and 2 variables:
@@ -23,7 +23,7 @@ A data frame with ~12 rows and 2 variables:
 Generate an airlines dataset
 }
 \examples{
-get_airlines(dir = tempdir())
+\donttest{get_airlines(dir = tempdir())}
 }
 \seealso{
 \code{\link{get_flights}} for flight data, \code{\link{get_weather}} 

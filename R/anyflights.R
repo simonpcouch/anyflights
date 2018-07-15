@@ -5,18 +5,19 @@
 #' 
 #' @param station The airport of interest (use the airport code)
 #' @param year The year of interest, as an integer
-#' @param dir The folder for the datasets to be saved in
+#' @param dir A character string--the folder for the dataset to be saved in
 #' @return A folder containing datasets about air travel
 #' @examples
-#' anyflights(station = "PDX", year = 2015)
+#' \donttest{anyflights(station = "PDX", year = 2015, dir = tempdir())}
 #' @seealso \code{\link{get_flights}} for flight data, 
 #' \code{\link{get_airports}} for airport data, \code{\link{get_weather}} 
-#' for weather data, and \code{\link{get_airlines}} for airline data
+#' for weather data, \code{\link{get_flights}} for flight data, and 
+#' \code{\link{get_airlines}} for airline data
 #' @export
 
 anyflights <- function(station, year, dir) {
   
-  # Create Subdirectory ----------------------
+  # Create Subdirectory 
   dir.create(dir, showWarnings = FALSE)
   
   # Call get_ Functions
