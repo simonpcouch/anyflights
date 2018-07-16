@@ -1,11 +1,16 @@
-# anyflights
 
-This package, derived from `nycflights13`, includes functions to query datasets about air travel for user-specified airports and years.
+anyflights
+----------
 
-* `flights`: all flights that departed a given airport in a given year
-* `weather`: hourly meterological data for a given airport in a given year
-* `planes`: construction information about relevant planes
-* `airports`: airport names and locations
-* `airlines`: translation between two letter carrier codes and names
+`anyflights` supplies a set of functions to query air travel data. With a user-defined year and airport, the `anyflights` function will grab data on:
 
-Beginning with functionality from `nycflights13`, `anyflights` supplies a set of user functions to query and save datasets similar to that housed in `nycflights13` for user-specified airports and time-frames, but does not include any data itself.
+-   `flights`: all flights that departed a given airport in a given year
+-   `weather`: hourly meterological data for a given airport in a given year
+-   `airports`: airport names and locations
+-   `airlines`: translation between two letter carrier codes and names
+
+The package also includes a set of functions to query each of the above datasets individually. Each of the functions are named `get_` followed with the names of the datasets (shown above in `code`), and require a varying combination of the `station` (i.e. airport code), `year` (as an integer), and `dir` (folder in the working directory to save to) arguments.
+
+This package is inspired by and derived from Hadley Wickham's [nycflights13](https://github.com/hadley/nycflights13). However, note that the `planes` dataset is not included in the downloads for now, as the source for the `planes` dataset changes the formatting of the files nearly every year. A (now-deprecated) function `get_planes` is in the R folder, but is not exported in the build. This function may be available in later versions.
+
+These functions require a *strong* connection to run; expect several minutes of runtime, especially for the `anyflights` and `get_flights` functions.
