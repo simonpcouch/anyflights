@@ -2,6 +2,8 @@
 anyflights
 ==========
 
+[![Travis-CI Build Status](https://travis-ci.org/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.org/simonpcouch/anyflights)
+
 `anyflights` supplies a set of functions to query air travel data. With a user-defined year and airport, the `anyflights` function will grab data on:
 
 -   `flights`: all flights that departed a given airport in a given year
