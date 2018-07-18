@@ -1,9 +1,17 @@
-#' Generate a flights dataset for a given year and airport
+#' Generate a flights dataset for a specified year and airport
 #' 
-#' @param station The airport of interest (use the airport code)
-#' @param year The year of interest, as an integer. The more recent the year,
-#' the less likely the file structure has changed (and thus the more likely
-#' the function will run without error)
+#' Please note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data, and temporariliy 
+#' requires up to 2GB of storage (the file size is trimmed down significantly 
+#' after some post-processing---to the order of a couple MB---and the larger 
+#' files are deleted before termination)
+#' 
+#' 
+#' @param station A character string---the airport of interest (use the FAA 
+#' LID airport code).
+#' @param year The year of interest, as an integer (unquoted). Currently, years 
+#' 2015 and on are supported. Information for the most recent year is usually 
+#' available by February or March in the following year.
 #' @param dir A character string--the folder for the dataset to be saved in
 #' @return A data frame with ~10k-500k rows and 19 variables:
 #' \describe{

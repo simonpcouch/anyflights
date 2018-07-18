@@ -1,6 +1,9 @@
 #' Generate an airports dataset
 #' 
-#' @param dir A character string--the folder for the dataset to be saved in
+#' Please note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @param dir A character string---the folder for the dataset to be saved in
 #' @return A data frame with ~1350 rows and 8 variables:
 #' \describe{
 #'  \item{faa}{FAA airport code}

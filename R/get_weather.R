@@ -1,7 +1,12 @@
 #' Generate a weather dataset for the specified year and airport
 #' 
-#' @param station The airport of interest (use the airport code)
-#' @param year The year of interest, as an integer
+#' Please note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @param station A character string---the airport of interest (use the FAA 
+#' LID airport code).
+#' @param year The year of interest, as an integer (unquoted). Currently, years 
+#' 2015 and on are supported.
 #' @param dir The folder for the dataset to be saved in
 #' @return A data frame with ~25,000 rows and 15 variables:
 #' \describe{

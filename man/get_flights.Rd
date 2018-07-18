@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_flights.R
 \name{get_flights}
 \alias{get_flights}
-\title{Generate a flights dataset for a given year and airport}
+\title{Generate a flights dataset for a specified year and airport}
 \source{
 RITA, Bureau of transportation statistics,
  \url{http://www.transtats.bts.gov}
@@ -11,11 +11,12 @@ RITA, Bureau of transportation statistics,
 get_flights(station, year, dir)
 }
 \arguments{
-\item{station}{The airport of interest (use the airport code)}
+\item{station}{A character string---the airport of interest (use the FAA 
+LID airport code).}
 
-\item{year}{The year of interest, as an integer. The more recent the year,
-the less likely the file structure has changed (and thus the more likely
-the function will run without error)}
+\item{year}{The year of interest, as an integer (unquoted). Currently, years 
+2015 and on are supported. Information for the most recent year is usually 
+available by February or March in the following year.}
 
 \item{dir}{A character string--the folder for the dataset to be saved in}
 }
@@ -41,7 +42,11 @@ A data frame with ~10k-500k rows and 19 variables:
 }
 }
 \description{
-Generate a flights dataset for a given year and airport
+Please note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data, and temporariliy 
+requires up to 2GB of storage (the file size is trimmed down significantly 
+after some post-processing---to the order of a couple MB---and the larger 
+files are deleted before termination)
 }
 \examples{
 \donttest{get_flights(station = "MCI", year = 2016, dir = tempdir())}

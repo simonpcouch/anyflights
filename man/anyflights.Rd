@@ -2,23 +2,31 @@
 % Please edit documentation in R/anyflights.R
 \name{anyflights}
 \alias{anyflights}
-\title{Generate a folder of flights datasets for a given year and airport}
+\title{Generate a folder of air travel datasets for a given year and airport}
 \usage{
 anyflights(station, year, dir)
 }
 \arguments{
-\item{station}{The airport of interest (use the airport code)}
+\item{station}{A character string---the airport of interest (use the FAA 
+LID airport code).}
 
-\item{year}{The year of interest, as an integer}
+\item{year}{The year of interest, as an integer (unquoted). Currently, years 
+2015 and on are supported. Information for the most recent year is usually 
+available by February or March in the following year.}
 
-\item{dir}{A character string--the folder for the dataset to be saved in}
+\item{dir}{A character string---the folder for the dataset to be saved in}
 }
 \value{
 A folder containing datasets about air travel
 }
 \description{
 \code{anyflights} is a wrapper function for \code{get_flights},
-\code{get_airports}, \code{get_weather}, and \code{get_airlines}
+\code{get_airports}, \code{get_weather}, and \code{get_airlines}. Please 
+note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data, and temporariliy 
+requires up to 2GB of storage (the file size is trimmed down significantly 
+after some post-processing---to the order of a couple MB---and the larger 
+files are deleted before termination)
 }
 \examples{
 \donttest{anyflights(station = "PDX", year = 2015, dir = tempdir())}

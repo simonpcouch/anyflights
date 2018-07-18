@@ -1,6 +1,9 @@
 #' Generate an airlines dataset
 #' 
-#' @param dir A character string--the folder for the dataset to be saved in
+#' Please note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @param dir A character string---the folder for the dataset to be saved in
 #' @return A data frame with ~12 rows and 2 variables:
 #' \describe{
 #' \item{carrier}{Two letter abbreviation}

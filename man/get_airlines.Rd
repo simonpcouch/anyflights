@@ -10,7 +10,7 @@
 get_airlines(dir)
 }
 \arguments{
-\item{dir}{A character string--the folder for the dataset to be saved in}
+\item{dir}{A character string---the folder for the dataset to be saved in}
 }
 \value{
 A data frame with ~12 rows and 2 variables:
@@ -20,7 +20,8 @@ A data frame with ~12 rows and 2 variables:
 }
 }
 \description{
-Generate an airlines dataset
+Please note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data.
 }
 \examples{
 \donttest{get_airlines(dir = tempdir())}

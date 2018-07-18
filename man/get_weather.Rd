@@ -11,9 +11,11 @@ ASOS download from Iowa Environmental Mesonet,
 get_weather(station, year, dir)
 }
 \arguments{
-\item{station}{The airport of interest (use the airport code)}
+\item{station}{A character string---the airport of interest (use the FAA 
+LID airport code).}
 
-\item{year}{The year of interest, as an integer}
+\item{year}{The year of interest, as an integer (unquoted). Currently, years 
+2015 and on are supported.}
 
 \item{dir}{The folder for the dataset to be saved in}
 }
@@ -34,7 +36,8 @@ A data frame with ~25,000 rows and 15 variables:
 }
 }
 \description{
-Generate a weather dataset for the specified year and airport
+Please note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data.
 }
 \examples{
 \donttest{get_weather(station = "PDX", year = 2015, dir = tempdir())}
