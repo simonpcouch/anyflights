@@ -1,5 +1,5 @@
 Package: anyflights
-Title: Download Flight Data For Specified Years and Airports
+Title: Download Air Travel Data for Specified Years and Airports
 Version: 0.1.0
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
@@ -7,8 +7,9 @@ Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("RStudio", role = "cph")
     )
-Description: Airline on-time data for all flights departing specified airports and years.
-    Also includes useful 'metadata' on airlines, airports, weather, and planes.
+Description: Supplies a set of functions to query air travel data for user-
+specified years and airports. Datasets include on-time flights, airlines,
+airports, and weather.
 License: CC0
 LazyData: true
 Depends:
