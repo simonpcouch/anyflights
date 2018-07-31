@@ -35,5 +35,7 @@ files are deleted before termination)
 \code{\link{get_flights}} for flight data, 
 \code{\link{get_airports}} for airport data, \code{\link{get_weather}} 
 for weather data, \code{\link{get_flights}} for flight data, and 
-\code{\link{get_airlines}} for airline data
+\code{\link{get_airlines}} for airline data. See 
+\code{\link{anyflights_description}} for information on the package,
+rather than the function.
 }
