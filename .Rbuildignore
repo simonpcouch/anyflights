@@ -1,3 +1,7 @@
 README.Rmd
 anyflights.Rproj
 ^\.travis\.yml$
+demo_script.R
+^.*\.Rproj$
+^\.Rproj\.user$
+cran-comments.md
