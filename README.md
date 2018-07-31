@@ -2,7 +2,7 @@
 anyflights
 ==========
 
-[![Travis-CI Build Status](https://travis-ci.org/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.org/simonpcouch/anyflights)
+![CRAN Badge](http://www.r-pkg.org/badges/version/anyflights)[![Travis-CI Build Status](https://travis-ci.org/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.org/simonpcouch/anyflights)
 
 `anyflights` supplies a set of functions to query air travel data. With a user-defined year and airport, the `anyflights` function will grab data on:
 
@@ -21,12 +21,11 @@ These functions require a *strong* connection to run; expect several minutes of 
 
 For now, years 2015 and on are supported. The FAA usually posts all of the data for a given year during February or March of the following year. All airports with an FAA LID code are supported, to my knowledge.
 
-You can install the latest version of `anyflights` with the following code.
+We're now on CRAN! You can install the latest version of `anyflights` with the following code.
 
 ``` r
-# install.packages("devtools")
-# library(devtools)
-devtools::install_github("simonpcouch/anyflights")
+install.packages("anyflights")
+library(anyflights)
 ```
 
 *Simon P. Couch*
