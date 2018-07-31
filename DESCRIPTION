@@ -24,4 +24,4 @@ Imports:
     lubridate
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
