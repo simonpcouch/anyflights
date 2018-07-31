@@ -23,7 +23,7 @@ A folder containing datasets about air travel
 \code{anyflights} is a wrapper function for \code{get_flights},
 \code{get_airports}, \code{get_weather}, and \code{get_airlines}. Please 
 note that, even with a strong internet connection, this function 
-may take several minutes to download relevant data, and temporariliy 
+may take several minutes to download relevant data, and temporarily 
 requires up to 2GB of storage (the file size is trimmed down significantly 
 after some post-processing---to the order of a couple MB---and the larger 
 files are deleted before termination)
