@@ -8,8 +8,8 @@ Authors@R: c(
     person("RStudio", role = "cph")
     )
 Description: Supplies a set of functions to query air travel data for user-
-specified years and airports. Datasets include on-time flights, airlines,
-airports, and weather.
+    specified years and airports. Datasets include on-time flights, airlines,
+    airports, and weather.
 License: CC0
 LazyData: true
 Depends:
