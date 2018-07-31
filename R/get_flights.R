@@ -1,7 +1,7 @@
 #' Generate a flights dataset for a specified year and airport
 #' 
 #' Please note that, even with a strong internet connection, this function 
-#' may take several minutes to download relevant data, and temporariliy 
+#' may take several minutes to download relevant data, and temporarily 
 #' requires up to 2GB of storage (the file size is trimmed down significantly 
 #' after some post-processing---to the order of a couple MB---and the larger 
 #' files are deleted before termination)
