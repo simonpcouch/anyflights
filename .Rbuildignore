@@ -5,3 +5,4 @@ demo_script.R
 ^.*\.Rproj$
 ^\.Rproj\.user$
 cran-comments.md
+CONTRIBUTING.md
