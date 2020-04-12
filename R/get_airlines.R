@@ -16,12 +16,12 @@
 #' for weather data, \code{\link{get_airports}} for airport data, and 
 #' \code{\link{anyflights}} for a wrapper function  
 #' @export
-
+source("E:/GITHUB_Projects/anyflights/R/url_check.R")
 get_airlines <- function(dir) {
+  #main_dir <- file.path(getwd(), dir, fsep = "/")
   
-  if (!RCurl::url.exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
+  if(!url_exists("http://www.transtats.bts.gov/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS")) {
     return("Can't access link for airlines data.")}
-
   if (!file.exists(paste0(dir, "/flights.rda"))) stop("`flights.rda` dataset not found. Please run
                                                       get_flights() with the same `dir` argument first.")
   
@@ -42,6 +42,4 @@ get_airlines <- function(dir) {
     
     airlines_filepath <- paste0(dir, "/airlines.rda")
     save(airlines, file = airlines_filepath, compress = "bzip2")
-    
-  
 }

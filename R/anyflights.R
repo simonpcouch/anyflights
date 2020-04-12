@@ -29,11 +29,13 @@ anyflights <- function(station, year, dir) {
   
   # Create Subdirectory 
   dir.create(dir, showWarnings = FALSE)
+  #main_dir <- file.path(getwd(), dir, fsep = "/")
   
   # Call get_ Functions
   get_flights(station = station, year = year, dir = dir)
   get_airlines(dir = dir)
   get_airports(dir = dir)
-  get_weather(station = station, year = year, dir = dir)
+  get_airports(dir = dir)
+  #get_weather(station = station, year = year, dir = dir)
   print("All done!")
 }
