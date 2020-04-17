@@ -16,7 +16,7 @@
 #' for weather data, \code{\link{get_airports}} for airport data, and 
 #' \code{\link{anyflights}} for a wrapper function  
 #' @export
-source("E:/GITHUB_Projects/anyflights/R/url_check.R")
+
 get_airlines <- function(dir) {
   #main_dir <- file.path(getwd(), dir, fsep = "/")
   
