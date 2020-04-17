@@ -25,7 +25,9 @@
 #' @export
 
 
+
 get_airports <- function(dir) {
+  #main_dir <- file.path(getwd(), dir, fsep = "/")
   
   if (!RCurl::url.exists("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")) {
     return("Can't access airports data.")}

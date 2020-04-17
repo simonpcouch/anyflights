@@ -2,6 +2,7 @@
 # and for now, it doesn't seem worth it to make queries for every year.
 
 get_planes <- function(year, dir) {
+ # main_dir <- file.path(getwd(), dir, fsep = "/")
   
   # Check that the flights dataset exists before running
   if (!file.exists(paste0(dir, "/flights.rda"))) {stop(
@@ -29,7 +30,7 @@ get_planes <- function(year, dir) {
   if (year == 2015)
   { keep <- planes_master %>%
     dplyr::tbl_df() %>%
-    dplyr::select(nnum = n.number, code = aircraftmfrmdlcode, year = year.mfr) 
+    dplyr::select(nnum = n.number, code = aircraftmfrmodelcode, year = year.mfr) 
   } else {
     keep <- planes_master %>%
       dplyr::tbl_df() %>%

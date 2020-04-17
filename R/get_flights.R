@@ -44,23 +44,22 @@
 
 get_flights <- function(station, year, dir) {
   
+  #main_dir <- file.path(getwd(), dir, fsep = "/")
   if (!dir.exists(dir)) {dir.create(dir)}
   
   flight_url <- function(year, month) {
-    base_url <- "http://www.transtats.bts.gov/PREZIP/"
-    paste0(base_url, "On_Time_On_Time_Performance_", year, "_", month, ".zip")
+    base_url <- "https://transtats.bts.gov/PREZIP/"
+    paste0(base_url, "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_", year, "_", month, ".zip")
   }
   
   flight_exdir <- paste0(dir, "/flights")
   
-  if (!dir.exists(flight_exdir)) {
+  if (!dir.exists(flight_exdir)) {1
   
-  download_month <- function(year = year, month) {
+  download_month <- function(year, month) {
     fl_url <- flight_url(year, month)
-    if (RCurl::url.exists(fl_url)) {
       flight_temp <- tempfile(fileext = ".zip")
       utils::download.file(fl_url, flight_temp)
-    } else stop(sprintf("Can't access flight data for supplied year. Check date of 'Latest Available Data' for 'Airline On-Time Performance Data' on \n https://www.transtats.bts.gov/releaseinfo.asp"))
     
     flight_files <- utils::unzip(flight_temp, list = TRUE)
     # Only extract biggest file
@@ -73,8 +72,7 @@ get_flights <- function(station, year, dir) {
     flight_dst <- paste0(dir, "/flights/", year, "-", month, ".csv")
     file.rename(flight_src, flight_dst)
   }
-  
-  months <- 1:12
+  months <- 1
   lapply(months, download_month, year = year)
   
   }
@@ -85,8 +83,8 @@ get_flights <- function(station, year, dir) {
       ArrTime = readr::col_integer(),
       CRSDepTime = readr::col_integer(),
       CRSArrTime = readr::col_integer(),
-      Carrier = readr::col_character(),
-      UniqueCarrier = readr::col_character()
+      Reporting_Airline = readr::col_character(),
+      IATA_CODE_Reporting_Airline = readr::col_character()
     )
     
     suppressWarnings(readr::read_csv(path, col_types = col_types)) %>%
@@ -94,7 +92,7 @@ get_flights <- function(station, year, dir) {
         year = Year, month = Month, day = DayofMonth,
         dep_time = DepTime, sched_dep_time = CRSDepTime, dep_delay = DepDelay,
         arr_time = ArrTime, sched_arr_time = CRSArrTime, arr_delay = ArrDelay,
-        carrier = Carrier,  flight = FlightNum, tailnum = TailNum,
+        carrier = Reporting_Airline,  flight = Flight_Number_Reporting_Airline, tailnum = Tail_Number,
         origin = Origin, dest = Dest,
         air_time = AirTime, distance = Distance
       ) %>%
