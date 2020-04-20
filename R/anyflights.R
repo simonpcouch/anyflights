@@ -2,10 +2,13 @@
 #' 
 #' The \code{anyflights} function is a wrapper around the following functions:
 #' \itemize{
-#'   \item \code{get_flights}: Grab data on all flights departing from the
-#'   specified airports
-#'   \item \code{get_airlines}: Grab data on all active airlines 
-#'   \item \code{get_airports}: Grab data on airports
+#'   \item \code{get_airlines}: Grab data to translate between two letter 
+#'   carrier codes and names
+#'   \item \code{get_airports}: Grab data on airport names and locations
+#'   \item \code{get_flights}: Grab data on all flights that departed given 
+#'   airports in a given year and month
+#'   \item \code{get_weather}: Grab hourly meterological data for a given 
+#'   airport in a given year and month
 #' }
 #' 
 #' The function returns a list of dataframes (or directory of datasets) 

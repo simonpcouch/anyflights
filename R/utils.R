@@ -207,6 +207,28 @@ airports_cols <- readr::cols(
 )
 
 
+# get_weather utilities -------------------------------------------------
 
+weather_col_types <- cols(
+  .default = col_double(),
+  station = col_character(),
+  valid = col_datetime(format = ""),
+  skyc1 = col_character(),
+  skyc2 = col_character(),
+  skyc3 = col_character(),
+  skyc4 = col_logical(),
+  skyl4 = col_logical(),
+  wxcodes = col_character(),
+  peak_wind_time = col_datetime(format = ""),
+  metar = col_character()
+)
 
-
+process_month_arg <- function(month) {
+  start_month <- min(month)
+  end_month <- max(month)
+  last_day <- c(31, 28, 31, 30,
+                31, 30, 31, 31,
+                30, 31, 30, 31)[end_month]
+  
+  return(c(start_month, end_month, last_day))
+}
