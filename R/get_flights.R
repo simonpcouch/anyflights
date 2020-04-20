@@ -7,11 +7,11 @@
 #' files are deleted before termination)
 #' 
 #' 
-#' @param station A character string---the airport of interest (use the FAA 
-#' LID airport code).
-#' @param year The year of interest, as an integer (unquoted). Currently, years 
-#' 2015 and on are supported. Information for the most recent year is usually 
-#' available by February or March in the following year.
+#' @param station A character vector giving the airports of interest (using the 
+#' FAA LID airport code).
+#' @param year The years of interest. Currently, years 2015 and on are 
+#' supported. Information for the most recent year is usually available by 
+#' February or March in the following year.
 #' @param dir A character string--the folder for the dataset to be saved in
 #' @return A data frame with ~10k-500k rows and 19 variables:
 #' \describe{
@@ -41,75 +41,46 @@
 #' \code{\link{get_weather}} for weather data, \code{\link{get_airlines}} 
 #' for airline data, and \code{\link{anyflights}} for a wrapper function  
 #' @export
-
-get_flights <- function(station, year, dir) {
+get_flights <- function(station, year, month, dir = NULL) {
   
-  #main_dir <- file.path(getwd(), dir, fsep = "/")
+  # create a temporary directory if need be
+  if (is.null(dir)) {
+    return_data <- TRUE
+    dir <- tempdir()
+  } else {
+    return_data <- FALSE
+  }
+  
+  # if the directory doesn't exist, make it!
   if (!dir.exists(dir)) {dir.create(dir)}
   
-  flight_url <- function(year, month) {
-    base_url <- "https://transtats.bts.gov/PREZIP/"
-    paste0(base_url, "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_", year, "_", month, ".zip")
-  }
-  
+  # make a subdirectory inside the directory to download the raw data into
   flight_exdir <- paste0(dir, "/flights")
   
-  if (!dir.exists(flight_exdir)) {1
+  # download flight data for the relevant time range
+  purrr::map(month, download_month, year = year, flight_exdir)
   
-  download_month <- function(year, month) {
-    fl_url <- flight_url(year, month)
-      flight_temp <- tempfile(fileext = ".zip")
-      utils::download.file(fl_url, flight_temp)
+  # load in the flights data for each month, tidy it, and rowbind it
+  tidy_flights_data <- map(dir(flight_exdir, full.names = TRUE),
+                           get_flight_data) %>%
+    bind_rows() %>%
+    dplyr::arrange(year, month, day, dep_time)
+  
+  if (return_data) {
+    # get rid of the tempdir
+    unlink(x = dir, recursive = TRUE)
     
-    flight_files <- utils::unzip(flight_temp, list = TRUE)
-    # Only extract biggest file
-    flight_csv <- flight_files$Name[order(flight_files$Length, 
-                                          decreasing = TRUE)[1]]
-    utils::unzip(flight_temp, exdir = flight_exdir, 
-                 junkpaths = TRUE, files = flight_csv)
+    # return the data
+    return(tidy_flights_data)
+  } else {
+    # get rid of the "raw" data
+    unlink(x = flight_exdir, recursive = TRUE)
     
-    flight_src <- paste0(dir, "/flights/", flight_csv)
-    flight_dst <- paste0(dir, "/flights/", year, "-", month, ".csv")
-    file.rename(flight_src, flight_dst)
-  }
-  months <- 1
-  lapply(months, download_month, year = year)
-  
-  }
-  
-  get_flight_data <- function(path) {
-    col_types <- readr::cols(
-      DepTime = readr::col_integer(),
-      ArrTime = readr::col_integer(),
-      CRSDepTime = readr::col_integer(),
-      CRSArrTime = readr::col_integer(),
-      Reporting_Airline = readr::col_character(),
-      IATA_CODE_Reporting_Airline = readr::col_character()
-    )
+    # ...and save the flights data
+    save(tidy_flights_data, 
+         file = paste0(dir, "/flights.rda"), 
+         compress = "bzip2")
     
-    suppressWarnings(readr::read_csv(path, col_types = col_types)) %>%
-      dplyr::select(
-        year = Year, month = Month, day = DayofMonth,
-        dep_time = DepTime, sched_dep_time = CRSDepTime, dep_delay = DepDelay,
-        arr_time = ArrTime, sched_arr_time = CRSArrTime, arr_delay = ArrDelay,
-        carrier = Reporting_Airline,  flight = Flight_Number_Reporting_Airline, tailnum = Tail_Number,
-        origin = Origin, dest = Dest,
-        air_time = AirTime, distance = Distance
-      ) %>%
-      dplyr::filter(origin %in% station) %>%
-      dplyr::mutate(
-        hour = sched_dep_time %/% 100,
-        minute = sched_dep_time %% 100,
-        time_hour = lubridate::make_datetime(year, month, day, hour, 0, 0)
-      ) %>%
-      dplyr::arrange(year, month, day, dep_time)
+    return(TRUE)
   }
-  
-  all <- lapply(dir(flight_exdir, full.names = TRUE), get_flight_data)
-  flights <- dplyr::bind_rows(all)
-  flights$tailnum[flights$tailnum == ""] <- NA
-  flight_file_path <- paste0(dir, "/flights.rda")
-  save(flights, file = flight_file_path, compress = "bzip2")
-  unlink(x = flight_exdir, recursive = TRUE)
-  
 }
