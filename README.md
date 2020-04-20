@@ -1,18 +1,14 @@
 
 # anyflights
 
-**Note: This package is no longer supported.**
-
-[![Travis-CI Build
-Status](https://travis-ci.org/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.org/simonpcouch/anyflights)
-
 `anyflights` supplies a set of functions to query air travel data. With
 a user-defined year and airport, the `anyflights` function will grab
 data on:
 
   - `flights`: all flights that departed a given airport in a given year
+    and month
   - `weather`: hourly meterological data for a given airport in a given
-    year
+    year and month
   - `airports`: airport names and locations
   - `airlines`: translation between two letter carrier codes and names
 
@@ -27,7 +23,7 @@ The main intent of this package, among others, is to allow for students
 learning the basics of R and the tidyverse through labs working with the
 `nycflights13` package to work with more recent data from their own
 hometowns or from the airport closest to their school. An instructor can
-use this package to generate a folder of data (\~5MB) that can be
+use this package to generate a folder of data (~5MB) that can be
 distributed to students through Dropbox, GitHub, etc. As a result,
 students can make discoveries that could impact their own, real-life air
 travel decisions. (I was introduced to R through a guided analysis of
@@ -46,16 +42,6 @@ These functions require a *strong* connection to run; expect several
 minutes of runtime, especially for the `anyflights` and `get_flights`
 functions.
 
-For now, years 2015 and on are supported. The FAA usually posts all of
-the data for a given year during February or March of the following
-year. All airports with an FAA LID code are supported, to my knowledge.
-
-We’re now on CRAN\! You can install the latest version of `anyflights`
-with the following code.
-
-``` r
-install.packages("anyflights")
-library(anyflights)
-```
-
-*Simon P. Couch*
+The FAA usually posts all of the data for a given year during February
+or March of the following year. All airports with an FAA LID code are
+supported, to my knowledge.
