@@ -38,6 +38,52 @@ url_exists <- function(x, quiet = FALSE, ...) {
   
 }
 
+stop_glue <- function(..., .sep = "", .envir = parent.frame(),
+                      call. = FALSE, .domain = NULL) {
+  stop(
+    glue_null(..., .sep = .sep, .envir = .envir),
+    call. = call., domain = .domain
+  )
+}
+
+warning_glue <- function(..., .sep = "", .envir = parent.frame(),
+                         call. = FALSE, .domain = NULL) {
+  warning(
+    glue_null(..., .sep = .sep, .envir = .envir),
+    call. = call., domain = .domain
+  )
+}
+
+message_glue <- function(..., .sep = "", .envir = parent.frame(),
+                         .domain = NULL, .appendLF = TRUE) {
+  message(
+    glue_null(..., .sep = .sep, .envir = .envir),
+    domain = .domain, appendLF = .appendLF
+  )
+}
+
+# glue messages, warnings, and errors
+glue_null <- function(..., .sep = "", .envir = parent.frame()) {
+  glue::glue(
+    ..., .sep = .sep, .envir = .envir, .transformer = null_transformer
+  )
+}
+
+# actually print NULLs in output 
+null_transformer <- function(text, envir) {
+  out <- eval(parse(text = text, keep.source = FALSE), envir)
+  if (is.null(out)) {
+    return("NULL")
+  }
+  
+  out
+}
+
+load_as <- function(filepath) {
+  new_env <- new.env()
+  data <- load(filepathj, new_env)[1]
+  new_env[[data]]
+}
 
 # get_flights utilities --------------------------------------------------
 
@@ -114,3 +160,36 @@ make_flights_url <- function(year, month) {
          "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_", 
          year, "_", month, ".zip")
 }
+
+
+# get_airlines utilities ----------------------------------------------------
+parse_flights_data_arg <- function(flights_data) {
+  
+  # if it's a character vector, check if it's a filepath
+  if (is.character(flights_data)) {
+    if (file.exists(flights_data)) {
+      flights_data <- load_as(flights_data)
+    }
+  }
+  
+  # now, if flights_data is a dataframe...
+  if (is.data.frame(flights_data)) {
+    # and carrier is in the column names
+    if ("carrier" %in% colnames(flights_data)) {
+      # just return the dataframe
+      return(flights_data)
+    }
+  }
+  
+  # otherwise, return null
+  return(NULL)
+  
+}
+
+
+
+
+
+
+
+

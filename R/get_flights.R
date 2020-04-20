@@ -61,9 +61,9 @@ get_flights <- function(station, year, month, dir = NULL) {
   purrr::map(month, download_month, year = year, flight_exdir)
   
   # load in the flights data for each month, tidy it, and rowbind it
-  tidy_flights_data <- map(dir(flight_exdir, full.names = TRUE),
-                           get_flight_data) %>%
-    bind_rows() %>%
+  tidy_flights_data <- purrr::map(dir(flight_exdir, full.names = TRUE),
+                                  get_flight_data) %>%
+    dplyr::bind_rows() %>%
     dplyr::arrange(year, month, day, dep_time)
   
   if (return_data) {
