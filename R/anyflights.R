@@ -1,41 +1,75 @@
-#' Generate a folder of air travel datasets for a given year and airport
+#' Grab data on air travel
 #' 
-#' \code{anyflights} is a wrapper function for \code{get_flights},
-#' \code{get_airports}, \code{get_weather}, and \code{get_airlines}. Please 
+#' The \code{anyflights} function is a wrapper around the following functions:
+#' \itemize{
+#'   \item \code{get_flights}: Grab data on all flights departing from the
+#'   specified airports
+#'   \item \code{get_airlines}: Grab data on all active airlines 
+#'   \item \code{get_airports}: Grab data on airports
+#' }
+#' 
+#' The function returns a list of dataframes (or directory of datasets) 
+#' similar to those found in the \code{nycflights13} data package. Please 
 #' note that, even with a strong internet connection, this function 
-#' may take several minutes to download relevant data, and temporarily 
-#' requires up to 2GB of storage (the file size is trimmed down significantly 
-#' after some post-processing---to the order of a couple MB---and the larger 
-#' files are deleted before termination)
+#' may take several minutes to download relevant data.
 #' 
-#' @param station A character string---the airport of interest (use the FAA 
-#' LID airport code).
-#' @param year The year of interest, as an integer (unquoted). Currently, years 
-#' 2015 and on are supported. Information for the most recent year is usually 
-#' available by February or March in the following year.
-#' @param dir A character string---the folder for the dataset to be saved in
-#' @return A folder containing datasets about air travel
+#' @param station A character vector giving the origin airports of interest
+#'  (as the FAA LID airport code).
+#'  
+#' @param year A numeric giving the year of interest. This argument is currently
+#' not vectorized, as dataset sizes for single years are significantly large.
+#' Information for the most recent year is usually available by February or 
+#' March in the following year.
+#' 
+#' @param month A numeric giving the month(s) of interest.
+#' 
+#' @param dir An (always) optional character string giving the directory
+#' to save datasets in. By default, datasets will not be saved to file.
+#' 
+#' @param flights_data An optional argument to \code{get_airlines} so that the 
+#' function will only return carriers that appear in the flight data or 
+#' interest---either a filepath as a character string or a dataframe outputted
+#' by \code{get_flights}. If not supplied, all carriers will be returned.
+#' 
+#' @return A named list of dataframes and, optionally, a folder containing the 
+#' datasets saved to file.
+#' 
 #' @examples
-#' \donttest{anyflights(station = "PDX", year = 2015, dir = tempdir())}
-#' @seealso \code{\link{get_flights}} for flight data, 
-#' \code{\link{get_airports}} for airport data, \code{\link{get_weather}} 
-#' for weather data, \code{\link{get_flights}} for flight data, and 
-#' \code{\link{get_airlines}} for airline data. See 
-#' \code{\link{anyflights_description}} for information on the package,
-#' rather than the function. 
+#' # grab data on all flights departing from Portland International Airport
+#' # in June 2019 without saving to file as well as other useful metadata
+#' \donttest{anyflights("PDX", 2018, 6)}
+#' 
+#' # ...or, grab that same data and opt to save the file as well! (tempdir() 
+#' # can usually be specified as a character string)
+#' \donttest{anyflights("PDX", 2018, 6, tempdir())}
+#' 
+#' # equivalently to the first call, grab each of the datasets individually
+#' \donttest{get_flights("PDX", 2018, 6)}
+#' \donttest{get_airlines(2018)}
+#' \donttest{get_airports()}
+#' 
+#' # get_flights is vectorized on the month argument! to grab both june and
+#' # July, you could call
+#' \donttest{flights <- get_flights("PDX", 2018, 6:7)}
+#' 
+#' # the get_airlines function optionally takes in a flights dataframe
+#' # to automatically subset the airlines data down to carriers
+#' # that appear in the flights data
+#' \donttest{get_airlines(2018, flights)}
+#' 
 #' @export
+anyflights <- function(station, year, month = 1:12, dir = NULL) {
+  
+  if (!is.null(dir)) {
+    dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  }
+  
+  flights <- get_flights(station, year, month, dir)
+  airlines <- get_airlines(dir, flights)
+  airports <- get_airports(dir)
+  
+  return(list(flights = flights,
+              airlines = airlines,
+              airports = airports))
 
-anyflights <- function(station, year, dir) {
-  
-  # Create Subdirectory 
-  dir.create(dir, showWarnings = FALSE)
-  #main_dir <- file.path(getwd(), dir, fsep = "/")
-  
-  # Call get_ Functions
-  get_flights(station = station, year = year, dir = dir)
-  get_airlines(dir = dir)
-  get_airports(dir = dir)
-  get_airports(dir = dir)
-  #get_weather(station = station, year = year, dir = dir)
-  print("All done!")
 }
