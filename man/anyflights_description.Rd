@@ -3,7 +3,6 @@
 \docType{package}
 \name{anyflights_description}
 \alias{anyflights_description}
-\alias{anyflights_description-package}
 \title{Package: anyflights}
 \description{
 Download Flight Data For Specified Years and Airports

@@ -108,12 +108,12 @@ download_month <- function(year, month, dir, flight_exdir) {
                junkpaths = TRUE, files = flight_csv)
   
   # rename the file so that it's easier to find elsewhere
-  flight_src <- paste0("flights/", flight_csv)
-  flight_dst <- paste0("flights/", year, "-", month, ".csv")
+  flight_src <- paste0(flight_exdir, "/", flight_csv)
+  flight_dst <- paste0(flight_exdir, "/", year, "-", month, ".csv")
   file.rename(flight_src, flight_dst)
 }
 
-get_flight_data <- function(path) {
+get_flight_data <- function(path, station) {
   
   # read in the data
   suppressMessages(vroom::vroom(path)) %>%
@@ -147,7 +147,7 @@ get_flight_data <- function(path) {
       minute = sched_dep_time %% 100,
       time_hour = lubridate::make_datetime(year, month, day, hour, 0, 0),
       # cleanup NAs in the tailnum column
-      tailnum = case_when(
+      tailnum = dplyr::case_when(
         tailnum == "" ~ NA_character_,
         TRUE ~ tailnum)
       )

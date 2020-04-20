@@ -1,20 +1,4 @@
-#' Generate an airlines dataset
-#' 
-#' Please note that, even with a strong internet connection, this function 
-#' may take several minutes to download relevant data.
-#' 
-#' @param dir A character string---the folder for the dataset to be saved in
-#' @return A data frame with ~12 rows and 2 variables:
-#' \describe{
-#' \item{carrier}{Two letter abbreviation}
-#' \item{name}{Full name}
-#' }
-#' @source \url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
-#' @examples
-#' \donttest{get_airlines(dir = tempdir())}
-#' @seealso \code{\link{get_flights}} for flight data, \code{\link{get_weather}} 
-#' for weather data, \code{\link{get_airports}} for airport data, and 
-#' \code{\link{anyflights}} for a wrapper function  
+#' @rdname anyflights
 #' @export
 get_airlines <- function(dir = NULL, flights_data = NULL) {
   

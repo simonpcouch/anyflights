@@ -26,4 +26,4 @@ Imports:
     glue
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
