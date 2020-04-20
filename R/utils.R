@@ -187,7 +187,24 @@ parse_flights_data_arg <- function(flights_data) {
 }
 
 
+# get_airports utilities -----------------------------------------------------
 
+airports_cols <- readr::cols(
+    id = readr::col_integer(),
+    name = readr::col_character(),
+    city = readr::col_character(),
+    country = readr::col_character(),
+    faa = readr::col_character(),
+    icao = readr::col_character(),
+    lat = readr::col_double(),
+    lon = readr::col_double(),
+    alt = readr::col_integer(),
+    tz = readr::col_double(),
+    dst = readr::col_character(),
+    tzone = readr::col_character(),
+    type = readr::col_character(),
+    source = readr::col_character()
+)
 
 
 
