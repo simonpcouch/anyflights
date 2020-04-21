@@ -7,6 +7,7 @@
 #'   \item \code{get_airports}: Grab data on airport names and locations
 #'   \item \code{get_flights}: Grab data on all flights that departed given 
 #'   airports in a given year and month
+#'   \item \code{get_planes}: Grab construction information about each plane
 #'   \item \code{get_weather}: Grab hourly meterological data for a given 
 #'   airport in a given year and month
 #' }
@@ -29,10 +30,11 @@
 #' @param dir An (always) optional character string giving the directory
 #' to save datasets in. By default, datasets will not be saved to file.
 #' 
-#' @param flights_data An optional argument to \code{get_airlines} so that the 
-#' function will only return carriers that appear in the flight data or 
-#' interest---either a filepath as a character string or a dataframe outputted
-#' by \code{get_flights}. If not supplied, all carriers will be returned.
+#' @param flights_data An optional argument to \code{get_airlines} and 
+#' \get{get_planes}so that the function will only return carriers
+#' that appear in the flight data of interest---either a filepath as a 
+#' character string or a dataframe outputted by \code{get_flights}. If 
+#' not supplied, all carriers and planes will be returned.
 #' 
 #' @return A named list of dataframes and, optionally, a folder containing the 
 #' datasets saved to file.
@@ -60,6 +62,18 @@
 #' # that appear in the flights data
 #' \donttest{get_airlines(2018, flights)}
 #' 
+#' # the same goes for the get_planes function!
+#' \donttest{get_planes(2018, flights)}
+#' 
+#' # the months provided to get_weather (and get_flights) don't necessarily
+#' # have to be back-to-back---to just grab the weather for June and August
+#' # at Portland International in 2018, you could call
+#' \donttest{get_weather("PDX", 2018, c(6, 8))}
+#'
+#' 
+#' # if the flights_data argument isn't provided to the functions above,
+#' # unsubsetted data will be returned
+#' 
 #' @export
 anyflights <- function(station, year, month = 1:12, dir = NULL) {
   
@@ -69,10 +83,14 @@ anyflights <- function(station, year, month = 1:12, dir = NULL) {
   
   flights <- get_flights(station, year, month, dir)
   airlines <- get_airlines(dir, flights)
+  planes <- get_planes(year, dir, flights)
   airports <- get_airports(dir)
+  weather <- get_weather(station, year, month, dir)
   
-  return(list(flights = flights,
-              airlines = airlines,
-              airports = airports))
+  return(list(airlines = airlines,
+              airports = airports,
+              flights = flights,
+              planes = planes,
+              weather = weather))
 
 }

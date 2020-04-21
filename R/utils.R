@@ -232,3 +232,132 @@ process_month_arg <- function(month) {
   
   return(c(start_month, end_month, last_day))
 }
+
+
+# get_planes utilities ------------------------------------------------------
+get_planes_data <- function(year, dir, flights_data) {
+  
+  # put together the url to query the planes data at
+  planes_src <- paste0(
+    "http://registry.faa.gov/database/yearly/ReleasableAircraft.", 
+    year, 
+    ".zip"
+  )
+  
+  # and a folder to save the planes data to
+  planes_lcl <- paste0(dir, "/planes")
+  if (!dir.exists(planes_lcl)) {dir.create(planes_lcl)}
+  
+  # download the planes data
+  planes_tmp <- tempfile(fileext = ".zip")
+  utils::download.file(planes_src, planes_tmp) 
+  
+  # ...and unzip it!
+  utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
+  
+  # loading in and tidying the master planes data
+  planes_master <- process_planes_master(planes_lcl)
+  
+  # loading in and tidying the planes reference data
+  planes_ref <- process_planes_ref(planes_lcl)
+  
+  # join the master and ref data together
+  planes <- join_planes_data(planes_master, planes_ref)
+  
+  # filter the planes data by the flights data, if relevant
+  planes <- join_planes_to_flights_data(planes, flights_data)
+  
+  planes %>%
+    dplyr::select(tailnum, everything(), -nnum)
+}
+
+
+process_planes_master <- function(planes_lcl) {
+  suppressMessages(
+    # read in the data, but fast
+    planes_master <- vroom::vroom(paste0(planes_lcl, "/MASTER.txt")) %>%
+      # the column names change every year, but the positions have stayed the
+      # same -- select by position :-(
+      dplyr::select(nnum = 1, code = 3, year = 5)
+  )
+  
+  planes_master
+}
+
+
+process_planes_ref <- function(planes_lcl) {
+  
+  # find the file called "acftref" in the folder -- the filename
+  # is capitalized differently from year to year, which is great
+  
+  
+  # read in the data, but fast
+  planes_ref <- vroom::vroom(paste0(planes_lcl, "/ACFTREF.txt"),
+                             col_names = planes_ref_col_names,
+                             col_types = planes_ref_col_types) %>%
+    dplyr::select(code, mfr, model, type_acft, 
+                  type_eng, no_eng, no_seats, speed)
+}
+
+join_planes_data <- function(planes_master, planes_ref) {
+  planes_master %>%
+    dplyr::inner_join(planes_ref, by = "code") %>%
+    dplyr::select(-code) %>%
+    dplyr::mutate(speed = dplyr::if_else(speed == 0, NA_character_, speed),
+                  no_eng = dplyr::if_else(no_eng == 0, NA_integer_, no_eng),
+                  no_seats = dplyr::if_else(no_seats == 0, NA_integer_, no_seats),
+                  engine = engine_types[type_eng + 1],
+                  type = acft_types[type_acft],
+                  tailnum = paste0("N", nnum)) %>%
+    dplyr::select(-c(type_eng, type_acft)) %>%
+    dplyr::rename(manufacturer = mfr,
+                  engines = no_eng, 
+                  seats = no_seats)
+}
+
+
+planes_ref_col_names <- c("code", "mfr", "model", "type_acft", "type_eng", "ac", 
+                          "amat", "no_eng", "no_seats", "na1", "speed", "na2")  
+
+engine_types <- c("None", "Reciprocating", "Turbo-prop", "Turbo-shaft", 
+                  "Turbo-jet", "Turbo-fan", "Ramjet", "2 Cycle", "4 Cycle", 
+                  "Unknown", "Electric", "Rotary")
+
+acft_types <- c("Glider", "Balloon", "Blimp/Dirigible", 
+                "Fixed wing single engine", "Fixed wing multi engine", 
+                "Rotorcraft", "Weight-shift-control", "Powered Parachute", 
+                "Gyroplane")
+
+planes_ref_col_types <- readr::cols(
+  code = col_character(),
+  mfr = col_character(),
+  model = col_character(),
+  type_acft = col_integer(),
+  type_eng = col_integer(),
+  ac = col_integer(),
+  amat = col_integer(),
+  no_eng = col_integer(),
+  no_seats = col_integer(),
+  na1 = col_character(),
+  speed = col_character(),
+  na2 = col_character()
+)
+
+
+# filter the planes data by the flights data, if relevant
+join_planes_to_flights_data <- function(planes, flights_data) {
+  
+  # interpret the flights_data argument
+  flights_data <- parse_flights_data_arg(flights_data)
+  
+  # join to flights data if it was supplied
+  if (!is.null(flights_data)) {
+    planes <- planes %>%
+      dplyr::semi_join(flights, "tailnum") %>%
+      dplyr::arrange(tailnum)
+  }
+  
+  planes
+}
+
+
