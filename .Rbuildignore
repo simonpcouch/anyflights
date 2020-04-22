@@ -7,3 +7,6 @@ demo_script.R
 cran-comments.md
 CONTRIBUTING.md
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

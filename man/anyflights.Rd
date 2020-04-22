@@ -68,33 +68,33 @@ may take several minutes to download relevant data.
 \examples{
 # grab data on all flights departing from Portland International Airport
 # in June 2019 without saving to file as well as other useful metadata
-\donttest{anyflights("PDX", 2018, 6)}
+\dontrun{\donttest{anyflights("PDX", 2018, 6)}}
 
 # ...or, grab that same data and opt to save the file as well! (tempdir() 
 # can usually be specified as a character string)
-\donttest{anyflights("PDX", 2018, 6, tempdir())}
+\dontrun{\donttest{anyflights("PDX", 2018, 6, tempdir())}}
 
 # equivalently to the first call, grab each of the datasets individually
-\donttest{get_flights("PDX", 2018, 6)}
-\donttest{get_airlines(2018)}
-\donttest{get_airports()}
+\dontrun{\donttest{get_flights("PDX", 2018, 6)}}
+\dontrun{\donttest{get_airlines(2018)}}
+\dontrun{\donttest{get_airports()}}
 
 # get_flights is vectorized on the month argument! to grab both june and
 # July, you could call
-\donttest{flights <- get_flights("PDX", 2018, 6:7)}
+\dontrun{\donttest{flights <- get_flights("PDX", 2018, 6:7)}}
 
 # the get_airlines function optionally takes in a flights dataframe
 # to automatically subset the airlines data down to carriers
 # that appear in the flights data
-\donttest{get_airlines(2018, flights)}
+\dontrun{\donttest{get_airlines(2018, flights)}}
 
 # the same goes for the get_planes function!
-\donttest{get_planes(2018, flights)}
+\dontrun{\donttest{get_planes(2018, flights)}}
 
 # the months provided to get_weather (and get_flights) don't necessarily
 # have to be back-to-back---to just grab the weather for June and August
 # at Portland International in 2018, you could call
-\donttest{get_weather("PDX", 2018, c(6, 8))}
+\dontrun{\donttest{get_weather("PDX", 2018, c(6, 8))}}
 
 
 # if the flights_data argument isn't provided to the functions above,
