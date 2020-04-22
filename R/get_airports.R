@@ -2,6 +2,9 @@
 #' @export
 get_airports <- function(dir = NULL) {
   
+  # check the arguments
+  check_arguments(dir = dir)
+  
   # store the airports data url
   airports_url <- paste0("https://raw.githubusercontent.com/jpatokal",
                          "/openflights/master/data/airports.dat")
@@ -32,7 +35,6 @@ get_airports <- function(dir = NULL) {
     
   # save the data to file if a directory is supplied
   if (!is.null(dir)) {
-    if (!dir.exists(dir)) {dir.create(dir)}
     save(airports, file = paste0(dir, "/airports.rda"), compress = "xz")
   }
 

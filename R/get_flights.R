@@ -2,6 +2,13 @@
 #' @export
 get_flights <- function(station, year, month = 1:12, dir = NULL) {
   
+  # check user inputs
+  check_arguments(station = station, 
+                  year = year, 
+                  month = month, 
+                  dir = dir,
+                  context = "flights")
+  
   # create a temporary directory if need be
   if (is.null(dir)) {
     dir_is_null <- TRUE
@@ -10,13 +17,10 @@ get_flights <- function(station, year, month = 1:12, dir = NULL) {
     dir_is_null <- FALSE
   }
   
-  # if the directory doesn't exist, make it!
-  if (!dir.exists(dir)) {dir.create(dir)}
-  
   # make a subdirectory inside the directory to download the raw data into
   flight_exdir <- paste0(dir, "/flights")
   
-  # download flight data for the relevant time range
+  # download flight data for each month
   purrr::map(month, download_month, 
              year = year, dir = dir, flight_exdir = flight_exdir)
   

@@ -1,5 +1,64 @@
 # general utilities --------------------------------------------------------
 
+# a general argument checking function
+check_arguments <- function(station = NULL, year = NULL, 
+                            month = NULL, dir = NULL, context = NA) {
+  
+  # checking the "station" argument
+  if (context %in% c("flights", "weather")) {
+    if (!station %in% get_airports()$faa) {
+      stop_glue("Couldn't find the provided origin airport {station}. ",
+                "Please consider using the get_airports() function to ",
+                "locate the desired FAA LID code!")
+    }
+  }
+  
+  # checking the "year" argument
+  if (context %in% c("flights", "planes", "weather")) {
+    if (!is.numeric(year)) {
+      stop_glue("The provided `year` argument has class {class(year)}, but ",
+                "it needs to be a numeric. Have you put the year in quotes?")
+    }
+    if (year > as.numeric(substr(Sys.Date(), 1, 4))) {
+      stop_glue("The provided `year` is in the future. Oops. :-)")
+    }
+    if (year < 1987) {
+      stop_glue("Your `year` argument {year} is really far back in time! ",
+                "`anyflights` data sources do not provide data this old.")
+    }
+    if (year < 2013 & context == "planes") {
+      warning_glue("Planes data was not formatted consistently before 2013. ",
+                   "Please use caution.")
+    } else if (context != "planes" & year < 2010) {
+      message_glue("Queries before 2010 are untested by the package. ",
+                   "Please use caution!")
+    }
+  }
+  
+  # checking the "month" argument
+  if (context %in% c("flights", "weather")) {
+    if (!is.numeric(month)) {
+      stop_glue("The provided `month` argument has class {class(month)}, but ",
+                "it needs to be a numeric. Have you put the months in quotes?")
+    }
+    if (any(month > 12 | month < 1)) {
+      stop_glue("Please enter only month values within 1 to 12.")
+    }
+  }
+  
+  if (!is.null(dir)) {
+    if (!dir.exists(dir)) {
+      dir_ <- tryCatch(dir.create(dir), error = function(e) e)
+      if (inherits(dir, "error")) {
+        stop_glue("anyflights had trouble making the folder specified by ",
+                  "the directory argument {dir}. Here's the error: \n {dir_}")
+      }
+    }
+  }
+  
+}
+
+
 # a function derived from simonpcouch/gbfs to check if a URL exists
 url_exists <- function(x, quiet = FALSE, ...) {
   
@@ -353,7 +412,7 @@ join_planes_to_flights_data <- function(planes, flights_data) {
   # join to flights data if it was supplied
   if (!is.null(flights_data)) {
     planes <- planes %>%
-      dplyr::semi_join(flights, "tailnum") %>%
+      dplyr::semi_join(flights_data, "tailnum") %>%
       dplyr::arrange(tailnum)
   }
   

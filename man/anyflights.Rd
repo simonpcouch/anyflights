@@ -37,7 +37,7 @@ March in the following year.}
 to save datasets in. By default, datasets will not be saved to file.}
 
 \item{flights_data}{An optional argument to \code{get_airlines} and 
-\get{get_planes}so that the function will only return carriers
+\code{get_planes}so that the function will only return carriers
 that appear in the flight data of interest---either a filepath as a 
 character string or a dataframe outputted by \code{get_flights}. If 
 not supplied, all carriers and planes will be returned.}

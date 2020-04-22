@@ -2,7 +2,12 @@
 #' @export
 get_weather <- function(station, year, month, dir = NULL) {
   
-  # process the month argument
+  # check user inputs
+  check_arguments(station = station, 
+                  year = year, 
+                  month = month, 
+                  dir = dir, 
+                  context = "weather")
   month_and_day_range <- process_month_arg(month)
   
   # set up the directory to download data to
@@ -12,8 +17,6 @@ get_weather <- function(station, year, month, dir = NULL) {
   } else {
     dir_is_null <- FALSE
   }
-  
-  if (!dir.exists(dir)) {dir.create(dir, showWarnings = FALSE, recursive = TRUE)}
   
   # query setup
   weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"

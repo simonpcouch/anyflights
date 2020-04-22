@@ -2,7 +2,8 @@
 #' @export
 get_airlines <- function(dir = NULL, flights_data = NULL) {
   
-  # check if the flights_data argument references/is a dataset
+  # check input arguments!
+  check_arguments(dir = dir)
   flights_data <- parse_flights_data_arg(flights_data)
   
   # base url for the airlines dataset

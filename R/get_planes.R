@@ -2,7 +2,12 @@
 #' @export
 get_planes <- function(year, dir = NULL, flights_data = NULL) {
 
-  # check if the flights_data argument references/is a dataset
+  # check user inputs
+  check_arguments(station = station,
+                  year = year,
+                  month = month,
+                  dir = dir,
+                  context = "planes")
   flights_data <- parse_flights_data_arg(flights_data)
   
   # create a temporary directory if need be
