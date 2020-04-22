@@ -6,3 +6,4 @@ demo_script.R
 ^\.Rproj\.user$
 cran-comments.md
 CONTRIBUTING.md
+^\.github$
