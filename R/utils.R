@@ -6,10 +6,10 @@ check_arguments <- function(station = NULL, year = NULL,
   
   # checking the "station" argument
   if (context %in% c("flights", "weather")) {
-    if (!station %in% get_airports()$faa) {
-      stop_glue("Couldn't find the provided origin airport {station}. ",
-                "Please consider using the get_airports() function to ",
-                "locate the desired FAA LID code!")
+    if (!all(station %in% get_airports()$faa)) {
+      stop_glue("Couldn't find at least one of the provided origin airports ",
+                "{station}. Please consider using the get_airports() function ",
+                "to locate the desired FAA LID code!")
     }
   }
   
@@ -49,7 +49,7 @@ check_arguments <- function(station = NULL, year = NULL,
   if (!is.null(dir)) {
     if (!dir.exists(dir)) {
       dir_ <- tryCatch(dir.create(dir), error = function(e) e)
-      if (inherits(dir, "error")) {
+      if (inherits(dir_, "error")) {
         stop_glue("anyflights had trouble making the folder specified by ",
                   "the directory argument {dir}. Here's the error: \n {dir_}")
       }
@@ -198,8 +198,8 @@ get_flight_data <- function(path, station) {
     dplyr::filter(origin %in% station) %>%
     dplyr::mutate(
       # convert column classes
-      dep_time = as.numeric(dep_time),
-      sched_dep_time = as.numeric(sched_dep_time),
+      dep_time = as.integer(dep_time),
+      sched_dep_time = as.integer(sched_dep_time),
       flight = as.factor(flight),
       # mutate some help time columns
       hour = sched_dep_time %/% 100,
@@ -208,7 +208,14 @@ get_flight_data <- function(path, station) {
       # cleanup NAs in the tailnum column
       tailnum = dplyr::case_when(
         tailnum == "" ~ NA_character_,
-        TRUE ~ tailnum)
+        TRUE ~ tailnum),
+      # convert column types to match the original data
+      year = as.integer(year),
+      month = as.integer(month),
+      day = as.integer(day),
+      arr_time = as.integer(arr_time),
+      sched_arr_time = as.integer(sched_arr_time),
+      flight = as.integer(flight)
       )
 }
 

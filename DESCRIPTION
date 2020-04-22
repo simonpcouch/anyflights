@@ -3,7 +3,7 @@ Title: Query `nycflights13`-Like Air Travel Data for Specified Years and Airport
 Version: 0.2.0
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
-    person("Jay", "Lee", , "jaylee@reed.edu", "aut"),
+    person("Jay", "Lee", , "jaylee@reed.edu", "ctb"),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("RStudio", role = "cph"),
     person("Dennis", "Irorere", , "denironyx@gmail.com", "ctb")
@@ -29,3 +29,6 @@ Imports:
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.0.2
+Suggests: 
+    testthat,
+    nycflights13
