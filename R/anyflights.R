@@ -1,4 +1,4 @@
-#' Grab data on air travel
+#' Easily Query nycflights13-Like Air Travel Data
 #' 
 #' The \code{anyflights} function is a wrapper around the following functions:
 #' \itemize{

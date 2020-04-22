@@ -140,7 +140,7 @@ null_transformer <- function(text, envir) {
 
 load_as <- function(filepath) {
   new_env <- new.env()
-  data <- load(filepathj, new_env)[1]
+  data <- load(filepath, new_env)[1]
   new_env[[data]]
 }
 
@@ -268,18 +268,18 @@ airports_cols <- readr::cols(
 
 # get_weather utilities -------------------------------------------------
 
-weather_col_types <- cols(
-  .default = col_double(),
-  station = col_character(),
-  valid = col_datetime(format = ""),
-  skyc1 = col_character(),
-  skyc2 = col_character(),
-  skyc3 = col_character(),
-  skyc4 = col_logical(),
-  skyl4 = col_logical(),
-  wxcodes = col_character(),
-  peak_wind_time = col_datetime(format = ""),
-  metar = col_character()
+weather_col_types <- readr::cols(
+  .default = readr::col_double(),
+  station = readr::col_character(),
+  valid = readr::col_datetime(format = ""),
+  skyc1 = readr::col_character(),
+  skyc2 = readr::col_character(),
+  skyc3 = readr::col_character(),
+  skyc4 = readr::col_logical(),
+  skyl4 = readr::col_logical(),
+  wxcodes = readr::col_character(),
+  peak_wind_time = readr::col_datetime(format = ""),
+  metar = readr::col_character()
 )
 
 process_month_arg <- function(month) {
@@ -388,18 +388,18 @@ acft_types <- c("Glider", "Balloon", "Blimp/Dirigible",
                 "Gyroplane")
 
 planes_ref_col_types <- readr::cols(
-  code = col_character(),
-  mfr = col_character(),
-  model = col_character(),
-  type_acft = col_integer(),
-  type_eng = col_integer(),
-  ac = col_integer(),
-  amat = col_integer(),
-  no_eng = col_integer(),
-  no_seats = col_integer(),
-  na1 = col_character(),
-  speed = col_character(),
-  na2 = col_character()
+  code = readr::col_character(),
+  mfr = readr::col_character(),
+  model = readr::col_character(),
+  type_acft = readr::col_integer(),
+  type_eng = readr::col_integer(),
+  ac = readr::col_integer(),
+  amat = readr::col_integer(),
+  no_eng = readr::col_integer(),
+  no_seats = readr::col_integer(),
+  na1 = readr::col_character(),
+  speed = readr::col_character(),
+  na2 = readr::col_character()
 )
 
 

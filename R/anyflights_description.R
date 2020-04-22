@@ -1,6 +1,6 @@
 #' Package: anyflights
 #'
-#' Download Flight Data For Specified Years and Airports
+#' Query nycflights13-Like Air Travel Data for Specified Years and Airports
 #'
 #' The `anyflights` package supplies a set of functions to query air travel
 #' information for specified years and airports. The output of the wrapper
@@ -11,11 +11,10 @@
 #' anyflights(), get_airlines(), get_airports(), get_flights(), get_weather()
 #'
 #' @docType package
-#' @name anyflights_description
+#' @name anyflights-description
+#' @aliases anyflights-package
 #' @importFrom dplyr %>%
-#' @importFrom stats time
-#' @importFrom utils read.csv
-NULL
+"_PACKAGE"
 
 utils::globalVariables(c(".", "AirTime", "ArrDelay", "ArrTime", "CRSArrTime", 
                          "CRSDepTime", "Carrier", "Code", "DayofMonth", 
@@ -30,4 +29,9 @@ utils::globalVariables(c(".", "AirTime", "ArrDelay", "ArrTime", "CRSArrTime",
                          "read_csv", "relh", "row_number", "sched_dep_time", 
                          "sknt", "speed", "tailnum", "temp", "tmpf", "type", 
                          "type.acft", "type.eng", "tz", "tzone", "valid", 
-                         "visib", "vsby", "wind_speed", "year.mfr"))
+                         "visib", "vsby", "wind_speed", "year.mfr", 
+                         "Flight_Number_Reporting_Airline", 
+                         "Reporting_Airline", "Tail_Number", "time",
+                         "everything", "feel", "flight", "metar", "nnum", 
+                         "no_eng", "no_seats", "planes_lcl", "station", 
+                         "type_acft", "type_eng", "year", "Reporting_Airline"))

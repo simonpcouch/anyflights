@@ -8,7 +8,7 @@
 \alias{get_flights}
 \alias{get_planes}
 \alias{get_weather}
-\title{Grab data on air travel}
+\title{Easily Query nycflights13-Like Air Travel Data}
 \usage{
 anyflights(station, year, month = 1:12, dir = NULL)
 
