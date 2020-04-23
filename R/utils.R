@@ -155,8 +155,8 @@ download_month <- function(year, month, dir, flight_exdir) {
   flight_temp <- tempfile(fileext = ".zip")
   
   # download the file
-  utils::download.file(fl_url, flight_temp, method = "libcurl")
-  
+  utils::download.file(fl_url, flight_temp)
+
   # ...and unzip it
   flight_files <- utils::unzip(flight_temp, list = TRUE)
   
