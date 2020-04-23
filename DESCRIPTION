@@ -1,5 +1,5 @@
 Package: anyflights
-Title: Query `nycflights13`-Like Air Travel Data for Specified Years and Airports
+Title: Query `nycflights13`-Like Air Travel Data for Given Years and Airports
 Version: 0.2.0
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
@@ -25,7 +25,8 @@ Imports:
     vroom,
     glue,
     purrr,
-    stringr
+    stringr,
+    curl
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.0.2

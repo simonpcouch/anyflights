@@ -4,6 +4,11 @@
 check_arguments <- function(station = NULL, year = NULL, 
                             month = NULL, dir = NULL, context = NA) {
   
+  # test internet connection
+  if (!connected_to_internet()) {
+    stop_no_internet()
+  }
+  
   # checking the "station" argument
   if (context %in% c("flights", "weather")) {
     if (!all(station %in% get_airports()$faa)) {
@@ -95,6 +100,19 @@ url_exists <- function(x, quiet = FALSE, ...) {
   
   return(TRUE)
   
+}
+
+# a function to alert the user of no internet connection in a
+# more informative/helpful way
+stop_no_internet <- function() {
+  stop_glue("You don't seem to have an active internet connection. Please ", 
+            "connect to the internet to use the anyflights package.")
+  return(list())
+}
+
+# a wrapper around has internet so that with_mock can be used in tests
+connected_to_internet <- function() {
+  curl::has_internet()
 }
 
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
@@ -425,5 +443,3 @@ join_planes_to_flights_data <- function(planes, flights_data) {
   
   planes
 }
-
-
