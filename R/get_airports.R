@@ -1,4 +1,38 @@
-#' @rdname anyflights
+#' Query nycflights13-Like Airports Data
+#' 
+#' This function generates a dataframe similar to the 
+#' \code{\link[nycflights13]{airports}} dataset from \code{nycflights13} 
+#' for any US airports and time frame. Please 
+#' note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @inheritParams anyflights 
+#' 
+#' @return A data frame with ~1350 rows and 8 variables:
+#' \describe{
+#'  \item{faa}{FAA airport code}
+#'  \item{name}{Usual name of the airport}
+#'  \item{lat, lon}{Location of airport}
+#'  \item{alt}{Altitude, in feet}
+#'  \item{tz}{Timezone offset from GMT/UTC}
+#'  \item{dst}{Daylight savings time zone. A = Standard US DST: starts on the
+#'     second Sunday of March, ends on the first Sunday of November.
+#'     U = unknown. N = no dst.}
+#'  \item{tzone}{IANA time zone, as determined by GeoNames webservice}
+#' }
+#' @source \url{http://openflights.org/data.html}
+#' 
+#' @examples
+#' 
+#' # grab airports data
+#' \donttest{\dontrun{get_aiports()}}
+#'
+#' @seealso \code{\link{get_flights}} for flight data,
+#' \code{\link{get_weather}} for weather data, 
+#' \code{\link{get_airlines}} for airlines data,
+#' \code{\link{get_planes}} for planes data,
+#' or \code{\link{anyflights}} for a wrapper function
+#'
 #' @export
 get_airports <- function(dir = NULL) {
   

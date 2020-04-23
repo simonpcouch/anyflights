@@ -1,4 +1,56 @@
-#' @rdname anyflights
+#' Query nycflights13-Like Flights Data
+#' 
+#' This function generates a dataframe similar to the 
+#' \code{\link[nycflights13]{flights}} dataset from \code{nycflights13} 
+#' for any US airport and time frame. Please 
+#' note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @inheritParams anyflights 
+#' 
+#' @return A data frame with ~1k-500k rows and 19 variables:
+#' \describe{
+#' \item{\code{year, month, day}}{Date of departure}
+#' \item{\code{dep_time, arr_time}}{Actual departure and arrival times, UTC.}
+#' \item{\code{sched_dep_time, sched_arr_time}}{Scheduled departure and arrival 
+#'   times, UTC.}
+#' \item{\code{dep_delay, arr_delay}}{Departure and arrival delays, in minutes.
+#'   Negative times represent early departures/arrivals.}
+#' \item{\code{hour, minute}}{Time of scheduled departure broken into hour and 
+#'   minutes.}
+#' \item{\code{carrier}}{Two letter carrier abbreviation. See 
+#'   \code{\link{get_airlines}} to get full name}
+#' \item{\code{tailnum}}{Plane tail number}
+#' \item{\code{flight}}{Flight number}
+#' \item{\code{origin, dest}}{Origin and destination. See 
+#'   \code{\link{get_airports}} for additional metadata.}
+#' \item{\code{air_time}}{Amount of time spent in the air, in minutes}
+#' \item{\code{distance}}{Distance between airports, in miles}
+#' \item{\code{time_hour}}{Scheduled date and hour of the flight as a 
+#'   \code{POSIXct} date. Along with \code{origin}, can be used to join 
+#'   flights data to weather data.}
+#' }
+#' @source RITA, Bureau of transportation statistics,
+#'  \url{http://www.transtats.bts.gov}
+#' 
+#' @examples
+#' 
+#' # query flights out of Portland International in June 2018
+#' \donttest{\dontrun{get_flights("PDX", 2018, 6)}}
+#' 
+#' # ...or the original nycflights13 flights dataset
+#' \donttest{\dontrun{get_flights(c("JFK", "LGA", "EWR"), 2013)}}
+#' 
+#' # use the dir argument to indicate the folder to save the 
+#' # data in as "flights.rda"
+#' \donttest{\dontrun{get_flights("PDX", 2018, 6, dir = tempdir())}}
+#'
+#' @seealso \code{\link{get_weather}} for weather data, 
+#' \code{\link{get_airlines}} for airlines data,
+#' \code{\link{get_airports}} for airports data,
+#' \code{\link{get_planes}} for planes data,
+#' or \code{\link{anyflights}} for a wrapper function
+#'
 #' @export
 get_flights <- function(station, year, month = 1:12, dir = NULL) {
   

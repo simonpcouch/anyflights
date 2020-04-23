@@ -2,17 +2,14 @@
 #'
 #' Query nycflights13-Like Air Travel Data for Specified Years and Airports
 #'
-#' The `anyflights` package supplies a set of functions to query air travel
+#' The anyflights package supplies a set of functions to query air travel
 #' information for specified years and airports. The output of the wrapper
-#' function, `anyflights()`, is a folder of datasets similar to those
-#' found in the data-only package `nycflights13`.
-#'
-#' @section anyflights Functions:
-#' anyflights(), get_airlines(), get_airports(), get_flights(), get_weather()
+#' function, \code{anyflights()}, is a list of dataframe similar to those
+#' found in the data-only package nycflights13.
 #'
 #' @docType package
-#' @name anyflights-description
-#' @aliases anyflights-package
+#' @name anyflights_description
+#' @aliases anyflights_package
 #' @importFrom dplyr %>%
 "_PACKAGE"
 

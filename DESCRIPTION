@@ -3,14 +3,14 @@ Title: Query `nycflights13`-Like Air Travel Data for Specified Years and Airport
 Version: 0.2.0
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
-    person("Jay", "Lee", , "jaylee@reed.edu", "ctb"),
     person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
     person("RStudio", role = "cph"),
+    person("Jay", "Lee", , "jaylee@reed.edu", "ctb"),
     person("Dennis", "Irorere", , "denironyx@gmail.com", "ctb")
     )
 Description: Supplies a set of functions to query air travel data for user-
     specified years and airports. Datasets include on-time flights, airlines,
-    airports, and weather.
+    airports, planes, and weather.
 License: CC0
 LazyData: true
 Depends:

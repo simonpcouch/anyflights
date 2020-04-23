@@ -1,4 +1,41 @@
-#' @rdname anyflights
+#' Query nycflights13-Like Airlines Data
+#' 
+#' This function generates a dataframe similar to the 
+#' \code{\link[nycflights13]{airlines}} dataset from \code{nycflights13} 
+#' for any US airports and time frame. Please 
+#' note that, even with a strong internet connection, this function 
+#' may take several minutes to download relevant data.
+#' 
+#' @inheritParams anyflights 
+#' 
+#' @param flights_data Optional---either a filepath as a 
+#' character string or a dataframe outputted by \code{\link{get_flights}} that
+#' will be used to subset the output to only include relevant carriers/planes.
+#' If not supplied, all carriers/planes will be returned.
+#' 
+#' @return A data frame with <2k rows and 2 variables:
+#' \describe{
+#' \item{carrier}{Two letter abbreviation}
+#' \item{name}{Full name}
+#' }
+#' @source \url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
+#' 
+#' @examples
+#' 
+#' # run with defaults
+#' \donttest{\dontrun{get_airlines()}}
+#' 
+#' # if you'd like to only return the airline abbreviations only
+#' # for airlines that appear in \code{flights}, query your flights
+#' # dataset first, and then supply it as a flights_data argument
+#' \donttest{\dontrun{get_airlines(flights_data = get_flights("PDX", 2018, 6))}}
+#'
+#' @seealso \code{\link{get_flights}} for flight data,
+#' \code{\link{get_weather}} for weather data, 
+#' \code{\link{get_airports}} for airports data,
+#' \code{\link{get_planes}} for planes data,
+#' or \code{\link{anyflights}} for a wrapper function
+#'
 #' @export
 get_airlines <- function(dir = NULL, flights_data = NULL) {
   
