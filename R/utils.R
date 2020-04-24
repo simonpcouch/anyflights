@@ -162,6 +162,13 @@ load_as <- function(filepath) {
   new_env[[data]]
 }
 
+skip_conditions <- function() {
+  internet <- curl::has_internet()
+  on_mac <- unname(Sys.info()["sysname"]) != "Darwin"
+  
+  (!internet) | on_mac
+}
+
 # get_flights utilities --------------------------------------------------
 
 download_month <- function(year, month, dir, flight_exdir) {
@@ -282,7 +289,7 @@ airports_cols <- readr::cols(
     icao = readr::col_character(),
     lat = readr::col_double(),
     lon = readr::col_double(),
-    alt = readr::col_integer(),
+    alt = readr::col_double(),
     tz = readr::col_double(),
     dst = readr::col_character(),
     tzone = readr::col_character(),

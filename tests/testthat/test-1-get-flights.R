@@ -1,15 +1,13 @@
 context("get flights")
 
 test_that("standard get_flights (PDX, June 2018)", {
-  skip_if_offline()
-  skip_if(unname(Sys.info()["sysname"]) != "Darwin")
+  skip_if(skip_conditions())
   
   flights_ <- get_flights("PDX", 2018, 6)
 })
 
 test_that("standard get_flights (NYC, February 2013)", {
-  skip_if_offline()
-  skip_if(unname(Sys.info()["sysname"]) != "Darwin")
+  skip_if(skip_conditions())
   
   flights_2 <- get_flights(c("JFK", "LGA", "EWR"), 2013, 2)
   
