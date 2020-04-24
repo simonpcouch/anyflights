@@ -404,12 +404,6 @@ get_planes_data <- function(year, dir, flights_data) {
   
   # filter the planes data by the flights data, if relevant
   planes <- join_planes_to_flights_data(planes, flights_data)
-  
-  # delete the temporary folder
-  unlink(x = planes_lcl, recursive = TRUE)
-  
-  planes %>%
-    dplyr::select(tailnum, everything(), -nnum)
 }
 
 
@@ -423,32 +417,48 @@ process_planes_master <- function(planes_lcl) {
       dplyr::select(nnum = 1, code = 3, year = 5)
   )
   
+  # delete the temporary folder
+  unlink(x = planes_lcl, recursive = TRUE)
+  
   planes_master
 }
 
 
 process_planes_ref <- function(planes_lcl) {
   
-  # find the file called "acftref" in the folder -- the filename
-  # is capitalized differently from year to year, which is great
-  acftref_loc <- dir(planes_lcl) %>%
-    tolower() %>%
-    stringr::str_detect("acftref.txt") %>%
-    which()
+  # 99.96% of the tailnumbers that were in the 2013 data are in the
+  # 2019 data -- similar numbers hold for 2015, 2017. since formatting
+  # is so unstable, just query the 2019 acftref data for now and join
+  # to the given year's master.txt data to get the accurate data
+  # for tailnums licensed in that year
   
-  if (length(acftref_loc) != 1) {
-    stop_glue("Couldn't process the planes data for the given year.")
-  }
+  if (!dir.exists(planes_lcl)) {dir.create(planes_lcl)}
+  
+  # download the planes acftref data 
+  planes_tmp <- tempfile(fileext = ".zip")
+  utils::download.file(
+    "http://registry.faa.gov/database/yearly/ReleasableAircraft.2019.zip", 
+    planes_tmp, 
+    quiet = TRUE) 
+  
+  # ...and unzip it!
+  utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
   
   # read in the data, but fast
   planes_ref <- vroom::vroom(paste0(planes_lcl, 
                                     "/", 
-                                    dir(planes_lcl)[acftref_loc]),
+                                    "ACFTREF.txt"),
                              col_names = planes_ref_col_names,
                              col_types = planes_ref_col_types,
-                             progress = FALSE) %>%
+                             progress = FALSE,
+                             skip = 1) %>%
     dplyr::select(code, mfr, model, type_acft, 
                   type_eng, no_eng, no_seats, speed)
+  
+  # delete the temporary folder
+  unlink(x = planes_lcl, recursive = TRUE)
+  
+  planes_ref
 }
 
 join_planes_data <- function(planes_master, planes_ref) {
@@ -460,11 +470,14 @@ join_planes_data <- function(planes_master, planes_ref) {
                   no_seats = dplyr::if_else(no_seats == 0, NA_integer_, no_seats),
                   engine = engine_types[type_eng + 1],
                   type = acft_types[type_acft],
-                  tailnum = paste0("N", nnum)) %>%
-    dplyr::select(-c(type_eng, type_acft)) %>%
+                  tailnum = paste0("N", nnum),
+                  year = as.integer(year),
+                  speed = as.integer(speed)) %>%
     dplyr::rename(manufacturer = mfr,
                   engines = no_eng, 
-                  seats = no_seats)
+                  seats = no_seats) %>%
+    dplyr::select(tailnum, year, type, manufacturer, model, engines,
+                  seats, speed, engine)
 }
 
 
