@@ -91,8 +91,8 @@ get_weather <- function(station, year, month, dir = NULL) {
     dplyr::mutate(time = as.POSIXct(strptime(time, "%Y-%m-%d %H:%M")),
                   wind_speed = as.numeric(wind_speed) * 1.15078, # convert to mpg
                   wind_gust = as.numeric(wind_speed) * 1.15078,
-                  year = year,
-                  month = lubridate::month(time),
+                  year = as.integer(year),
+                  month = as.integer(lubridate::month(time)),
                   day = lubridate::mday(time),
                   hour = lubridate::hour(time),
                   time_hour = ISOdatetime(year, month, day, hour, 0, 0)) %>%
@@ -101,10 +101,12 @@ get_weather <- function(station, year, month, dir = NULL) {
     # remove duplicates / incompletes
     dplyr::group_by(origin, month, day, hour) %>%
     dplyr::filter(dplyr::row_number() == 1) %>%
-    # reorder columns
-    dplyr::select(origin, year:hour, temp:visib, dplyr::everything()) %>%
     dplyr::ungroup() %>%
-    dplyr::filter(!is.na(month))
+    # reorder columns to match the original dataset
+    dplyr::select(origin, year, month, day, hour, temp, dewp, 
+                  humid, wind_dir, wind_speed, wind_gust, precip,
+                  pressure, visib, time_hour)
+    
   
   # save the data if the user supplied a directory
   if (!dir_is_null) {
