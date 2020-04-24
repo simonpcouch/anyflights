@@ -173,7 +173,7 @@ download_month <- function(year, month, dir, flight_exdir) {
   flight_temp <- tempfile(fileext = ".zip")
   
   # download the file
-  utils::download.file(fl_url, flight_temp)
+  utils::download.file(fl_url, flight_temp, quiet = TRUE)
 
   # ...and unzip it
   flight_files <- utils::unzip(flight_temp, list = TRUE)
@@ -193,7 +193,7 @@ download_month <- function(year, month, dir, flight_exdir) {
 get_flight_data <- function(path, station) {
   
   # read in the data
-  suppressMessages(vroom::vroom(path)) %>%
+  suppressMessages(vroom::vroom(path, progress = FALSE)) %>%
     # select relevant columns
     dplyr::select(
       year = Year, 
@@ -334,7 +334,7 @@ get_planes_data <- function(year, dir, flights_data) {
   
   # download the planes data
   planes_tmp <- tempfile(fileext = ".zip")
-  utils::download.file(planes_src, planes_tmp) 
+  utils::download.file(planes_src, planes_tmp, quiet = TRUE) 
   
   # ...and unzip it!
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
@@ -351,6 +351,9 @@ get_planes_data <- function(year, dir, flights_data) {
   # filter the planes data by the flights data, if relevant
   planes <- join_planes_to_flights_data(planes, flights_data)
   
+  # delete the temporary folder
+  unlink(x = planes_lcl, recursive = TRUE)
+  
   planes %>%
     dplyr::select(tailnum, everything(), -nnum)
 }
@@ -359,7 +362,8 @@ get_planes_data <- function(year, dir, flights_data) {
 process_planes_master <- function(planes_lcl) {
   suppressMessages(
     # read in the data, but fast
-    planes_master <- vroom::vroom(paste0(planes_lcl, "/MASTER.txt")) %>%
+    planes_master <- vroom::vroom(paste0(planes_lcl, "/MASTER.txt"),
+                                  progress = FALSE) %>%
       # the column names change every year, but the positions have stayed the
       # same -- select by position :-(
       dplyr::select(nnum = 1, code = 3, year = 5)
@@ -373,12 +377,22 @@ process_planes_ref <- function(planes_lcl) {
   
   # find the file called "acftref" in the folder -- the filename
   # is capitalized differently from year to year, which is great
+  acftref_loc <- dir(planes_lcl) %>%
+    tolower() %>%
+    stringr::str_detect("acftref.txt") %>%
+    which()
   
+  if (length(acftref_loc) != 1) {
+    stop_glue("Couldn't process the planes data for the given year.")
+  }
   
   # read in the data, but fast
-  planes_ref <- vroom::vroom(paste0(planes_lcl, "/ACFTREF.txt"),
+  planes_ref <- vroom::vroom(paste0(planes_lcl, 
+                                    "/", 
+                                    dir(planes_lcl)[acftref_loc]),
                              col_names = planes_ref_col_names,
-                             col_types = planes_ref_col_types) %>%
+                             col_types = planes_ref_col_types,
+                             progress = FALSE) %>%
     dplyr::select(code, mfr, model, type_acft, 
                   type_eng, no_eng, no_seats, speed)
 }

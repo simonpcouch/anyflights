@@ -29,7 +29,7 @@ A data frame with ~1k-25k rows and 15 variables:
 \describe{
 \item{\code{origin}}{Weather station. Named \code{origin} to facilitate 
   merging with flights data}
-\item{\code{year, month, day, hour}}{Time of recording}
+\item{\code{year, month, day, hour}}{Time of recording, UTC}
 \item{\code{temp, dewp}}{Temperature and dewpoint in F}
 \item{\code{humid}}{Relative humidity}
 \item{\code{wind_dir, wind_speed, wind_gust}}{Wind direction (in degrees), 
@@ -38,7 +38,7 @@ A data frame with ~1k-25k rows and 15 variables:
 \item{\code{pressure}}{Sea level pressure in millibars}
 \item{\code{visib}}{Visibility in miles}
 \item{\code{time_hour}}{Date and hour of the recording as a \code{POSIXct} 
-  date}
+  date, UTC}
 }
 }
 \description{

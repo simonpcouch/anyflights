@@ -30,6 +30,7 @@ Imports:
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.0.2
+Encoding: UTF-8
 Suggests: 
     testthat,
     nycflights13
