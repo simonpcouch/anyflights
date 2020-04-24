@@ -9,13 +9,11 @@ test_that("standard get_airlines", {
 test_that("get_airlines joined to nycflights13", {
   skip_if(skip_conditions())
   
-  # grab the airlines data and join it with the nycflights13 data
-  airlines_ <- get_airlines(flights_data = flights_2)
+  # grab the airlines data and join it with the nycflights13 flights data
+  airlines_ <- get_airlines(flights_data = nycflights13::flights)
   
-  # grab the original nycflights13 data (filtered down to only include
-  # the carriers in the internal flights data)
-  airlines_orig <- nycflights13::airlines %>%
-    dplyr::filter(carrier %in% flights_2$carrier)
+  # grab the original nycflights13 airlines data
+  airlines_orig <- nycflights13::airlines
   
   # expect same nrow, ncol, column names, and column types
   expect_equal(nrow(airlines_), nrow(airlines_orig))
