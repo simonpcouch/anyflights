@@ -324,6 +324,53 @@ process_month_arg <- function(month) {
   return(c(start_month, end_month, last_day))
 }
 
+get_weather_for_station <- function(station, year, dir, month_and_day_range) {
+  
+  # query setup
+  weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
+  
+  weather_query <- list(
+    station = station, 
+    data = "all",
+    year1 = as.character(year), 
+    month1 = as.character(month_and_day_range[1]), 
+    day1 = "1",
+    year2 = as.character(year), 
+    month2 = as.character(month_and_day_range[2]), 
+    day2 = as.character(month_and_day_range[3]), 
+    tz = "Etc/UTC",
+    format = "comma", 
+    latlon = "no", 
+    direct = "yes"
+  )
+  
+  # query the data!
+  request <- httr::GET(weather_url, 
+                       query = weather_query, 
+                       httr::write_disk(paste0(dir, 
+                                               "/weather_",
+                                               station,
+                                               ".csv"), 
+                                        overwrite = TRUE))
+  httr::stop_for_status(request) 
+  
+  # load the data, but fast !
+  weather_raw <- vroom::vroom(file = paste0(dir, 
+                                            "/weather_",
+                                            station,
+                                            ".csv"), 
+                              comment = "#", 
+                              na = "M", 
+                              col_names = TRUE,
+                              col_types = weather_col_types)
+  
+  # delete the raw data
+  unlink(paste0(dir, "/weather_", station, ".csv"))
+  
+  # and return the data object :-)
+  weather_raw
+}
+
 
 # get_planes utilities ------------------------------------------------------
 get_planes_data <- function(year, dir, flights_data) {

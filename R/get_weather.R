@@ -63,37 +63,12 @@ get_weather <- function(station, year, month, dir = NULL) {
     dir_is_null <- FALSE
   }
   
-  # query setup
-  weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
-  
-  weather_query <- list(
-    station = station, 
-    data = "all",
-    year1 = as.character(year), 
-    month1 = as.character(month_and_day_range[1]), 
-    day1 = "1",
-    year2 = as.character(year), 
-    month2 = as.character(month_and_day_range[2]), 
-    day2 = as.character(month_and_day_range[3]), 
-    tz = "Etc/UTC",
-    format = "comma", 
-    latlon = "no", 
-    direct = "yes"
-  )
-
-  # query the data!
-  request <- httr::GET(weather_url, 
-                       query = weather_query, 
-                       httr::write_disk(paste0(dir, "/weather.csv"), 
-                                        overwrite = TRUE))
-  httr::stop_for_status(request)                     
-    
-  # load in the data as an object                    
-  weather_raw <- vroom::vroom(file = paste0(dir, "/weather.csv"), 
-                              comment = "#", 
-                              na = "M", 
-                              col_names = TRUE,
-                              col_types = weather_col_types)
+  weather_raw <- purrr::map(station, 
+                            get_weather_for_station, 
+                            year = year,
+                            dir = dir, 
+                            month_and_day_range = month_and_day_range) %>%
+    dplyr::bind_rows()
   
   # tidy the data
   weather <- weather_raw %>%
@@ -130,9 +105,6 @@ get_weather <- function(station, year, month, dir = NULL) {
     dplyr::select(origin, year:hour, temp:visib, dplyr::everything()) %>%
     dplyr::ungroup() %>%
     dplyr::filter(!is.na(month))
-  
-  # delete the raw data
-  unlink(paste0(dir, "/weather.csv"))
   
   # save the data if the user supplied a directory
   if (!dir_is_null) {
