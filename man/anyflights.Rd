@@ -45,12 +45,14 @@ The \code{anyflights} function is a wrapper around the following functions:
 }
 }
 \examples{
-# grab data on all flights departing from Portland International Airport
-# in June 2019 and other useful metadata without saving to file
+# grab data on all flights departing from 
+# Portland International Airport in June 2019 and 
+# other useful metadata without saving to file
 \donttest{\dontrun{anyflights("PDX", 2018, 6)}}
 
-# ...or, grab that same data and opt to save the file as well! (tempdir() 
-# can usually be specified as a character string giving the path to a folder)
+# ...or, grab that same data and opt to save the 
+# file as well! (tempdir() can usually be specified 
+# as a character string giving the path to a folder)
 \donttest{\dontrun{anyflights("PDX", 2018, 6, tempdir())}}
 
 }
@@ -59,5 +61,5 @@ The \code{anyflights} function is a wrapper around the following functions:
 \code{\link{get_weather}} for weather data, 
 \code{\link{get_airlines}} for airlines data,
 \code{\link{get_airports}} for airports data,
-or \code{\link{get_planes}} for planes data
+or \code{\link{get_planes}} for planes data.
 }

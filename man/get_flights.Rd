@@ -57,14 +57,14 @@ may take several minutes to download relevant data.
 }
 \examples{
 
-# query flights out of Portland International in June 2018
+# flights out of Portland International in June 2018
 \donttest{\dontrun{get_flights("PDX", 2018, 6)}}
 
 # ...or the original nycflights13 flights dataset
 \donttest{\dontrun{get_flights(c("JFK", "LGA", "EWR"), 2013)}}
 
-# use the dir argument to indicate the folder to save the 
-# data in as "flights.rda"
+# use the dir argument to indicate the folder to 
+# save the data in \code{dir} as "flights.rda"
 \donttest{\dontrun{get_flights("PDX", 2018, 6, dir = tempdir())}}
 
 }
@@ -73,5 +73,5 @@ may take several minutes to download relevant data.
 \code{\link{get_airlines}} for airlines data,
 \code{\link{get_airports}} for airports data,
 \code{\link{get_planes}} for planes data,
-or \code{\link{anyflights}} for a wrapper function
+or \code{\link{anyflights}} for a wrapper function.
 }

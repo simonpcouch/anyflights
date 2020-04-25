@@ -37,9 +37,10 @@ may take several minutes to download relevant data.
 # run with defaults
 \donttest{\dontrun{get_airlines()}}
 
-# if you'd like to only return the airline abbreviations only
-# for airlines that appear in \code{flights}, query your flights
-# dataset first, and then supply it as a flights_data argument
+# if you'd like to only return the airline 
+# abbreviations only for airlines that appear in 
+# \code{flights}, query your flights dataset first, 
+# and then supply it as a flights_data argument
 \donttest{\dontrun{get_airlines(flights_data = get_flights("PDX", 2018, 6))}}
 
 }
@@ -48,5 +49,5 @@ may take several minutes to download relevant data.
 \code{\link{get_weather}} for weather data, 
 \code{\link{get_airports}} for airports data,
 \code{\link{get_planes}} for planes data,
-or \code{\link{anyflights}} for a wrapper function
+or \code{\link{anyflights}} for a wrapper function.
 }

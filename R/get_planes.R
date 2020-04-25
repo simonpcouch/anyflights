@@ -28,9 +28,9 @@
 #' # grab airplanes data for 2018
 #' \donttest{\dontrun{get_planes(2018)}}
 #' 
-#' # if you'd like to only return the planes  that appear in \code{flights}, 
-#' # query your flights dataset first, and then supply it as a 
-#' # \code{flights_data} argument
+#' # if you'd like to only return the planes  that appear 
+#' # in \code{flights}, query your flights dataset first, 
+#' # and then supply it as a \code{flights_data} argument
 #' \donttest{\dontrun{get_planes(2018, 
 #'                  flights_data = get_flights("PDX", 2018, 6))}}
 #'
@@ -38,7 +38,7 @@
 #' \code{\link{get_weather}} for weather data, 
 #' \code{\link{get_airlines}} for airlines data,
 #' \code{\link{get_airports}} for airports data,
-#' or \code{\link{anyflights}} for a wrapper function
+#' or \code{\link{anyflights}} for a wrapper function.
 #'
 #' @export
 get_planes <- function(year, dir = NULL, flights_data = NULL) {

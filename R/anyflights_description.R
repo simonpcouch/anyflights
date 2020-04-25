@@ -1,6 +1,8 @@
-#' Package: anyflights
+#' anyflights: `nycflights13`-Like Data for Specified Years and Airports
 #'
-#' Query nycflights13-Like Air Travel Data for Specified Years and Airports
+#' @description 
+#'
+#' \if{html}{\figure{logo.png}{options: align='right'}}
 #'
 #' The anyflights package supplies a set of functions to query air travel
 #' information for specified years and airports. The output of the wrapper

@@ -56,8 +56,8 @@ may take several minutes to download relevant data.
 # ...or the original nycflights13 weather dataset
 \donttest{\dontrun{get_weather(c("JFK", "LGA", "EWR"), 2013)}}
 
-# use the dir argument to indicate the folder to save the 
-# data in as "weather.rda"
+# use the dir argument to indicate the folder to 
+# save the data in as "weather.rda"
 \donttest{\dontrun{get_weather("PDX", 2018, 6, dir = tempdir())}}
 
 }
@@ -66,5 +66,5 @@ may take several minutes to download relevant data.
 \code{\link{get_airlines}} for airlines data,
 \code{\link{get_airports}} for airports data,
 \code{\link{get_planes}} for planes data,
-or \code{\link{anyflights}} for a wrapper function
+or \code{\link{anyflights}} for a wrapper function.
 }

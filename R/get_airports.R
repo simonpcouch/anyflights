@@ -31,7 +31,7 @@
 #' \code{\link{get_weather}} for weather data, 
 #' \code{\link{get_airlines}} for airlines data,
 #' \code{\link{get_planes}} for planes data,
-#' or \code{\link{anyflights}} for a wrapper function
+#' or \code{\link{anyflights}} for a wrapper function.
 #'
 #' @export
 get_airports <- function(dir = NULL) {

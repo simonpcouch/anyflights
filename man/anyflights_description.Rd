@@ -5,11 +5,10 @@
 \alias{anyflights_description}
 \alias{_PACKAGE}
 \alias{anyflights_package}
-\title{Package: anyflights}
+\title{anyflights: `nycflights13`-Like Data for Specified Years and Airports}
 \description{
-Query nycflights13-Like Air Travel Data for Specified Years and Airports
-}
-\details{
+\if{html}{\figure{logo.png}{options: align='right'}}
+
 The anyflights package supplies a set of functions to query air travel
 information for specified years and airports. The output of the wrapper
 function, \code{anyflights()}, is a list of dataframe similar to those
