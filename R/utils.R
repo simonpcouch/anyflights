@@ -11,9 +11,15 @@ check_arguments <- function(station = NULL, year = NULL,
   
   # checking the "station" argument
   if (context %in% c("flights", "weather")) {
+    if (!all(is.character(station))) {
+      stop_glue("At least one of the provided station arguments, ",
+                "{list(station)}, wasn't a character string. Have you ",
+                "surrounded the airport names in quotes?")
+    }    
+    
     if (!all(station %in% get_airports()$faa)) {
       stop_glue("Couldn't find at least one of the provided origin airports ",
-                "{station}. Please consider using the get_airports() function ",
+                "{list(station)}. Please consider using the get_airports() function ",
                 "to locate the desired FAA LID code!")
     }
   }
@@ -27,6 +33,13 @@ check_arguments <- function(station = NULL, year = NULL,
     if (year > as.numeric(substr(Sys.Date(), 1, 4))) {
       stop_glue("The provided `year` is in the future. Oops. :-)")
     }
+  
+    if (year == as.numeric(substr(Sys.Date(), 1, 4))) {
+      stop_glue("The data for this year isn't quite available yet. The data ",
+                "for the previous year usually is released in February ",
+                "or March!")
+      }
+    
     if (year < 1987) {
       stop_glue("Your `year` argument {year} is really far back in time! ",
                 "`anyflights` data sources do not provide data this old.")
@@ -60,8 +73,7 @@ check_arguments <- function(station = NULL, year = NULL,
       }
     }
   }
-  
-}
+} 
 
 
 # a function derived from simonpcouch/gbfs to check if a URL exists
