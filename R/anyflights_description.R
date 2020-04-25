@@ -32,4 +32,8 @@ utils::globalVariables(c(".", "AirTime", "ArrDelay", "ArrTime", "CRSArrTime",
                          "everything", "feel", "flight", "metar", "nnum", 
                          "no_eng", "no_seats", "planes_lcl", "station", 
                          "type_acft", "type_eng", "year", "Reporting_Airline",
-                         "arr_time", "sched_arr_time"))
+                         "arr_time", "sched_arr_time", "dewp", "engine",
+                         "engines", "humid", "manufacturer", "precip",
+                         "pressure", "seats", "time_hour", "wind_dir",
+                         "wind_gust"))
+
