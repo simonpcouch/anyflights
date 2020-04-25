@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query nycflights13-Like Air Travel Data — anyflights • anyflights</title>
+<title>Query nycflights13-Like Weather Data — get_weather • anyflights</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,12 @@
 
 
 
-<meta property="og:title" content="Query nycflights13-Like Air Travel Data — anyflights" />
-<meta property="og:description" content="This function generates a list of dataframes similar to those found in the
-nycflights13 data package for any US airports
-and time frames. Please note that, even with a strong internet connection, 
-this function may take several minutes to download relevant data." />
+<meta property="og:title" content="Query nycflights13-Like Weather Data — get_weather" />
+<meta property="og:description" content="This function generates a dataframe similar to the 
+weather dataset from nycflights13 
+for any US airports and time frame. Please 
+note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,19 +120,20 @@ this function may take several minutes to download relevant data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query nycflights13-Like Air Travel Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/simonpcouch/anyflights/blob/master/R/anyflights.R'><code>R/anyflights.R</code></a></small>
-    <div class="hidden name"><code>anyflights.Rd</code></div>
+    <h1>Query nycflights13-Like Weather Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/simonpcouch/anyflights/blob/master/R/get_weather.R'><code>R/get_weather.R</code></a></small>
+    <div class="hidden name"><code>get_weather.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function generates a list of dataframes similar to those found in the
-nycflights13 data package for any US airports
-and time frames. Please note that, even with a strong internet connection, 
-this function may take several minutes to download relevant data.</p>
+    <p>This function generates a dataframe similar to the 
+<code><a href='https://rdrr.io/pkg/nycflights13/man/weather.html'>weather</a></code> dataset from <code>nycflights13</code> 
+for any US airports and time frame. Please 
+note that, even with a strong internet connection, this function 
+may take several minutes to download relevant data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>anyflights</span>(<span class='no'>station</span>, <span class='no'>year</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_weather</span>(<span class='no'>station</span>, <span class='no'>year</span>, <span class='no'>month</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,42 +161,47 @@ to save datasets in. By default, datasets will not be saved to file.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>ASOS download from Iowa Environmental Mesonet,
+  <a href='https://mesonet.agron.iastate.edu/request/download.phtml'>https://mesonet.agron.iastate.edu/request/download.phtml</a></p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of dataframes (and, optionally, a directory of datasets) 
-similar to those found in the <code>nycflights13</code> data package.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>A data frame with ~1k-25k rows and 15 variables:</p><dl'>
+<dt><code>origin</code></dt><dd><p>Weather station. Named <code>origin</code> to facilitate 
+  merging with flights data</p></dd>
+<dt><code>year, month, day, hour</code></dt><dd><p>Time of recording, UTC</p></dd>
+<dt><code>temp, dewp</code></dt><dd><p>Temperature and dewpoint in F</p></dd>
+<dt><code>humid</code></dt><dd><p>Relative humidity</p></dd>
+<dt><code>wind_dir, wind_speed, wind_gust</code></dt><dd><p>Wind direction (in degrees), 
+  speed and gust speed (in mph)</p></dd>
+<dt><code>precip</code></dt><dd><p>Precipitation, in inches</p></dd>
+<dt><code>pressure</code></dt><dd><p>Sea level pressure in millibars</p></dd>
+<dt><code>visib</code></dt><dd><p>Visibility in miles</p></dd>
+<dt><code>time_hour</code></dt><dd><p>Date and hour of the recording as a <code>POSIXct</code> 
+  date, UTC</p></dd>
 
-    <p>The <code>anyflights</code> function is a wrapper around the following functions:</p><ul>
-<li><p><code><a href='get_airlines.html'>get_airlines</a></code>: Grab data to translate between two letter 
-  carrier codes and names</p></li>
-<li><p><code><a href='get_airports.html'>get_airports</a></code>: Grab data on airport names and locations</p></li>
-<li><p><code><a href='get_flights.html'>get_flights</a></code>: Grab data on all flights that departed 
-  given US airports in a given year and month</p></li>
-<li><p><code><a href='get_planes.html'>get_planes</a></code>: Grab construction information about each 
-  plane</p></li>
-<li><p><code><a href='get_weather.html'>get_weather</a></code>: Grab hourly meterological data for a given 
-  airport in a given year and month</p></li>
-</ul>
+</dl>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='get_flights.html'>get_flights</a></code> for flight data,
-<code><a href='get_weather.html'>get_weather</a></code> for weather data, 
 <code><a href='get_airlines.html'>get_airlines</a></code> for airlines data,
 <code><a href='get_airports.html'>get_airports</a></code> for airports data,
-or <code><a href='get_planes.html'>get_planes</a></code> for planes data.</p></div>
+<code><a href='get_planes.html'>get_planes</a></code> for planes data,
+or <code><a href='anyflights.html'>anyflights</a></code> for a wrapper function.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># grab data on all flights departing from </span>
-<span class='co'># Portland International Airport in June 2019 and </span>
-<span class='co'># other useful metadata without saving to file</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>anyflights</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
+    <pre class="examples"><div class='input'>
+<span class='co'># query weather at Portland International in June 2018</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_weather</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
 
-<span class='co'># ...or, grab that same data and opt to save the </span>
-<span class='co'># file as well! (tempdir() can usually be specified </span>
-<span class='co'># as a character string giving the path to a folder)</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>anyflights</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>, <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())</div></pre>
+<span class='co'># ...or the original nycflights13 weather dataset</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_weather</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"JFK"</span>, <span class='st'>"LGA"</span>, <span class='st'>"EWR"</span>), <span class='fl'>2013</span>)
+
+<span class='co'># use the dir argument to indicate the folder to </span>
+<span class='co'># save the data in as "weather.rda"</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_weather</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
