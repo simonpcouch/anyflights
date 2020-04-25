@@ -6,22 +6,46 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# anyflights
+# anyflights <a href='https://anyflights.netlify.com'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
 
-`anyflights` supplies a set of functions to query air travel data. With a user-defined year and airport, the `anyflights` function will grab data on:
+The `anyflights` package supplies a set of functions to query air travel data similar to those found in [`nycflights13`](https://github.com/hadley/nycflights13). With a user-defined year and airport, the `anyflights` function will grab data on:
 
 * `flights`: all flights that departed a given airport in a given year and month
 * `weather`: hourly meterological data for a given airport in a given year and month
-* `airports`: airport names and locations
-* `airlines`: translation between two letter carrier codes and names
+* `airports`: airport names, FAA codes, and locations
+* `airlines`: translation between two letter carrier (airline) codes and names
+* `planes`: construction information about each plane found in `flights`
 
-The package also includes a set of functions to query each of the above datasets individually. Each of the functions are named `get_` followed with the names of the datasets (shown above in `code`), and require a varying combination of the `station` (i.e. airport code), `year` (as an integer), and `dir` (folder in the working directory to save to) arguments. 
-
-The main intent of this package, among others, is to allow for students learning the basics of R and the tidyverse through labs working with the `nycflights13` package to work with more recent data from their own hometowns or from the airport closest to their school. An instructor can use this package to generate a folder of data (~5MB) that can be distributed to students through Dropbox, GitHub, etc. As a result, students can make discoveries that could impact their own, real-life air travel decisions. (I was introduced to R through a guided analysis of the `nycflights13` data, and have since longed to create this package for this reason.)
-
-This package is inspired by and derived from Hadley Wickham's [nycflights13](https://github.com/hadley/nycflights13). However, note that the `planes` dataset is not included in the downloads for now, as the source for the `planes` dataset changes the formatting of the files nearly every year. A (now-deprecated) function `get_planes` is in the R folder, but is not exported in the build. This function may be available in later versions.
+The package also exports a set of functions to query each of the above datasets individually. Each of the functions are named `get_*` followed with the names of the datasets (shown above in `code`), and require a varying combination of the `station` (character vector of FAA LID airport codes), `year` (as an integer), and `month` (integer vector) arguments. Optionally, the user can also supply a `dir` argument (filepath to a folder) to save the resulting datasets. 
 
 These functions require a *strong* connection to run; expect several minutes of runtime, especially for the `anyflights` and `get_flights` functions.
 
 The FAA usually posts all of the data for a given year during February or March of the following year. All airports with an FAA LID code are supported, to my knowledge.
+
+### Installation
+
+`anyflights` can be installed with the following code:
+
+```{r, eval = FALSE}
+#install.packages("remotes")
+remotes::install_github("simonpcouch/anyflights")
+```
+
+### Basic Usage
+
+To grab a named list of 5 dataframes giving `nycflights13`-like air travel data for the Portland International Airport during June 2019, you could call:
+
+```{r, eval = FALSE}
+pdxflights19 <- anyflights("PDX", 2019, 6)
+```
+
+To grab the original `nycflights13` datasets, try:
+
+```{r, eval = FALSE}
+nycflights13_ <- anyflights(c("JFK", "LGA", "EWR"), 2013)
+```
+
+
+
+
 
