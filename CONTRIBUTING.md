@@ -17,6 +17,10 @@ This Code of Conduct is adapted from the [Contributor Covenant](http:contributor
 Contributions to `anyflights`, whether in the form of bug fixes, issue reports, 
 new code or documentation improvements are encouraged and welcome.
 
+Maximal goofiness in commit messages and description of issues/PRs, including 
+but not limited to emojis, excessive punctuation (!!!), or ridiculous 
+capitalization is encouraged but not required. 
+
 ## Code style
 
 Please use snake case (such as `get_flights`) for function names.
