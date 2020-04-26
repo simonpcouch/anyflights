@@ -13,3 +13,7 @@
 \description{
 Look up airline names from their carrier codes.
 }
+\usage{
+airlines
+}
+\keyword{datasets}

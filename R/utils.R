@@ -544,16 +544,19 @@ save_flights_data <- function(data, name) {
   
   dir.create(paste0(name, "/data"))
   
-  purrr::map2(names(data), data, save_flights_dataset)
+  purrr::map2(names(data), data, save_flights_dataset, name)
   
 }
 
-save_flights_dataset <- function(dataset_name, data) {
+save_flights_dataset <- function(dataset_name, data, name) {
   
-  # save the dataset to file
-  save(data, file = paste0(name, "/data/", dataset_name,  ".rda"))
+  # save the dataset to file with the appropriate object name attached to it
+  assign(dataset_name, data)
+  save(list = dataset_name, 
+       file = paste0(name, "/data/", dataset_name,  ".rda"))
   
 }
+
 
 write_flights_documentation <- function(name) {
   
@@ -561,19 +564,18 @@ write_flights_documentation <- function(name) {
   which_data <- dir(paste0(name, "/data")) %>% stringr::str_replace(".rda", "")
 
   # only write documentation for the relevant datasets
-  sysdata[which_data]
+  needed_docs <- sysdata[which_data]
   
   # create the man directory
   dir.create(paste0(name, "/man"))
   
   # create the .Rd files in man/
-  purrr::map(paste0(name, "/man/", names(sysdata), ".Rd"), file.create)
+  purrr::map(paste0(name, "/man/", names(needed_docs), ".Rd"), file.create)
   
   # write the .Rd data to them
-  purrr::map2(sysdata, 
-              paste0(name, "/man/", names(sysdata), ".Rd"),
+  purrr::map2(needed_docs, 
+              paste0(name, "/man/", names(needed_docs), ".Rd"),
               writeLines)
-  
 }
 
 

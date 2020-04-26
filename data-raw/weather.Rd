@@ -24,3 +24,7 @@ ASOS download from Iowa Environmental Mesonet,
 \description{
 Hourly meterological data.
 }
+\usage{
+weather
+}
+\keyword{datasets}

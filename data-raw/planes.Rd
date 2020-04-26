@@ -21,3 +21,7 @@ Plane metadata for all plane tailnumbers found in the FAA aircraft
 registry. American Airways (AA) and Envoy Air (MQ) report fleet numbers
 rather than tail numbers so can't be matched.
 }
+\usage{
+planes
+}
+\keyword{datasets}

@@ -20,3 +20,7 @@
 \description{
 Useful metadata about airports.
 }
+\usage{
+airports
+}
+\keyword{datasets}

@@ -31,3 +31,7 @@ RITA, Bureau of transportation statistics,
 \description{
 On-time data for all flights that departed from the given airports.
 }
+\usage{
+flights
+}
+\keyword{datasets}
