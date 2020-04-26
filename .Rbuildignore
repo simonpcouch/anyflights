@@ -12,3 +12,4 @@ CONTRIBUTING.md
 ^pkgdown$
 figs/
 pkgdown/
+data-raw/
