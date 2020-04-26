@@ -536,3 +536,44 @@ join_planes_to_flights_data <- function(planes, flights_data) {
   
   planes
 }
+
+
+# create_flights_package utilities -------------------------------------
+
+save_flights_data <- function(data, name) {
+  
+  dir.create(paste0(name, "/data"))
+  
+  purrr::map2(names(data), data, save_flights_dataset)
+  
+}
+
+save_flights_dataset <- function(dataset_name, data) {
+  
+  # save the dataset to file
+  save(data, file = paste0(name, "/data/", dataset_name,  ".rda"))
+  
+}
+
+write_flights_documentation <- function(name) {
+  
+  # check for which datasets are included in the package
+  which_data <- dir(paste0(name, "/data")) %>% stringr::str_replace(".rda", "")
+
+  # only write documentation for the relevant datasets
+  sysdata[which_data]
+  
+  # create the man directory
+  dir.create(paste0(name, "/man"))
+  
+  # create the .Rd files in man/
+  purrr::map(paste0(name, "/man/", names(sysdata), ".Rd"), file.create)
+  
+  # write the .Rd data to them
+  purrr::map2(sysdata, 
+              paste0(name, "/man/", names(sysdata), ".Rd"),
+              writeLines)
+  
+}
+
+

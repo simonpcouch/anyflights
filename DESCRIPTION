@@ -14,7 +14,7 @@ Description: Supplies a set of functions to query air travel data for user-
 License: CC0
 LazyData: true
 Depends:
-    R (>= 3.1.2)
+    R (>= 3.5.0)
 Imports:
     httr,
     dplyr,
