@@ -7,9 +7,6 @@
 #' @param data A named list of dataframes outputted by 
 #'   \code{\link{anyflights}}.
 #' 
-#' @param dir The folder to write the package to, relative to the current
-#' working directory.
-#' 
 #' @param name The desired name of the resulting package.
 #' 
 #' @return A directory containing a data-only package built around the
@@ -42,8 +39,6 @@ as_flights_package <- function(data, name) {
   save_flights_data(data, name)
   
   write_flights_documentation(name)
-  
-  setwd(current_wd)
   
   invisible(TRUE)
   

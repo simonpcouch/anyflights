@@ -26,7 +26,8 @@ Imports:
     glue,
     purrr,
     stringr,
-    curl
+    curl,
+    usethis
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.0.2

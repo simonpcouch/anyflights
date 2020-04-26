@@ -11,9 +11,6 @@ as_flights_package(data, name)
 \code{\link{anyflights}}.}
 
 \item{name}{The desired name of the resulting package.}
-
-\item{dir}{The folder to write the package to, relative to the current
-working directory.}
 }
 \value{
 A directory containing a data-only package built around the
