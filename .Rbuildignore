@@ -14,3 +14,4 @@ figs/
 pkgdown/
 data-raw/
 ^codecov\.yml$
+^CRAN-RELEASE$
