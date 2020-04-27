@@ -576,6 +576,69 @@ write_flights_documentation <- function(name) {
   purrr::map2(needed_docs, 
               paste0(name, "/man/", names(needed_docs), ".Rd"),
               writeLines)
+  
+  # make .R files out of the .Rds for easier documentation editing
+  Rd2roxygen::Rd2roxygen(name)
+  
+  invisible(TRUE)
 }
+
+
+check_as_flights_package_arguments <- function(data, name) {
+  
+  # check the supplied data
+  if (!inherits(data, "list")) {
+    stop_glue("The `data` argument to `as_flights_package` must be a named ",
+              "list, but you've provided an object with class ",
+              "{list(class(data))}.")
+  }
+  if (is.null(names(data))) {
+    stop_glue("The `data` argument must have names.")
+  }
+  if (any(!names(data) %in% c("flights", "weather", "airlines",
+                              "airports", "planes"))) {
+    stop_glue('Each of the names of the list for the `data` argument must be ',
+              'one of "flights", "weather", "airlines", "airports", ', 
+              'or "planes".')
+  }
+  if ("flights" %in% names(data)) {
+    check_given_data(data[["flights"]], "flights", 19)
+  }
+  if ("weather" %in% names(data)) {
+    check_given_data(data[["weather"]], "weather", 15)
+  }
+  if ("planes" %in% names(data)) {
+    check_given_data(data[["planes"]], "planes", 9)
+  }
+  if ("airlines" %in% names(data)) {
+    check_given_data(data[["airlines"]], "airlines", 2)
+  }
+  if ("airports" %in% names(data)) {
+    check_given_data(data[["airports"]], "airports", 8)
+  }
+  
+  # if the package name isn't valid, error out
+  if (!grepl(.standard_regexps()$valid_package_name, name)) {
+    stop_glue("The supplied package name isn't valid. See: \n ",
+              "http://r-pkgs.had.co.nz/package.html \n",
+              "for more information.")
+  }
+  
+}
+
+check_given_data <- function(data_, name, ncols) {
+  if (ncol(data_) != ncols) {
+    stop_glue("There should be {ncols} columns in the {name} data, but the ",
+              "supplied {name} data has {ncol(data_)} columns.")
+  }
+  if (!all(names(data_) %in% names(eval(parse(
+      text = paste0("nycflights13::", name)))))) {
+    stop_glue("The column names in the {name} data don't match the ",
+              "expected column names. See names(nycflights13::{name}) ",
+              "for expected column names.")
+  }
+}
+
+
 
 
