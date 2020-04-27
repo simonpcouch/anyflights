@@ -2,7 +2,7 @@ context("as_flights_package")
 
 test_that("as_flights_package works", {
 
-  skip_if(skip_conditions())
+  skip_on_cran()
   
   toy_data <- list(flights = dplyr::sample_n(nycflights13::flights, 30),
                    weather = dplyr::sample_n(nycflights13::weather, 30),

@@ -1,7 +1,7 @@
 context("get airlines")
 
 test_that("standard get_airports", {
-  skip_if(skip_conditions())
+  skip_on_cran()
   
   airports_ <- get_airports()
   airports_orig <- nycflights13::airports

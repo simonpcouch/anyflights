@@ -1,13 +1,13 @@
 context("get planes")
 
 test_that("standard get_planes", {
-  skip_if(skip_conditions())
+  skip_on_cran()
   
   planes_ <- get_planes(2018)
 })
 
 test_that("get_planes joined to nycflights13", {
-  skip_if(skip_conditions())
+  skip_on_cran()
 
   # grab the planes data and join it with the nycflights13 flights data
   planes_ <- get_planes(2013, flights_data = nycflights13::flights)

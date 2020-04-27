@@ -1,7 +1,7 @@
 context("utilities")
 
 test_that("checking station argument", {
-  skip_if(skip_conditions())
+  skip_on_cran()
   
   expect_error(anyflights("Portland", 2018, 1),
                "consider using the get_airports")
@@ -13,7 +13,7 @@ test_that("checking station argument", {
 
 
 test_that("checking month argument", {
-  skip_if(skip_conditions())
+  skip_on_cran()
   
   expect_error(anyflights("PDX", 2018, -1),
                "month values within")
