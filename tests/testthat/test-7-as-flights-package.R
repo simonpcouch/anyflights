@@ -3,6 +3,7 @@ context("as_flights_package")
 test_that("as_flights_package works", {
 
   skip_on_cran()
+  skip_on_ci()
   
   toy_data <- list(flights = dplyr::sample_n(nycflights13::flights, 30),
                    weather = dplyr::sample_n(nycflights13::weather, 30),

@@ -2,12 +2,14 @@ context("get weather")
 
 test_that("standard get_weather (PDX, June 2018)", {
   skip_on_cran()
+  skip_if_offline()
   
   weather_ <- get_weather("PDX", 2018, 6)
 })
 
 test_that("standard get_weather (NYC, February 2013)", {
   skip_on_cran()
+  skip_if_offline()
   
   weather_2 <- get_weather(c("JFK", "LGA", "EWR"), 2013, 2)
   
