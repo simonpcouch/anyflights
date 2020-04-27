@@ -2,13 +2,15 @@
 
   - local OS X install, R 3.6.3
   - ubuntu 16.04 (on travis-ci), R 3.6.2
-  - win-builder (devel and release)
+  - win-builder (rR- elease)
+  - Windows Server 2008 (on r-hub), R-devel
+  - Fedora Linux (on r-hub), R-devel
 
 ## R CMD check results
 
 There were no ERRORs or WARNINGs.
 
-There was 1 NOTE (from win-builder):
+There was 1 NOTE (from win-builder and r-hub):
 
 ```
 checking CRAN incoming feasibility ... NOTE

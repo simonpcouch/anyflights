@@ -1,7 +1,7 @@
-#' Generate a Data-Only Package from `anyflights` Data
+#' Generate a Data Package from `anyflights` Data
 #' 
 #' Generate a data-only package, including documentation, from data outputted
-#' by the `anyflights` function. Please do not submit the outputted package to
+#' by the `anyflights()` function. Please do not submit the outputted package to
 #' CRAN or similar repositories as original packages.
 #' 
 #' @param data A named list of dataframes outputted by 

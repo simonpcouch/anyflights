@@ -26,12 +26,12 @@ similar to those found in the \code{nycflights13} data package.
 }
 \description{
 This function generates a list of dataframes similar to those found in the
-nycflights13 data package for any US airports
+\code{nycflights13} data package for any US airports
 and time frames. Please note that, even with a strong internet connection, 
 this function may take several minutes to download relevant data.
 }
 \details{
-The \code{anyflights} function is a wrapper around the following functions:
+The \code{anyflights()} function is a wrapper around the following functions:
 \itemize{
   \item \code{\link{get_airlines}}: Grab data to translate between two letter 
   carrier codes and names

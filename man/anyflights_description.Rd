@@ -9,10 +9,9 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
-The anyflights package supplies a set of functions to query air travel
-information for specified years and airports. The output of the wrapper
-function, \code{anyflights()}, is a list of dataframe similar to those
-found in the data-only package nycflights13.
+The anyflights package supplies a set of functions to generate
+\code{nycflights13}-like datasets and data packages for specified years and 
+airports.
 }
 \seealso{
 Useful links:

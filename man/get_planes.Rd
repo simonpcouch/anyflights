@@ -48,7 +48,7 @@ may take several minutes to download relevant data.
 # grab airplanes data for 2018
 \donttest{\dontrun{get_planes(2018)}}
 
-# if you'd like to only return the planes  that appear 
+# if you'd like to only return the planes that appear 
 # in \code{flights}, query your flights dataset first, 
 # and then supply it as a \code{flights_data} argument
 \donttest{\dontrun{get_planes(2018, 
