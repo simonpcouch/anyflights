@@ -8,7 +8,7 @@ status](https://travis-ci.com/simonpcouch/anyflights.svg?branch=master)](https:/
 [![Codecov test
 coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=master)
 [![Netlify
-Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://app.netlify.com/sites/anyflights/deploys)
+Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://anyflights.netlify.com/)
 
 The `anyflights` package supplies a set of functions to generate air
 travel data (and data packages\!) similar to
