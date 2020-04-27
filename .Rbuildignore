@@ -13,3 +13,4 @@ CONTRIBUTING.md
 figs/
 pkgdown/
 data-raw/
+^codecov\.yml$
