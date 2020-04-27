@@ -11,8 +11,9 @@ as_flights_package(data, name)
 \code{\link{anyflights}}.}
 
 \item{name}{The desired name of the resulting package as a character string.
-The package will check that the supplied package is valid using the
-regular expression given by \code{.standard_regexps()$valid_package_name}.}
+The package will check that the supplied package name is valid using the
+regular expression \code{.standard_regexps()$valid_package_name}, and save
+the output in a directory by the same name.}
 }
 \value{
 A directory containing a data-only package built around the

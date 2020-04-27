@@ -51,6 +51,9 @@
 #' \code{\link{get_airports}} for airports data,
 #' or \code{\link{get_planes}} for planes data.
 #' 
+#' Use the \code{\link{as_flights_package}} function to convert the output
+#' of this function to a data-only package.
+#' 
 #' @export
 anyflights <- function(station, year, month = 1:12, dir = NULL) {
   

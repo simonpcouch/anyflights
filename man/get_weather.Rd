@@ -8,7 +8,7 @@ ASOS download from Iowa Environmental Mesonet,
   \url{https://mesonet.agron.iastate.edu/request/download.phtml}
 }
 \usage{
-get_weather(station, year, month, dir = NULL)
+get_weather(station, year, month = 1:12, dir = NULL)
 }
 \arguments{
 \item{station}{A character vector giving the origin US airports of interest
@@ -67,4 +67,7 @@ may take several minutes to download relevant data.
 \code{\link{get_airports}} for airports data,
 \code{\link{get_planes}} for planes data,
 or \code{\link{anyflights}} for a wrapper function.
+
+Use the \code{\link{as_flights_package}} function to convert this dataset 
+to a data-only package.
 }

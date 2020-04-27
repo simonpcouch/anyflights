@@ -62,4 +62,7 @@ The \code{anyflights} function is a wrapper around the following functions:
 \code{\link{get_airlines}} for airlines data,
 \code{\link{get_airports}} for airports data,
 or \code{\link{get_planes}} for planes data.
+
+Use the \code{\link{as_flights_package}} function to convert the output
+of this function to a data-only package.
 }

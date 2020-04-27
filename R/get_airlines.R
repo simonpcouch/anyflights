@@ -37,6 +37,9 @@
 #' \code{\link{get_planes}} for planes data,
 #' or \code{\link{anyflights}} for a wrapper function.
 #'
+#' Use the \code{\link{as_flights_package}} function to convert this dataset 
+#' to a data-only package.
+#'
 #' @export
 get_airlines <- function(dir = NULL, flights_data = NULL) {
   

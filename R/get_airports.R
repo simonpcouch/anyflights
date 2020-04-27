@@ -25,13 +25,16 @@
 #' @examples
 #' 
 #' # grab airports data
-#' \donttest{\dontrun{get_aiports()}}
+#' \donttest{\dontrun{get_airports()}}
 #'
 #' @seealso \code{\link{get_flights}} for flight data,
 #' \code{\link{get_weather}} for weather data, 
 #' \code{\link{get_airlines}} for airlines data,
 #' \code{\link{get_planes}} for planes data,
 #' or \code{\link{anyflights}} for a wrapper function.
+#'
+#' Use the \code{\link{as_flights_package}} function to convert this dataset 
+#' to a data-only package.
 #'
 #' @export
 get_airports <- function(dir = NULL) {
