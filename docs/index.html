@@ -47,22 +47,19 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="news/index.html">News</a>
+</li>
+<li>
+  <a href="CONTRIBUTING.html">How To Contribute</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/simonpcouch/anyflights/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/simonpcouch/anyflights">
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -83,7 +80,7 @@
 <a href="#anyflights" class="anchor"></a>anyflights <a href="https://anyflights.netlify.com"><img src="https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png" align="right" height="300"></a>
 </h1></div>
 
-<p>The <code>anyflights</code> package supplies a set of functions to query air travel data similar to those found in <a href="https://github.com/hadley/nycflights13"><code>nycflights13</code></a>. With a user-defined year and airport, the <code>anyflights</code> function will grab data on:</p>
+<p>The <code>anyflights</code> package supplies a set of functions to generate air travel data (and data packages!) similar to <a href="https://github.com/hadley/nycflights13"><code>nycflights13</code></a>. With a user-defined year and airport, the <code>anyflights</code> function will grab data on:</p>
 <ul>
 <li>
 <code>flights</code>: all flights that departed a given airport in a given year and month</li>
@@ -99,27 +96,36 @@
 </ul>
 <p>The package also exports a set of functions to query each of the above datasets individually. Each of the functions are named <code>get_*</code> followed with the names of the datasets (shown above in <code>code</code>), and require a varying combination of the <code>station</code> (character vector of FAA LID airport codes), <code>year</code> (as an integer), and <code>month</code> (integer vector) arguments. Optionally, the user can also supply a <code>dir</code> argument (filepath to a folder) to save the resulting datasets.</p>
 <p>These functions require a <em>strong</em> connection to run; expect several minutes of runtime, especially for the <code>anyflights</code> and <code>get_flights</code> functions.</p>
-<p>The FAA usually posts all of the data for a given year during February or March of the following year. All airports with an FAA LID code are supported, to my knowledge.</p>
+<p>The FAA usually posts all of the data for a given year during February or March of the following year. All airports with an FAA LID code are supported, to my knowledge. Data queries earlier than 2013 are significantly less thoroughly tested than those 2013 and on.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
 <hr>
-<p><code>anyflights</code> can be installed with the following code:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"simonpcouch/anyflights"</span>)</pre></div>
+<p><code>anyflights</code> is now on CRAN! Install with the following code:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"anyflights"</span>)</pre></div>
+<p>To install the developmental version, use the following code:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co">#install.packages("remotes")</span>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"simonpcouch/anyflights"</span>, <span class="kw">ref</span> <span class="kw">=</span> <span class="st">"develop"</span>)</pre></div>
 </div>
 <div id="basic-usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h3>
 <hr>
 <p>To grab a named list of 5 dataframes giving <code>nycflights13</code>-like air travel data for the Portland International Airport during June 2019, you could call:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="st">"PDX"</span>, <span class="fl">2019</span>, <span class="fl">6</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="st">"PDX"</span>, <span class="fl">2019</span>, <span class="fl">6</span>)</pre></div>
 <p>To grab the original <code>nycflights13</code> datasets, try:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">nycflights13_</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"JFK"</span>, <span class="st">"LGA"</span>, <span class="st">"EWR"</span>), <span class="fl">2013</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">nycflights13_</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"JFK"</span>, <span class="st">"LGA"</span>, <span class="st">"EWR"</span>), <span class="fl">2013</span>)</pre></div>
 <p>The package also provides an <code>as_flights_package</code> function to create a data-only package from the data outputted by <code>anyflights</code>. To create the package from the data, just supply a name:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/as_flights_package.html">as_flights_package</a></span>(<span class="st">"pdxflights"</span>)</pre></div>
 <p>and check out the data-only package in the <code>pdxflights</code> directory! 🐛</p>
+<p>If you have used <code>anyflights</code> to create a data package, please link me to the repository and I might feature it here! Please do not submit the outputted package to CRAN or similar repositories as original packages.</p>
+</div>
+<div id="contributing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing" class="anchor"></a>Contributing</h2>
+<hr>
+<p>Contributions to <code>anyflights</code>, whether in the form of bug fixes, issue reports, new code or documentation improvements are encouraged and welcome. Please see <a href="https://github.com/simonpcouch/anyflights/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> if you’re interested in contributing!</p>
 </div>
 </div>
   </div>
@@ -161,8 +167,10 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=anyflights"><img src="https://www.r-pkg.org/badges/version/anyflights" alt="CRAN status"></a></li>
 <li><a href="https://travis-ci.com/simonpcouch/anyflights"><img src="https://travis-ci.com/simonpcouch/anyflights.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://codecov.io/gh/simonpcouch/anyflights?branch=master"><img src="https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.netlify.com/sites/anyflights/deploys"><img src="https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status" alt="Netlify Status"></a></li>
 </ul>
 </div>
 </div>

@@ -1,13 +1,17 @@
 
 # anyflights <a href='https://anyflights.netlify.com'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project.org/package=anyflights)
 [![Travis build
 status](https://travis-ci.com/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.com/simonpcouch/anyflights)
 [![Codecov test
 coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=master)
+[![Netlify
+Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://app.netlify.com/sites/anyflights/deploys)
 
-The `anyflights` package supplies a set of functions to query air travel
-data similar to those found in
+The `anyflights` package supplies a set of functions to generate air
+travel data (and data packages\!) similar to
 [`nycflights13`](https://github.com/hadley/nycflights13). With a
 user-defined year and airport, the `anyflights` function will grab data
 on:
@@ -36,17 +40,24 @@ functions.
 
 The FAA usually posts all of the data for a given year during February
 or March of the following year. All airports with an FAA LID code are
-supported, to my knowledge.
+supported, to my knowledge. Data queries earlier than 2013 are
+significantly less thoroughly tested than those 2013 and on.
 
 ### Installation
 
 -----
 
-`anyflights` can be installed with the following code:
+`anyflights` is now on CRAN\! Install with the following code:
+
+``` r
+install.packages("anyflights")
+```
+
+To install the developmental version, use the following code:
 
 ``` r
 #install.packages("remotes")
-remotes::install_github("simonpcouch/anyflights")
+remotes::install_github("simonpcouch/anyflights", ref = "develop")
 ```
 
 ### Basic Usage
@@ -77,3 +88,17 @@ pdxflights19 %>%
 ```
 
 and check out the data-only package in the `pdxflights` directory\! 🐛
+
+If you have used `anyflights` to create a data package, please link me
+to the repository and I might feature it here\! Please do not submit the
+outputted package to CRAN or similar repositories as original packages.
+
+## Contributing
+
+-----
+
+Contributions to `anyflights`, whether in the form of bug fixes, issue
+reports, new code or documentation improvements are encouraged and
+welcome. Please see
+[CONTRIBUTING.md](https://github.com/simonpcouch/anyflights/blob/master/CONTRIBUTING.md)
+if you’re interested in contributing\!
