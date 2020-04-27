@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • anyflights</title>
+<title>Changelog • anyflights</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -116,82 +116,33 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/simonpcouch/anyflights/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <table class="ref-index">
-
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="anyflights.html">anyflights()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Air Travel Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="anyflights_description.html">anyflights_description</a></code> </p>
-        </td>
-        <td><p>anyflights: `nycflights13`-Like Data for Specified Years and Airports</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_flights_package.html">as_flights_package()</a></code> </p>
-        </td>
-        <td><p>Generate a Data Package from `anyflights` Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_airlines.html">get_airlines()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Airlines Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_airports.html">get_airports()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Airports Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_flights.html">get_flights()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Flights Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_planes.html">get_planes()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Planes Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_weather.html">get_weather()</a></code> </p>
-        </td>
-        <td><p>Query nycflights13-Like Weather Data</p></td>
-      </tr>
-    </tbody>
-    </table>
+    <div id="v-0-2-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#v-0-2-0" class="anchor"></a>v 0.2.0</h2>
+<hr>
+<ul>
+<li>Significant improvements to stability and performance</li>
+<li>Add <code><a href="../reference/as_flights_package.html">as_flights_package()</a></code> function to convert <code><a href="../reference/anyflights.html">anyflights()</a></code> data objects to data-only packages</li>
+<li>Add <code>month</code> argument to <code><a href="../reference/get_flights.html">get_flights()</a></code> and <code><a href="../reference/get_weather.html">get_weather()</a></code>
+</li>
+<li>Allow users to return data objects without saving to file</li>
+<li>Documentation improvements, bug fixes, and increases in unit testing coverage</li>
+</ul>
+</div>
+    <div id="v-0-1-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#v-0-1-0" class="anchor"></a>v 0.1.0</h2>
+<hr>
+<ul>
+<li>Original release!</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -199,6 +150,7 @@
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 

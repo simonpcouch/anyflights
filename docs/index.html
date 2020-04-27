@@ -55,6 +55,9 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -79,6 +82,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#anyflights" class="anchor"></a>anyflights <a href="https://anyflights.netlify.com"><img src="https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png" align="right" height="300"></a>
 </h1></div>
+
 <p>The <code>anyflights</code> package supplies a set of functions to query air travel data similar to those found in <a href="https://github.com/hadley/nycflights13"><code>nycflights13</code></a>. With a user-defined year and airport, the <code>anyflights</code> function will grab data on:</p>
 <ul>
 <li>
@@ -99,6 +103,7 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
+<hr>
 <p><code>anyflights</code> can be installed with the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("remotes")</span>
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"simonpcouch/anyflights"</span>)</pre></div>
@@ -106,10 +111,15 @@
 <div id="basic-usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h3>
+<hr>
 <p>To grab a named list of 5 dataframes giving <code>nycflights13</code>-like air travel data for the Portland International Airport during June 2019, you could call:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="st">"PDX"</span>, <span class="fl">2019</span>, <span class="fl">6</span>)</pre></div>
 <p>To grab the original <code>nycflights13</code> datasets, try:</p>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="no">nycflights13_</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"JFK"</span>, <span class="st">"LGA"</span>, <span class="st">"EWR"</span>), <span class="fl">2013</span>)</pre></div>
+<p>The package also provides an <code>as_flights_package</code> function to create a data-only package from the data outputted by <code>anyflights</code>. To create the package from the data, just supply a name:</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/as_flights_package.html">as_flights_package</a></span>(<span class="st">"pdxflights"</span>)</pre></div>
+<p>and check out the data-only package in the <code>pdxflights</code> directory! 🐛</p>
 </div>
 </div>
   </div>
@@ -148,7 +158,14 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.com/simonpcouch/anyflights"><img src="https://travis-ci.com/simonpcouch/anyflights.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://codecov.io/gh/simonpcouch/anyflights?branch=master"><img src="https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

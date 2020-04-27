@@ -98,6 +98,9 @@ this function may take several minutes to download relevant data." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -126,7 +129,7 @@ this function may take several minutes to download relevant data." />
 
     <div class="ref-description">
     <p>This function generates a list of dataframes similar to those found in the
-nycflights13 data package for any US airports
+<code>nycflights13</code> data package for any US airports
 and time frames. Please note that, even with a strong internet connection, 
 this function may take several minutes to download relevant data.</p>
     </div>
@@ -165,7 +168,7 @@ to save datasets in. By default, datasets will not be saved to file.</p></td>
 similar to those found in the <code>nycflights13</code> data package.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>anyflights</code> function is a wrapper around the following functions:</p><ul>
+    <p>The <code>anyflights()</code> function is a wrapper around the following functions:</p><ul>
 <li><p><code><a href='get_airlines.html'>get_airlines</a></code>: Grab data to translate between two letter 
   carrier codes and names</p></li>
 <li><p><code><a href='get_airports.html'>get_airports</a></code>: Grab data on airport names and locations</p></li>
@@ -183,7 +186,9 @@ similar to those found in the <code>nycflights13</code> data package.</p>
 <code><a href='get_weather.html'>get_weather</a></code> for weather data, 
 <code><a href='get_airlines.html'>get_airlines</a></code> for airlines data,
 <code><a href='get_airports.html'>get_airports</a></code> for airports data,
-or <code><a href='get_planes.html'>get_planes</a></code> for planes data.</p></div>
+or <code><a href='get_planes.html'>get_planes</a></code> for planes data.</p>
+<p>Use the <code><a href='as_flights_package.html'>as_flights_package</a></code> function to convert the output
+of this function to a data-only package.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># grab data on all flights departing from </span>
