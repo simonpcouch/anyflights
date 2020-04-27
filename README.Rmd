@@ -4,6 +4,8 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# devtools::install_github("hadley/emo")
+library(emo)
 ```
 
 # anyflights <a href='https://anyflights.netlify.com'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
@@ -26,6 +28,8 @@ The FAA usually posts all of the data for a given year during February or March 
 
 ### Installation
 
+------
+
 `anyflights` can be installed with the following code:
 
 ```{r, eval = FALSE}
@@ -34,6 +38,8 @@ remotes::install_github("simonpcouch/anyflights")
 ```
 
 ### Basic Usage
+
+------
 
 To grab a named list of 5 dataframes giving `nycflights13`-like air travel data for the Portland International Airport during June 2019, you could call:
 
@@ -47,6 +53,14 @@ To grab the original `nycflights13` datasets, try:
 nycflights13_ <- anyflights(c("JFK", "LGA", "EWR"), 2013)
 ```
 
+The package also provides an `as_flights_package` function to create a data-only package from the data outputted by `anyflights`. To create the package from the data, just supply a name:
+
+```{r, eval = FALSE}
+pdxflights19 %>%
+  as_flights_package("pdxflights")
+```
+
+and check out the data-only package in the `pdxflights` directory! `r emo::ji("bug")`
 
 
 

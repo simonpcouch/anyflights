@@ -2,15 +2,17 @@
 #' 
 #' Generate a data-only package, including documentation, from data outputted
 #' by the `anyflights` function. Please do not submit the outputted package to
-#' CRAN or similar hosting services!
+#' CRAN or similar repositories as original packages.
 #' 
 #' @param data A named list of dataframes outputted by 
 #'   \code{\link{anyflights}}.
 #' 
-#' @param name The desired name of the resulting package.
+#' @param name The desired name of the resulting package as a character string.
+#' The package will check that the supplied package is valid using the
+#' regular expression given by \code{.standard_regexps()$valid_package_name}.
 #' 
 #' @return A directory containing a data-only package built around the
-#' supplied data
+#' supplied data.
 #' 
 #' @export
 as_flights_package <- function(data, name) {

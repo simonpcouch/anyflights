@@ -1,6 +1,11 @@
 
 # anyflights <a href='https://anyflights.netlify.com'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
 
+[![Travis build
+status](https://travis-ci.com/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.com/simonpcouch/anyflights)
+[![Codecov test
+coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=master)
+
 The `anyflights` package supplies a set of functions to query air travel
 data similar to those found in
 [`nycflights13`](https://github.com/hadley/nycflights13). With a
@@ -35,6 +40,8 @@ supported, to my knowledge.
 
 ### Installation
 
+-----
+
 `anyflights` can be installed with the following code:
 
 ``` r
@@ -43,6 +50,8 @@ remotes::install_github("simonpcouch/anyflights")
 ```
 
 ### Basic Usage
+
+-----
 
 To grab a named list of 5 dataframes giving `nycflights13`-like air
 travel data for the Portland International Airport during June 2019, you
@@ -57,3 +66,14 @@ To grab the original `nycflights13` datasets, try:
 ``` r
 nycflights13_ <- anyflights(c("JFK", "LGA", "EWR"), 2013)
 ```
+
+The package also provides an `as_flights_package` function to create a
+data-only package from the data outputted by `anyflights`. To create the
+package from the data, just supply a name:
+
+``` r
+pdxflights19 %>%
+  as_flights_package("pdxflights")
+```
+
+and check out the data-only package in the `pdxflights` directory\! 🐛

@@ -10,14 +10,16 @@ as_flights_package(data, name)
 \item{data}{A named list of dataframes outputted by 
 \code{\link{anyflights}}.}
 
-\item{name}{The desired name of the resulting package.}
+\item{name}{The desired name of the resulting package as a character string.
+The package will check that the supplied package is valid using the
+regular expression given by \code{.standard_regexps()$valid_package_name}.}
 }
 \value{
 A directory containing a data-only package built around the
-supplied data
+supplied data.
 }
 \description{
 Generate a data-only package, including documentation, from data outputted
 by the `anyflights` function. Please do not submit the outputted package to
-CRAN or similar hosting services!
+CRAN or similar repositories as original packages.
 }
