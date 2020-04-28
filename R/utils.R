@@ -639,6 +639,85 @@ check_given_data <- function(data_, name, ncols) {
   }
 }
 
+# progress updates utility -----------------------------------------
+
+# f <- function() {
+# 
+#   # create a function, unique to this call to anyflights,
+#   # that returns the difference from when the function was called
+#   diff_from_start <- create_diff_from_start()
+#   
+#   # initiate the progress bar
+#   pb <- progress_bar$new(
+#     format = ":what",
+#     clear = FALSE, width = 60, show_after = 0)
+#   pb$tick(0)
+#   
+#   pb$message(stringr::str_pad("Total Time Elapsed", 43, side = "left"))
+#   
+#   write_tick(pb, "Downloading Flights...")
+#   
+#   
+#   sum(rnorm(5e7))
+#   
+#   write_message(pb, "Finished Downloading Flights", diff_from_start)
+#   
+#   write_tick(pb, "Downloading Airlines...")
+#   
+#   sum(rnorm(5e7))
+#   
+#   write_message(pb, "Finished Downloading Airlines", diff_from_start)
+#   write_tick(pb, "Downloading Planes...")
+#   
+#   sum(rnorm(5e7))
+#   
+#   write_message(pb, "Finished Downloading Planes", diff_from_start)
+#   
+#   
+#   write_tick(pb, "Done!")
+#   
+#   sum(rnorm(1e7)) 
+#   
+#   invisible(TRUE)
+#   
+# }
+# f()
+
+# A wrapper around str_pad for easier defaults
+pad_text <- function(msg, width = 40) {
+  stringr::str_pad(msg, width, side = "right")
+}
+
+# call tick on pb with an update
+write_tick <- function(pb, update) {
+  pb$tick(tokens = list(what = paste0(pad_text(update))))
+}
+
+# call message on pb with the total elapsed time
+write_message <- function(pb, update, diff_fn) {
+  pb$message(paste0(pad_text(update), diff_fn()))
+}
+
+# create a function that returns the difference in time
+# from when the function was created, in seconds
+create_diff_from_start <- function() {
+  start <- Sys.time()
+  diff_from_start <- function() {
+    as.difftime(Sys.time() - start, units = "secs") %>%
+      as.numeric() %>%
+      round() %>%
+      as.character() %>%
+      paste0("s")
+  }
+}
+
+
+
+
+
+
+
+
 
 
 
