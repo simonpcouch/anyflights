@@ -183,7 +183,12 @@ skip_conditions <- function() {
 
 # get_flights utilities --------------------------------------------------
 
-download_month <- function(year, month, dir, flight_exdir) {
+download_month <- function(year, month, dir, flight_exdir, pb, diff_fn) {
+  
+  # update the progress bar with the month being downloaded
+  write_tick(pb = pb, paste0("  Downloading Flights Data for ", 
+                             months[month], 
+                             "..."))
   
   # put together the url for the relevant year and month
   fl_url <- make_flights_url(year, month)
@@ -207,6 +212,11 @@ download_month <- function(year, month, dir, flight_exdir) {
   flight_src <- paste0(flight_exdir, "/", flight_csv)
   flight_dst <- paste0(flight_exdir, "/", year, "-", month, ".csv")
   file.rename(flight_src, flight_dst)
+  
+  write_message(pb, 
+                paste0("Downloaded Flights Data for ", 
+                months[month]),
+                diff_fn)
 }
 
 get_flight_data <- function(path, station) {
@@ -638,6 +648,50 @@ check_given_data <- function(data_, name, ncols) {
               "for expected column names.")
   }
 }
+
+# progress updates utility -----------------------------------------
+
+# A wrapper around str_pad for easier defaults
+pad_text <- function(msg, width = 50) {
+  stringr::str_pad(msg, width, side = "right")
+}
+
+# call tick on pb with an update
+write_tick <- function(pb, update) {
+  pb$tick(tokens = list(what = paste0(pad_text(update))))
+}
+
+# call message on pb with the total elapsed time
+write_message <- function(pb, update, diff_fn) {
+  pb$message(paste0(pad_text(update, 
+                             50 - stringr::str_length(diff_fn())), 
+                    diff_fn()))
+}
+
+# create a function that returns the difference in time
+# from when the function was created, in seconds
+create_diff_from_start <- function() {
+  start <- Sys.time()
+  diff_from_start <- function() {
+    difftime(Sys.time(), start, units = "secs") %>%
+      as.numeric() %>%
+      round() %>%
+      as.character() %>%
+      paste0("s")
+  }
+}
+
+# convert month numbers to names for progress updates
+months <- c("January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December")
+
+
+
+
+
+
+
 
 
 

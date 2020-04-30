@@ -1,3 +1,9 @@
+## v 0.2.0.9000
+
+----
+
+* Add progress updates to `anyflights()` and `get_flights()` (#4)
+
 ## v 0.2.0
 
 ----

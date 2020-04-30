@@ -8,7 +8,7 @@ RITA, Bureau of transportation statistics,
  \url{http://www.transtats.bts.gov}
 }
 \usage{
-get_flights(station, year, month = 1:12, dir = NULL)
+get_flights(station, year, month = 1:12, dir = NULL, ...)
 }
 \arguments{
 \item{station}{A character vector giving the origin US airports of interest
@@ -23,6 +23,8 @@ March in the following year.}
 
 \item{dir}{An optional character string giving the directory
 to save datasets in. By default, datasets will not be saved to file.}
+
+\item{...}{Currently only used internally.}
 }
 \value{
 A data frame with ~1k-500k rows and 19 variables:
