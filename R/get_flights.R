@@ -8,6 +8,8 @@
 #' 
 #' @inheritParams anyflights 
 #' 
+#' @param ... Currently only used internally.
+#' 
 #' @return A data frame with ~1k-500k rows and 19 variables:
 #' \describe{
 #' \item{\code{year, month, day}}{Date of departure}
@@ -55,7 +57,24 @@
 #' to a data-only package.
 #'
 #' @export
-get_flights <- function(station, year, month = 1:12, dir = NULL) {
+get_flights <- function(station, year, month = 1:12, dir = NULL, ...) {
+  
+  if (!hasArg(pb)) {
+    # if get_flights isn't supplied a progress bar from the anyflights
+    # wrapper, make one!
+    diff_from_start <- create_diff_from_start()
+    pb <- progress::progress_bar$new(
+      format = ":what",
+      clear = FALSE, width = 60, show_after = 0)
+    pb$tick(0)
+    pb$message(stringr::str_pad("Total Time Elapsed", 43, side = "left"))
+    write_tick(pb, "Checking Arguments...")
+    in_anyflights <- FALSE
+  } else {
+    pb <- list(...)$pb
+    diff_from_start <- list(...)$diff_fn
+    in_anyflights <- TRUE
+  }
   
   # check user inputs
   check_arguments(station = station, 
@@ -75,9 +94,14 @@ get_flights <- function(station, year, month = 1:12, dir = NULL) {
   # make a subdirectory inside the directory to download the raw data into
   flight_exdir <- paste0(dir, "/flights")
   
+  write_message(pb, "Finished Checking Arguments", diff_from_start)
+  
   # download flight data for each month
-  purrr::map(month, download_month, 
-             year = year, dir = dir, flight_exdir = flight_exdir)
+  purrr::map(sort(month), download_month,
+             year = year, dir = dir, flight_exdir = flight_exdir, 
+             pb = pb, diff_fn = diff_from_start)
+
+  write_tick(pb, "Processing Flights Data")
   
   # load in the flights data for each month, tidy it, and rowbind it
   flights <- purrr::map(dir(flight_exdir, full.names = TRUE),

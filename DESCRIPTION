@@ -28,7 +28,8 @@ Imports:
     stringr,
     curl,
     usethis,
-    Rd2roxygen
+    Rd2roxygen,
+    progress
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.0.2

@@ -183,7 +183,12 @@ skip_conditions <- function() {
 
 # get_flights utilities --------------------------------------------------
 
-download_month <- function(year, month, dir, flight_exdir) {
+download_month <- function(year, month, dir, flight_exdir, pb, diff_fn) {
+  
+  # update the progress bar with the month being downloaded
+  write_tick(pb = pb, paste0("  Downloading Flights Data for ", 
+                             months[month], 
+                             "..."))
   
   # put together the url for the relevant year and month
   fl_url <- make_flights_url(year, month)
@@ -207,6 +212,11 @@ download_month <- function(year, month, dir, flight_exdir) {
   flight_src <- paste0(flight_exdir, "/", flight_csv)
   flight_dst <- paste0(flight_exdir, "/", year, "-", month, ".csv")
   file.rename(flight_src, flight_dst)
+  
+  write_message(pb, 
+                paste0("Downloaded Flights Data for ", 
+                months[month]),
+                diff_fn)
 }
 
 get_flight_data <- function(path, station) {
@@ -641,50 +651,8 @@ check_given_data <- function(data_, name, ncols) {
 
 # progress updates utility -----------------------------------------
 
-# f <- function() {
-# 
-#   # create a function, unique to this call to anyflights,
-#   # that returns the difference from when the function was called
-#   diff_from_start <- create_diff_from_start()
-#   
-#   # initiate the progress bar
-#   pb <- progress_bar$new(
-#     format = ":what",
-#     clear = FALSE, width = 60, show_after = 0)
-#   pb$tick(0)
-#   
-#   pb$message(stringr::str_pad("Total Time Elapsed", 43, side = "left"))
-#   
-#   write_tick(pb, "Downloading Flights...")
-#   
-#   
-#   sum(rnorm(5e7))
-#   
-#   write_message(pb, "Finished Downloading Flights", diff_from_start)
-#   
-#   write_tick(pb, "Downloading Airlines...")
-#   
-#   sum(rnorm(5e7))
-#   
-#   write_message(pb, "Finished Downloading Airlines", diff_from_start)
-#   write_tick(pb, "Downloading Planes...")
-#   
-#   sum(rnorm(5e7))
-#   
-#   write_message(pb, "Finished Downloading Planes", diff_from_start)
-#   
-#   
-#   write_tick(pb, "Done!")
-#   
-#   sum(rnorm(1e7)) 
-#   
-#   invisible(TRUE)
-#   
-# }
-# f()
-
 # A wrapper around str_pad for easier defaults
-pad_text <- function(msg, width = 40) {
+pad_text <- function(msg, width = 50) {
   stringr::str_pad(msg, width, side = "right")
 }
 
@@ -710,6 +678,11 @@ create_diff_from_start <- function() {
       paste0("s")
   }
 }
+
+# convert month numbers to names for progress updates
+months <- c("January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December")
 
 
 
