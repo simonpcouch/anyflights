@@ -67,8 +67,8 @@ get_flights <- function(station, year, month = 1:12, dir = NULL, ...) {
       format = ":what",
       clear = FALSE, width = 60, show_after = 0)
     pb$tick(0)
-    pb$message(stringr::str_pad("Total Time Elapsed", 43, side = "left"))
-    write_tick(pb, "Checking Arguments...")
+    pb$message(stringr::str_pad("Total Time Elapsed", 50, side = "left"))
+    write_tick(pb, "  Processing Arguments...")
     in_anyflights <- FALSE
   } else {
     pb <- list(...)$pb
@@ -94,14 +94,14 @@ get_flights <- function(station, year, month = 1:12, dir = NULL, ...) {
   # make a subdirectory inside the directory to download the raw data into
   flight_exdir <- paste0(dir, "/flights")
   
-  write_message(pb, "Finished Checking Arguments", diff_from_start)
+  write_message(pb, "Finished Processing Arguments", diff_from_start)
   
   # download flight data for each month
   purrr::map(sort(month), download_month,
              year = year, dir = dir, flight_exdir = flight_exdir, 
              pb = pb, diff_fn = diff_from_start)
 
-  write_tick(pb, "Processing Flights Data")
+  write_tick(pb, "  Processing Flights Data")
   
   # load in the flights data for each month, tidy it, and rowbind it
   flights <- purrr::map(dir(flight_exdir, full.names = TRUE),
@@ -118,6 +118,11 @@ get_flights <- function(station, year, month = 1:12, dir = NULL, ...) {
     save(flights, 
          file = paste0(dir, "/flights.rda"), 
          compress = "bzip2")
+  }
+  
+  if (!in_anyflights) {
+    write_message(pb, "Finished Processing Flights Data", diff_from_start)
+    write_tick(pb, "All Done!")
   }
   
   return(flights)

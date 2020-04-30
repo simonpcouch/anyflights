@@ -663,7 +663,9 @@ write_tick <- function(pb, update) {
 
 # call message on pb with the total elapsed time
 write_message <- function(pb, update, diff_fn) {
-  pb$message(paste0(pad_text(update), diff_fn()))
+  pb$message(paste0(pad_text(update, 
+                             50 - stringr::str_length(diff_fn())), 
+                    diff_fn()))
 }
 
 # create a function that returns the difference in time
@@ -671,7 +673,7 @@ write_message <- function(pb, update, diff_fn) {
 create_diff_from_start <- function() {
   start <- Sys.time()
   diff_from_start <- function() {
-    as.difftime(Sys.time() - start, units = "secs") %>%
+    difftime(Sys.time(), start, units = "secs") %>%
       as.numeric() %>%
       round() %>%
       as.character() %>%

@@ -67,32 +67,32 @@ anyflights <- function(station, year, month = 1:12, dir = NULL) {
     clear = FALSE, width = 60, show_after = 0)
   pb$tick(0)
   
-  pb$message(stringr::str_pad("Total Time Elapsed", 53, side = "left"))
+  pb$message(stringr::str_pad("Total Time Elapsed", 50, side = "left"))
   
   if (!is.null(dir)) {
     dir.create(dir, recursive = TRUE, showWarnings = FALSE)
   }
   
-  write_tick(pb, "Checking Arguments...")
+  write_tick(pb, "  Processing Arguments...")
   flights <- get_flights(station, year, month, dir, 
                          pb = pb, diff_fn = diff_from_start)
-  write_message(pb, "Finished Generating Flights Data", diff_from_start)
+  write_message(pb, "Finished Downloading Flights Data", diff_from_start)
   
-  write_tick(pb, "Downloading Airlines...")
+  write_tick(pb, "  Downloading Airlines...")
   airlines <- get_airlines(dir, flights)
-  write_message(pb, "Finished Generating Airlines Data", diff_from_start)
+  write_message(pb, "Finished Downloading Airlines Data", diff_from_start)
   
-  write_tick(pb, "Downloading Planes...")
+  write_tick(pb, "  Downloading Planes...")
   planes <- get_planes(year, dir, flights)
-  write_message(pb, "Finished Generating Planes Data", diff_from_start)
+  write_message(pb, "Finished Downloading Planes Data", diff_from_start)
   
-  write_tick(pb, "Downloading Airports...")
+  write_tick(pb, "  Downloading Airports...")
   airports <- get_airports(dir)
-  write_message(pb, "Finished Generating Airports Data", diff_from_start)
+  write_message(pb, "Finished Downloading Airports Data", diff_from_start)
   
-  write_tick(pb, "Downloading Weather...")
+  write_tick(pb, "  Downloading Weather...")
   weather <- get_weather(station, year, month, dir)
-  write_message(pb, "Finished Generating Weather Data", diff_from_start)
+  write_message(pb, "Finished Downloading Weather Data", diff_from_start)
   write_tick(pb, "All Done!")
   return(list(airlines = airlines,
               airports = airports,
