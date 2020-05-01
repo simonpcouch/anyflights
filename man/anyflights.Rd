@@ -43,6 +43,13 @@ The \code{anyflights()} function is a wrapper around the following functions:
   \item \code{\link{get_weather}}: Grab hourly meterological data for a given 
   airport in a given year and month
 }
+
+The recommended approach to download data for many stations (airports)
+is to supply a vector of stations to the \code{station} argument rather than 
+iterating over many calls to \code{anyflights()}. The \code{faa} column
+in dataframes outputted by \code{get_airports()} provides the FAA LID
+codes for all supported airports. See 
+?\code{\link{get_flights}} for more details on implementation.
 }
 \examples{
 # grab data on all flights departing from 

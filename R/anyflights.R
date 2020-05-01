@@ -18,6 +18,13 @@
 #'   airport in a given year and month
 #' }
 #' 
+#' The recommended approach to download data for many stations (airports)
+#' is to supply a vector of stations to the \code{station} argument rather than 
+#' iterating over many calls to \code{anyflights()}. The \code{faa} column
+#' in dataframes outputted by \code{get_airports()} provides the FAA LID
+#' codes for all supported airports. See 
+#' ?\code{\link{get_flights}} for more details on implementation.
+#' 
 #' @param station A character vector giving the origin US airports of interest
 #'  (as the FAA LID airport code).
 #'  
