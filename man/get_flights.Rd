@@ -57,6 +57,13 @@ for any US airport and time frame. Please
 note that, even with a strong internet connection, this function 
 may take several minutes to download relevant data.
 }
+\details{
+This function currently downloads data for \emph{all} stations for each month
+supplied, and \emph{then} filters out data for relevant stations. Thus, 
+the recommended approach to download data for many airports is to supply 
+a vector of airport codes to the \code{station} argument rather than 
+iterating over many calls to \code{get_flights()}.
+}
 \examples{
 
 # flights out of Portland International in June 2018
