@@ -346,7 +346,8 @@ process_month_arg <- function(month) {
   return(c(start_month, end_month, last_day))
 }
 
-get_weather_for_station <- function(station, year, dir, month_and_day_range) {
+get_weather_for_station <- function(station, year, dir, 
+                                    month_and_day_range, month) {
   
   # query setup
   weather_url <- "http://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
@@ -389,8 +390,42 @@ get_weather_for_station <- function(station, year, dir, month_and_day_range) {
   # delete the raw data
   unlink(paste0(dir, "/weather_", station, ".csv"))
   
-  # and return the data object :-)
-  weather_raw
+  # and return the tidied data object :-)
+  weather_raw %>%
+    # rename some columns
+    dplyr::rename(origin = station, 
+                  time = valid, 
+                  temp = tmpf, 
+                  dewp = dwpf, 
+                  humid = relh,
+                  wind_dir = drct, 
+                  wind_speed = sknt, 
+                  wind_gust = gust,
+                  precip = p01i, 
+                  pressure = mslp, 
+                  visib = vsby,
+                  feels_like = feel) %>%
+    # get rid of the metadata column
+    dplyr::select(-metar) %>%
+    # mutate some new useful columns
+    dplyr::mutate(time = as.POSIXct(strptime(time, "%Y-%m-%d %H:%M")),
+                  wind_speed = as.numeric(wind_speed) * 1.15078, # convert to mpg
+                  wind_gust = as.numeric(wind_speed) * 1.15078,
+                  year = as.integer(year),
+                  month = as.integer(lubridate::month(time)),
+                  day = lubridate::mday(time),
+                  hour = lubridate::hour(time),
+                  time_hour = ISOdatetime(year, month, day, hour, 0, 0)) %>%
+    # filter to only relevant rows - necessary for discontinuous month ranges
+    dplyr::filter(month %in% !!month) %>%
+    # remove duplicates / incompletes
+    dplyr::group_by(origin, month, day, hour) %>%
+    dplyr::filter(dplyr::row_number() == 1) %>%
+    dplyr::ungroup() %>%
+    # reorder columns to match the original dataset
+    dplyr::select(origin, year, month, day, hour, temp, dewp, 
+                  humid, wind_dir, wind_speed, wind_gust, precip,
+                  pressure, visib, time_hour)
 }
 
 
