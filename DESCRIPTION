@@ -28,7 +28,7 @@ Imports:
     stringr,
     curl,
     usethis,
-    Rd2roxygen,
+    roxygen2,
     progress
 URL: http://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues

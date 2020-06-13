@@ -36,5 +36,5 @@ utils::globalVariables(c(".", "AirTime", "ArrDelay", "ArrTime", "CRSArrTime",
                          "arr_time", "sched_arr_time", "dewp", "engine",
                          "engines", "humid", "manufacturer", "precip",
                          "pressure", "seats", "time_hour", "wind_dir",
-                         "wind_gust"))
+                         "wind_gust", "hasArg"))
 
