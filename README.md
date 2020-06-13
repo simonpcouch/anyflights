@@ -57,7 +57,7 @@ To install the developmental version, use the following code:
 
 ``` r
 #install.packages("remotes")
-remotes::install_github("simonpcouch/anyflights", ref = "develop")
+remotes::install_github("simonpcouch/anyflights")
 ```
 
 ### Basic Usage
