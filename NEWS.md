@@ -3,6 +3,9 @@
 ----
 
 * Add progress updates to `anyflights()` and `get_flights()` (#4)
+* Clarify documentation on best practices for downloading data on many
+stations and years (#6)
+* Performance improvements to `get_weather()` (#8)
 
 ## v 0.2.0
 
