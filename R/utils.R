@@ -611,19 +611,16 @@ write_flights_documentation <- function(name) {
   # only write documentation for the relevant datasets
   needed_docs <- sysdata[which_data]
   
-  # create the man directory
-  dir.create(paste0(name, "/man"))
+  # create the .R files in R/
+  purrr::map(paste0(name, "/R/", names(needed_docs), ".R"), file.create)
   
-  # create the .Rd files in man/
-  purrr::map(paste0(name, "/man/", names(needed_docs), ".Rd"), file.create)
-  
-  # write the .Rd data to them
+  # write the .R data to them
   purrr::map2(needed_docs, 
-              paste0(name, "/man/", names(needed_docs), ".Rd"),
+              paste0(name, "/R/", names(needed_docs), ".R"),
               writeLines)
   
-  # make .R files out of the .Rds for easier documentation editing
-  Rd2roxygen::Rd2roxygen(name)
+  # generate .Rd documentation files
+  roxygen2::roxygenize(name)
   
   invisible(TRUE)
 }
