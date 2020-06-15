@@ -3,8 +3,7 @@ Title: Query `nycflights13`-Like Air Travel Data for Given Years and Airports
 Version: 0.2.0.9000
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
-    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
-    person("RStudio", role = "cph"),
+    person("Hadley", "Wickham", , "hadley@rstudio.com", "ctb"),
     person("Jay", "Lee", , "jaylee@reed.edu", "ctb"),
     person("Dennis", "Irorere", , "denironyx@gmail.com", "ctb")
     )
