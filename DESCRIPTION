@@ -19,7 +19,6 @@ Imports:
     dplyr,
     readr,
     utils,
-    tibble,
     lubridate,
     vroom,
     glue,
