@@ -29,7 +29,7 @@ Imports:
     usethis,
     roxygen2,
     progress
-URL: http://github.com/simonpcouch/anyflights
+URL: https://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.1.1
 Encoding: UTF-8

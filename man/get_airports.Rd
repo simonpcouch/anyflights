@@ -4,7 +4,7 @@
 \alias{get_airports}
 \title{Query nycflights13-Like Airports Data}
 \source{
-\url{http://openflights.org/data.html}
+\url{https://openflights.org/data.html}
 }
 \usage{
 get_airports(dir = NULL)

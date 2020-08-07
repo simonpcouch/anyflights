@@ -16,7 +16,7 @@ airports.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://github.com/simonpcouch/anyflights}
+  \item \url{https://github.com/simonpcouch/anyflights}
   \item Report bugs at \url{https://github.com/simonpcouch/anyflights/issues}
 }
 

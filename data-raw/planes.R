@@ -16,6 +16,6 @@
 #'   \item{engine}{Type of engine.} 
 #' }
 #' @source FAA Aircraft registry,
-#' \url{http://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/}
+#' \url{https://www.faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/releasable_aircraft_download/}
 #' @keywords datasets
 NULL
