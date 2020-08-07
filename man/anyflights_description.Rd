@@ -24,14 +24,9 @@ Useful links:
 \author{
 \strong{Maintainer}: Simon P. Couch \email{simonpatrickcouch@gmail.com}
 
-Authors:
-\itemize{
-  \item Hadley Wickham \email{hadley@rstudio.com}
-}
-
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder]
+  \item Hadley Wickham \email{hadley@rstudio.com} [contributor]
   \item Jay Lee \email{jaylee@reed.edu} [contributor]
   \item Dennis Irorere \email{denironyx@gmail.com} [contributor]
 }
