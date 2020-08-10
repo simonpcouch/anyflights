@@ -84,7 +84,7 @@ may take several minutes to download relevant data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anyflights</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ note that, even with a strong internet connection, this function
 may take several minutes to download relevant data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_flights</span>(<span class='no'>station</span>, <span class='no'>year</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_flights</span>(<span class='no'>station</span>, <span class='no'>year</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +158,10 @@ March in the following year.</p></td>
       <th>dir</th>
       <td><p>An optional character string giving the directory
 to save datasets in. By default, datasets will not be saved to file.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Currently only used internally.</p></td>
     </tr>
     </table>
 
@@ -190,6 +194,13 @@ to save datasets in. By default, datasets will not be saved to file.</p></td>
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function currently downloads data for <em>all</em> stations for each month
+supplied, and <em>then</em> filters out data for relevant stations. Thus, 
+the recommended approach to download data for many airports is to supply 
+a vector of airport codes to the <code>station</code> argument rather than 
+iterating over many calls to <code>get_flights()</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='get_weather.html'>get_weather</a></code> for weather data, 
@@ -222,7 +233,7 @@ to a data-only package.</p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Simon P. Couch, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
+  <p>Developed by Simon P. Couch.</p>
 </div>
 
 <div class="pkgdown">

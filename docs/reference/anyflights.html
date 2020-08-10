@@ -83,7 +83,7 @@ this function may take several minutes to download relevant data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anyflights</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -177,6 +177,12 @@ similar to those found in the <code>nycflights13</code> data package.</p>
   airport in a given year and month</p></li>
 </ul>
 
+<p>The recommended approach to download data for many stations (airports)
+is to supply a vector of stations to the <code>station</code> argument rather than 
+iterating over many calls to <code>anyflights()</code>. The <code>faa</code> column
+in dataframes outputted by <code><a href='get_airports.html'>get_airports()</a></code> provides the FAA LID
+codes for all supported airports. See 
+?<code><a href='get_flights.html'>get_flights</a></code> for more details on implementation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='get_flights.html'>get_flights</a></code> for flight data,
@@ -208,7 +214,7 @@ of this function to a data-only package.</p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Simon P. Couch, <a href='http://hadley.nz'>Hadley Wickham</a>.</p>
+  <p>Developed by Simon P. Couch.</p>
 </div>
 
 <div class="pkgdown">
