@@ -6,8 +6,6 @@ particular interest is increasing unit testing coverage, checking supplied
 arguments more thoroughly, and getting generated data packages to pass 
 `R CMD CHECK` in a variety of edge cases.
 
-When creating a pull request, please PR to the `develop` branch.
-
 Maximal goofiness in commit messages and description of issues/PRs, including 
 but not limited to emojis, excessive punctuation (!!!), or ridiculous 
 capitalization is encouraged but not required. 

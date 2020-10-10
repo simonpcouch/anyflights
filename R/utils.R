@@ -643,6 +643,14 @@ check_as_flights_package_arguments <- function(data, name) {
               'one of "flights", "weather", "airlines", "airports", ', 
               'or "planes".')
   }
+  if (!suppressWarnings(require("nycflights13", quietly = TRUE))) {
+    warning_glue(
+      "Some internal checks in as_flights_package make use of the nycflights13 ",
+      "package, but nycflights13 is not installed. To avoid warnings in the ",
+      'future, please install nycflights13 with `install.packages("nycflights13")`.'
+    )    
+  }
+  
   if ("flights" %in% names(data)) {
     check_given_data(data[["flights"]], "flights", 19)
   }
@@ -673,11 +681,14 @@ check_given_data <- function(data_, name, ncols) {
     stop_glue("There should be {ncols} columns in the {name} data, but the ",
               "supplied {name} data has {ncol(data_)} columns.")
   }
-  if (!all(names(data_) %in% names(eval(parse(
-      text = paste0("nycflights13::", name)))))) {
-    stop_glue("The column names in the {name} data don't match the ",
-              "expected column names. See names(nycflights13::{name}) ",
-              "for expected column names.")
+  
+  if (suppressWarnings(require("nycflights13", quietly = TRUE))) {
+    if (!all(names(data_) %in% names(eval(parse(
+        text = paste0("nycflights13::", name)))))) {
+      stop_glue("The column names in the {name} data don't match the ",
+                "expected column names. See names(nycflights13::{name}) ",
+                "for expected column names.")
+    }
   }
 }
 
@@ -717,14 +728,3 @@ create_diff_from_start <- function() {
 months <- c("January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December")
-
-
-
-
-
-
-
-
-
-
-
