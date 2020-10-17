@@ -4,7 +4,7 @@
 \alias{as_flights_package}
 \title{Generate a Data Package from `anyflights` Data}
 \usage{
-as_flights_package(data, name)
+as_flights_package(data, name = make.names(deparse(substitute(data))))
 }
 \arguments{
 \item{data}{A named list of dataframes outputted by 
@@ -13,7 +13,8 @@ as_flights_package(data, name)
 \item{name}{The desired name of the resulting package as a character string.
 The package will check that the supplied package name is valid using the
 regular expression \code{.standard_regexps()$valid_package_name}, and save
-the output in a directory by the same name.}
+the output in a directory by the same name. Defaults to 
+\code{make.names(deparse(substitute(data)))}.}
 }
 \value{
 A directory containing a data-only package built around the

@@ -1,3 +1,10 @@
+## v 0.3.1
+
+----
+
+* Fix bug in `as_flights_package()` when `nycflights13` is not installed (#11)
+* Add a default `name` argument to `as_flights_package()`
+
 ## v 0.3.0
 
 ----

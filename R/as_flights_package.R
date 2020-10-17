@@ -10,13 +10,14 @@
 #' @param name The desired name of the resulting package as a character string.
 #' The package will check that the supplied package name is valid using the
 #' regular expression \code{.standard_regexps()$valid_package_name}, and save
-#' the output in a directory by the same name.
+#' the output in a directory by the same name. Defaults to 
+#' \code{make.names(deparse(substitute(data)))}.
 #' 
 #' @return A directory containing a data-only package built around the
 #' supplied data.
 #' 
 #' @export
-as_flights_package <- function(data, name) {
+as_flights_package <- function(data, name = make.names(deparse(substitute(data)))) {
   
   check_as_flights_package_arguments(data, name)
   
