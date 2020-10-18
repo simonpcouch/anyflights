@@ -643,7 +643,7 @@ check_as_flights_package_arguments <- function(data, name) {
               'one of "flights", "weather", "airlines", "airports", ', 
               'or "planes".')
   }
-  if (!suppressWarnings(require("nycflights13", quietly = TRUE))) {
+  if (!suppressWarnings(requireNamespace("nycflights13", quietly = TRUE))) {
     warning_glue(
       "Some internal checks in as_flights_package make use of the nycflights13 ",
       "package, but nycflights13 is not installed. To avoid warnings in the ",
@@ -682,7 +682,7 @@ check_given_data <- function(data_, name, ncols) {
               "supplied {name} data has {ncol(data_)} columns.")
   }
   
-  if (suppressWarnings(require("nycflights13", quietly = TRUE))) {
+  if (suppressWarnings(requireNamespace("nycflights13", quietly = TRUE))) {
     if (!all(names(data_) %in% names(eval(parse(
         text = paste0("nycflights13::", name)))))) {
       stop_glue("The column names in the {name} data don't match the ",
