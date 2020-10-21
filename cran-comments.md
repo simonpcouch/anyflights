@@ -1,10 +1,7 @@
 ## anyflights 0.3.1
 
-This submission is a resubmission following request to redirect possibly 
-invalid URLs, use regular quotes in the title field, and note the URLs of data
-sources. All redirecting URLs have been adjusted, the package now uses regular
-quotes in the title field, and all data sources are noted in the documentation
-for the relevant querying function.
+This submission is a resubmission following request to adjust redirecting URLs.
+The relevant URLs have been adjusted.
 
 ## Test environments
 
