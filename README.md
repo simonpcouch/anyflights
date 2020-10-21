@@ -1,5 +1,5 @@
 
-# anyflights <a href='https://anyflights.netlify.com'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
+# anyflights <a href='https://anyflights.netlify.app/'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project.org/package=anyflights)

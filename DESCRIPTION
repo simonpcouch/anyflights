@@ -1,5 +1,5 @@
 Package: anyflights
-Title: Query `nycflights13`-Like Air Travel Data for Given Years and Airports
+Title: Query 'nycflights13'-Like Air Travel Data for Given Years and Airports
 Version: 0.3.1
 Authors@R: c(
     person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
