@@ -181,6 +181,19 @@ skip_conditions <- function() {
   (!internet) | on_mac
 }
 
+download_file_wrapper <- function(url, file_path, quiet = TRUE){
+  rlang::with_handlers(
+    error = ~ rlang::abort(stop_glue("utils::download.file timed out before ",
+                                     "finishing downloading the file. If you are ",
+                                     "repeatedly getting a timeout error, try ",
+                                     "extending the timeout period for your R ",
+                                     "session using option(timeout = ",
+                                     "timeout_value_in_seconds)"),
+                           parent = .),
+    rlang::with_abort(utils::download.file(url, file_path, quiet= quiet))
+  )
+}
+
 # get_flights utilities --------------------------------------------------
 
 download_month <- function(year, month, dir, flight_exdir, pb, diff_fn) {
@@ -197,7 +210,7 @@ download_month <- function(year, month, dir, flight_exdir, pb, diff_fn) {
   flight_temp <- tempfile(fileext = ".zip")
   
   # download the file
-  utils::download.file(fl_url, flight_temp, quiet = TRUE)
+  download_file_wrapper(fl_url, flight_temp, quiet = TRUE)
 
   # ...and unzip it
   flight_files <- utils::unzip(flight_temp, list = TRUE)
@@ -445,7 +458,7 @@ get_planes_data <- function(year, dir, flights_data) {
   
   # download the planes data
   planes_tmp <- tempfile(fileext = ".zip")
-  utils::download.file(planes_src, planes_tmp, quiet = TRUE) 
+  download_file_wrapper(planes_src, planes_tmp, quiet = TRUE)
   
   # ...and unzip it!
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
@@ -493,7 +506,8 @@ process_planes_ref <- function(planes_lcl) {
   
   # download the planes acftref data 
   planes_tmp <- tempfile(fileext = ".zip")
-  utils::download.file(
+  
+  download_file_wrapper(
     "http://registry.faa.gov/database/yearly/ReleasableAircraft.2019.zip", 
     planes_tmp, 
     quiet = TRUE) 
