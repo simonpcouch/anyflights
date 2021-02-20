@@ -38,6 +38,13 @@
 #'   \code{POSIXct} date. Along with \code{origin}, can be used to join 
 #'   flights data to weather data.}
 #' }
+#' 
+#' @note
+#' If you are repeatedly getting a timeout error when downloading flights,
+#' this could be because your download is taking longer than the default timeout
+#' R option. You can change the timeout value for your R session by running the
+#' code \code{option(timeout = timeout_value_in_seconds)} in your console.
+#' 
 #' @source RITA, Bureau of transportation statistics,
 #'  \url{http://www.transtats.bts.gov}
 #' 
