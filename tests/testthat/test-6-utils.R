@@ -41,3 +41,19 @@ test_that("checking year argument", {
   expect_error(anyflights("PDX", 1980, 1),
                "argument 1980 is really")
 })
+
+test_that("checking download file wrapper", {
+  skip_on_cran()
+  skip_if_offline()
+  
+  # set timeout option 1 second
+  original_timeout_value <- options()[['timeout']]
+  options(timeout = 1)
+  expect_warning(expect_error(anyflights("LAX", 2020, 1), 
+               "utils::download.file timed out before finishing downloading the file"
+               ))
+  expect_warning(expect_error(get_planes(2018), 
+               "utils::download.file timed out before finishing downloading the file"
+  ))
+  options(timeout = original_timeout_value)
+})
