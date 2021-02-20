@@ -182,15 +182,15 @@ skip_conditions <- function() {
 }
 
 download_file_wrapper <- function(url, file_path, quiet = TRUE){
-  rlang::with_handlers(
-    error = ~ rlang::abort(stop_glue("utils::download.file timed out before ",
+  with_handlers(
+    error = ~ abort(stop_glue("utils::download.file timed out before ",
                                      "finishing downloading the file. If you are ",
                                      "repeatedly getting a timeout error, try ",
                                      "extending the timeout period for your R ",
                                      "session using option(timeout = ",
                                      "timeout_value_in_seconds)"),
                            parent = .),
-    rlang::with_abort(utils::download.file(url, file_path, quiet= quiet))
+    with_abort(utils::download.file(url, file_path, quiet= quiet))
   )
 }
 
