@@ -182,16 +182,20 @@ skip_conditions <- function() {
 }
 
 download_file_wrapper <- function(url, file_path, quiet = TRUE){
-  with_handlers(
-    error = ~ abort(stop_glue("utils::download.file timed out before ",
-                                     "finishing downloading the file. If you are ",
-                                     "repeatedly getting a timeout error, try ",
-                                     "extending the timeout period for your R ",
-                                     "session using option(timeout = ",
-                                     "timeout_value_in_seconds)"),
-                           parent = .),
-    with_abort(utils::download.file(url, file_path, quiet= quiet))
+  out <- tryCatch(
+    utils::download.file(url, file_path, quiet = quiet), 
+    error = function(e) {e}
   )
+  
+  if (inherits(out, "error")) {
+    stop_glue(
+      "\n\n\nutils::download.file timed out before finishing downloading the file. ", 
+      "If you are repeatedly getting a timeout error, try extending the ",
+      "timeout period for your R session using ",
+      "option(timeout = timeout_value_in_seconds)\n\n\n")
+  }
+  
+  out
 }
 
 # get_flights utilities --------------------------------------------------

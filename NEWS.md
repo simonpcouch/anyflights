@@ -1,11 +1,18 @@
+## v 0.3.1.9000
+
+---
+
+To be released as 0.3.2.
+
+* Add information about R session timeout option in the error message when
+`utils::download.file()` fails (#13 by `@patrickvossler18`)
+
 ## v 0.3.1
 
 ----
 
 * Fix bug in `as_flights_package()` when `nycflights13` is not installed (#11)
 * Add a default `name` argument to `as_flights_package()`
-* Add information about R session timeout option in the error message when
-`utils::download.file()` fails
 
 ## v 0.3.0
 
