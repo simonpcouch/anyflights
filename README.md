@@ -3,8 +3,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project.org/package=anyflights)
-[![Travis build
-status](https://travis-ci.com/simonpcouch/anyflights.svg?branch=master)](https://travis-ci.com/simonpcouch/anyflights)
+[![Build 
+status](https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg)](https://github.com/simonpcouch/anyflights/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=master)
 [![Netlify

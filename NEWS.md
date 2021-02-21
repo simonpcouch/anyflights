@@ -6,6 +6,7 @@ To be released as 0.3.2.
 
 * Add information about R session timeout option in the error message when
 `utils::download.file()` fails (#13 by `@patrickvossler18`)
+* Transition continuous integration from Travis to GitHub Actions
 
 ## v 0.3.1
 
