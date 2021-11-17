@@ -11,13 +11,19 @@ test_that("as_flights_package works", {
                     planes = dplyr::sample_n(nycflights13::planes, 30),
                     airlines = nycflights13::airlines)
   
-  as_flights_package(test_data, "testflights13")
+  create_path <- tempdir()
   
-  expect_true(file.exists("testflights13/R/flights.R"))
-  expect_true(file.exists("testflights13/man/flights.Rd"))
-  expect_true(file.exists("testflights13/data/flights.rda"))
-  expect_true(file.exists("testflights13/testflights13.Rproj"))
+  as_flights_package(test_data, "testflights13", 
+                     create_path = create_path,
+                     check_name = FALSE,
+                     use_rstudio = FALSE)
   
-  unlink("testflights13", recursive = TRUE)
+  package_path = paste0(create_path, "/testflights13")
+  
+  expect_true(file.exists(paste0(package_path, "/R/flights.R")))
+  expect_true(file.exists(paste0(package_path, "/man/flights.Rd")))
+  expect_true(file.exists(paste0(package_path, "/data/flights.rda")))
+  
+  unlink(package_path, recursive = TRUE)
 
 })

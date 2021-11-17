@@ -17,13 +17,37 @@
 #' supplied data.
 #' 
 #' @export
-as_flights_package <- function(data, name = make.names(deparse(substitute(data)))) {
+as_flights_package <- function(data, name = make.names(deparse(substitute(data))), ...) {
   
   check_as_flights_package_arguments(data, name)
   
+  d <- list(...)
+  
+  if(!(is.null(d$create_path))) {
+    name <- paste(c(as.character(d$create_path), name), collapse = "/")
+  } 
+  
+  if(!(is.null(d$check_name))) {
+    cn <- d$check_name
+  } else {
+    cn <- TRUE
+  }
+  
+  if(!(is.null(d$use_rstudio))) {
+    rs <- d$use_rstudio
+  } else {
+    # only attempt to create it if we're really sure we can
+    if (rstudioapi::isAvailable() && rlang::is_interactive()) {
+      rs <- TRUE
+    } else {
+      warning_glue("the session is not in an appropriate state to create an .RProj file",
+                   "create one manually using rstudioapi::initializeProject()")
+      rs <- FALSE
+    }
+  }
+  
   usethis::create_package(
-    name,
-    open = FALSE,
+    path = name,
     field = list(
       `Authors@R` = 'c(
       person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
@@ -41,7 +65,10 @@ as_flights_package <- function(data, name = make.names(deparse(substitute(data))
       `License` = "CC0",
       `URL` = "http://github.com/simonpcouch/anyflights",
       `BugReports` = "https://github.com/simonpcouch/anyflights/issues",
-      `Suggests` = "anyflights")
+      `Suggests` = "anyflights"),
+    rstudio = rs,
+    check_name = cn,
+    open = FALSE
   )
   
   save_flights_data(data, name)
