@@ -4,7 +4,7 @@
 \alias{as_flights_package}
 \title{Generate a Data Package from `anyflights` Data}
 \usage{
-as_flights_package(data, name = make.names(deparse(substitute(data))))
+as_flights_package(data, name = make.names(deparse(substitute(data))), ...)
 }
 \arguments{
 \item{data}{A named list of dataframes outputted by 
