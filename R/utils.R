@@ -192,7 +192,7 @@ download_file_wrapper <- function(url, file_path, quiet = TRUE){
       "\n\n\nutils::download.file timed out before finishing downloading the file. ", 
       "If you are repeatedly getting a timeout error, try extending the ",
       "timeout period for your R session using ",
-      "option(timeout = timeout_value_in_seconds)\n\n\n")
+      "options(timeout = timeout_value_in_seconds)\n\n\n")
   }
   
   out
