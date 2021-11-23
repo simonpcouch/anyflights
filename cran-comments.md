@@ -1,12 +1,10 @@
-## anyflights 0.3.1
-
-This submission is a resubmission following request to adjust redirecting URLs.
-The relevant URLs have been adjusted.
+## anyflights 0.3.2
 
 ## Test environments
 
-  - local OS X install, R 3.6.3
-  - ubuntu 16.04 (on travis-ci), R 4.0.0
+  - local OS X install, R 4.1.0
+  - windows-latest on GitHub Actions (release, 3.6)
+  - ubuntu 16.04 on GitHub Actions (release, devel)
   - win-builder (devel)
 
 ## R CMD check results
