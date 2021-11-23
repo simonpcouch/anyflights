@@ -15,10 +15,11 @@
 #' 
 #' @return A data frame with <2k rows and 2 variables:
 #' \describe{
-#' \item{carrier}{Two letter abbreviation}
+#' \item{carrier}{Two or three length letter or number abbreviation. In cases whgere the the Unique Carrier Code has been use more than once, a suffix is added.
+#'                ex. ML, ML (1). This list matches the `Reporting_Airline` field in the BTS documentation for the flights data set}
 #' \item{name}{Full name}
 #' }
-#' @source \url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
+#' @source \url{https://www.transtats.bts.gov/Download_Lookup.asp?Y11x72=Y_haVdhR_PNeeVRef}
 #' 
 #' @examples
 #' 
@@ -48,8 +49,8 @@ get_airlines <- function(dir = NULL, flights_data = NULL) {
   flights_data <- parse_flights_data_arg(flights_data)
   
   # base url for the airlines dataset
-  airlines_url <- paste0("http://www.transtats.bts.gov/Download_Lookup.asp?",
-                         "Lookup=L_UNIQUE_CARRIERS")
+  airlines_url <- paste0("https://www.transtats.bts.gov/Download_Lookup.asp?",
+                         "Y11x72=Y_haVdhR_PNeeVRef")
   
   # check if the url is active
   if(!url_exists(airlines_url)) {

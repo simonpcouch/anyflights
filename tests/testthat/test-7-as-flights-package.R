@@ -1,7 +1,7 @@
 context("as_flights_package")
 
 test_that("as_flights_package works", {
-
+  
   skip_on_cran()
   skip_on_ci()
   
@@ -19,5 +19,5 @@ test_that("as_flights_package works", {
   expect_true(file.exists("testflights13/testflights13.Rproj"))
   
   unlink("testflights13", recursive = TRUE)
-
+  
 })
