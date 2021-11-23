@@ -1,7 +1,7 @@
 context("as_flights_package")
 
 test_that("as_flights_package works", {
-
+  
   skip_on_cran()
   skip_on_ci()
   
@@ -11,19 +11,13 @@ test_that("as_flights_package works", {
                     planes = dplyr::sample_n(nycflights13::planes, 30),
                     airlines = nycflights13::airlines)
   
-  create_path <- tempdir()
+  as_flights_package(test_data, "testflights13")
   
-  as_flights_package(test_data, "testflights13", 
-                     create_path = create_path,
-                     check_name = FALSE,
-                     use_rstudio = FALSE)
+  expect_true(file.exists("testflights13/R/flights.R"))
+  expect_true(file.exists("testflights13/man/flights.Rd"))
+  expect_true(file.exists("testflights13/data/flights.rda"))
+  expect_true(file.exists("testflights13/testflights13.Rproj"))
   
-  package_path = paste0(create_path, "/testflights13")
+  unlink("testflights13", recursive = TRUE)
   
-  expect_true(file.exists(paste0(package_path, "/R/flights.R")))
-  expect_true(file.exists(paste0(package_path, "/man/flights.Rd")))
-  expect_true(file.exists(paste0(package_path, "/data/flights.rda")))
-  
-  unlink(package_path, recursive = TRUE)
-
 })
