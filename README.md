@@ -6,13 +6,13 @@ status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project
 [![Build 
 status](https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg)](https://github.com/simonpcouch/anyflights/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=master)
+coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](moved to https://app.codecov.io/gh/simonpcouch/anyflights?branch=master)
 [![Netlify
 Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://anyflights.netlify.app/)
 
 The `anyflights` package supplies a set of functions to generate air
 travel data (and data packages\!) similar to
-[`nycflights13`](https://github.com/hadley/nycflights13). With a
+[`nycflights13`](https://github.com/tidyverse/nycflights13). With a
 user-defined year and airport, the `anyflights` function will grab data
 on:
 
