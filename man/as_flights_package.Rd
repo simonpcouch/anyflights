@@ -15,6 +15,10 @@ The package will check that the supplied package name is valid using the
 regular expression \code{.standard_regexps()$valid_package_name}, and save
 the output in a directory by the same name. Defaults to 
 \code{make.names(deparse(substitute(data)))}.}
+
+\item{...}{additional arguments passed through to \link[usethis]{create_package},
+including `use_rstudio` and `check_names`. `create_path` can be used to create the
+package in a different location}
 }
 \value{
 A directory containing a data-only package built around the
