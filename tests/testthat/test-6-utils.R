@@ -3,6 +3,7 @@ context("utilities")
 test_that("checking station argument", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   expect_error(anyflights("Portland", 2018, 1),
                "consider using the get_airports")
@@ -16,6 +17,7 @@ test_that("checking station argument", {
 test_that("checking month argument", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   expect_error(anyflights("PDX", 2018, -1),
                "month values within")
@@ -33,6 +35,7 @@ test_that("checking month argument", {
 
 test_that("checking year argument", {
   skip_if(skip_conditions())
+  skip_on_os("windows")
   
   expect_error(anyflights("PDX", as.numeric(substr(Sys.Date(), 1, 4)) + 1, 1),
                "in the future")
@@ -45,6 +48,7 @@ test_that("checking year argument", {
 test_that("checking download file wrapper", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   # set timeout option 1 second
   original_timeout_value <- options()[['timeout']]

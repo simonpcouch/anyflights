@@ -19,7 +19,7 @@
 #'                ex. ML, ML (1). This list matches the `Reporting_Airline` field in the BTS documentation for the flights data set}
 #' \item{name}{Full name}
 #' }
-#' @source \url{https://www.transtats.bts.gov/Download_Lookup.asp?Y11x72=Y_haVdhR_PNeeVRef}
+#' @source \url{https://www.bts.gov/}
 #' 
 #' @examples
 #' 

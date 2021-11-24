@@ -3,6 +3,7 @@ context("get airlines")
 test_that("standard get_airports", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   airports_ <- get_airports()
   airports_orig <- nycflights13::airports

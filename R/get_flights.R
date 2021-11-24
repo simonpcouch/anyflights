@@ -46,7 +46,7 @@
 #' code \code{option(timeout = timeout_value_in_seconds)} in your console.
 #' 
 #' @source RITA, Bureau of transportation statistics,
-#'  \url{http://www.transtats.bts.gov}
+#'  \url{https://www.bts.gov}
 #' 
 #' @examples
 #' 
