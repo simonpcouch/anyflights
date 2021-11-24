@@ -1,3 +1,7 @@
+## v 0.3.2.9000
+
+Developmental version, to be released as v0.3.3.
+
 ## v 0.3.2
 
 * Add information about R session timeout option in the error message when
