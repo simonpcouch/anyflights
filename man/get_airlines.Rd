@@ -4,7 +4,7 @@
 \alias{get_airlines}
 \title{Query nycflights13-Like Airlines Data}
 \source{
-\url{https://www.transtats.bts.gov/}
+\url{https://www.bts.gov/}
 }
 \usage{
 get_airlines(dir = NULL, flights_data = NULL)

@@ -5,7 +5,7 @@
 \title{Query nycflights13-Like Flights Data}
 \source{
 RITA, Bureau of transportation statistics,
- \url{https://www.transtats.bts.gov}
+ \url{https://www.bts.gov}
 }
 \usage{
 get_flights(station, year, month = 1:12, dir = NULL, ...)
