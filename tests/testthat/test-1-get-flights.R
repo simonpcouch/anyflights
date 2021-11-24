@@ -3,6 +3,7 @@ context("get flights")
 test_that("standard get_flights (PDX, June 2018)", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   flights_ <- get_flights("PDX", 2018, 6)
 })
@@ -10,6 +11,7 @@ test_that("standard get_flights (PDX, June 2018)", {
 test_that("standard get_flights (NYC, February 2013)", {
   skip_on_cran()
   skip_if_offline()
+  skip_on_os("windows")
   
   flights_2 <- get_flights(c("JFK", "LGA", "EWR"), 2013, 2)
   
