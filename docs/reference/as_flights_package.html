@@ -55,6 +55,8 @@ CRAN or similar repositories as original packages." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -66,9 +68,15 @@ CRAN or similar repositories as original packages." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -82,7 +90,7 @@ CRAN or similar repositories as original packages." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anyflights</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -129,7 +137,7 @@ by the `anyflights()` function. Please do not submit the outputted package to
 CRAN or similar repositories as original packages.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_flights_package</span>(<span class='no'>data</span>, <span class='no'>name</span>)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>as_flights_package</span><span class='op'>(</span><span class='va'>data</span>, name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,7 +152,8 @@ CRAN or similar repositories as original packages.</p>
       <td><p>The desired name of the resulting package as a character string.
 The package will check that the supplied package name is valid using the
 regular expression <code>.standard_regexps()$valid_package_name</code>, and save
-the output in a directory by the same name.</p></td>
+the output in a directory by the same name. Defaults to 
+<code>make.names(deparse(substitute(data)))</code>.</p></td>
     </tr>
     </table>
 
@@ -164,11 +173,11 @@ supplied data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Simon P. Couch.</p>
+  <p><p>Developed by Simon P. Couch.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -176,6 +185,8 @@ supplied data.</p>
 
   
 
+
+  
 
   </body>
 </html>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Query `nycflights13`-Like Air Travel Data for Given Years and Airports • anyflights</title>
+<title>Query nycflights13-Like Air Travel Data for Given Years and Airports • anyflights</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Query `nycflights13`-Like Air Travel Data for Given Years and Airports">
+<script src="pkgdown.js"></script><meta property="og:title" content="Query nycflights13-Like Air Travel Data for Given Years and Airports">
 <meta property="og:description" content="Supplies a set of functions to query air travel data for user-
     specified years and airports. Datasets include on-time flights, airlines,
     airports, planes, and weather.">
@@ -28,6 +28,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anyflights</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -77,10 +79,10 @@
   <div class="contents col-md-9">
 <div id="anyflights-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#anyflights-" class="anchor"></a>anyflights <a href="https://anyflights.netlify.com"><img src="https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png" align="right" height="300"></a>
+<a href="#anyflights-" class="anchor" aria-hidden="true"></a>anyflights <a href="https://anyflights.netlify.app/" class="external-link"><img src="https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png" align="right" height="300"></a>
 </h1></div>
 
-<p>The <code>anyflights</code> package supplies a set of functions to generate air travel data (and data packages!) similar to <a href="https://github.com/hadley/nycflights13"><code>nycflights13</code></a>. With a user-defined year and airport, the <code>anyflights</code> function will grab data on:</p>
+<p>The <code>anyflights</code> package supplies a set of functions to generate air travel data (and data packages!) similar to <a href="https://github.com/tidyverse/nycflights13" class="external-link"><code>nycflights13</code></a>. With a user-defined year and airport, the <code>anyflights</code> function will grab data on:</p>
 <ul>
 <li>
 <code>flights</code>: all flights that departed a given airport in a given year and month</li>
@@ -99,40 +101,45 @@
 <p>The FAA usually posts all of the data for a given year during February or March of the following year. All airports with an FAA LID code are supported, to my knowledge. Data queries earlier than 2013 are significantly less thoroughly tested than those 2013 and on.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h3>
 <hr>
 <p><code>anyflights</code> is now on CRAN! Install with the following code:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"anyflights"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"anyflights"</span><span class="op">)</span></code></pre></div>
 <p>To install the developmental version, use the following code:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co">#install.packages("remotes")</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"simonpcouch/anyflights"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"simonpcouch/anyflights"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="basic-usage" class="section level3">
 <h3 class="hasAnchor">
-<a href="#basic-usage" class="anchor"></a>Basic Usage</h3>
+<a href="#basic-usage" class="anchor" aria-hidden="true"></a>Basic Usage</h3>
 <hr>
 <p>To grab a named list of 5 dataframes giving <code>nycflights13</code>-like air travel data for the Portland International Airport during June 2019, you could call:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="st">"PDX"</span>, <span class="fl">2019</span>, <span class="fl">6</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pdxflights19</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span><span class="op">(</span><span class="st">"PDX"</span>, <span class="fl">2019</span>, <span class="fl">6</span><span class="op">)</span></code></pre></div>
 <p>To grab the original <code>nycflights13</code> datasets, try:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">nycflights13_</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"JFK"</span>, <span class="st">"LGA"</span>, <span class="st">"EWR"</span>), <span class="fl">2013</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nycflights13_</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/anyflights.html">anyflights</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"JFK"</span>, <span class="st">"LGA"</span>, <span class="st">"EWR"</span><span class="op">)</span>, <span class="fl">2013</span><span class="op">)</span></code></pre></div>
 <p>The package also provides an <code>as_flights_package</code> function to create a data-only package from the data outputted by <code>anyflights</code>. To create the package from the data, just supply a name:</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">pdxflights19</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/as_flights_package.html">as_flights_package</a></span>(<span class="st">"pdxflights"</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pdxflights19</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/as_flights_package.html">as_flights_package</a></span><span class="op">(</span><span class="st">"pdxflights"</span><span class="op">)</span></code></pre></div>
 <p>and check out the data-only package in the <code>pdxflights</code> directory! 🐛</p>
 <p>If you have used <code>anyflights</code> to create a data package, please link me to the repository and I might feature it here! Please do not submit the outputted package to CRAN or similar repositories as original packages.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
+<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
 <hr>
-<p>Contributions to <code>anyflights</code>, whether in the form of bug fixes, issue reports, new code or documentation improvements are encouraged and welcome. Please see <a href="https://github.com/simonpcouch/anyflights/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> if you’re interested in contributing!</p>
+<p>Contributions to <code>anyflights</code>, whether in the form of bug fixes, issue reports, new code or documentation improvements are encouraged and welcome. Please see <a href="https://github.com/simonpcouch/anyflights/blob/master/CONTRIBUTING.md" class="external-link">CONTRIBUTING.md</a> if you’re interested in contributing!</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=anyflights">https://​cloud.r-project.org/​package=anyflights</a>
 </li>
@@ -142,45 +149,51 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>CC0</li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Simon P. Couch <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=anyflights"><img src="https://www.r-pkg.org/badges/version/anyflights" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.com/simonpcouch/anyflights"><img src="https://travis-ci.com/simonpcouch/anyflights.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/simonpcouch/anyflights?branch=master"><img src="https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://anyflights.netlify.com/"><img src="https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status" alt="Netlify Status"></a></li>
+<li><a href="https://cran.r-project.org/package=anyflights" class="external-link"><img src="https://www.r-pkg.org/badges/version/anyflights" alt="CRAN status"></a></li>
+<li><a href="https://github.com/simonpcouch/anyflights/actions" class="external-link"><img src="https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg" alt="Build status"></a></li>
+<li><a href="https://app.codecov.io/gh/simonpcouch/anyflights?branch=master" class="external-link"><img src="https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://anyflights.netlify.app/" class="external-link"><img src="https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status" alt="Netlify Status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Simon P. Couch.</p>
+  <p></p>
+<p>Developed by Simon P. Couch.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -188,6 +201,8 @@
 
   
 
+
+  
 
   </body>
 </html>
