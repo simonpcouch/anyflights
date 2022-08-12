@@ -1,8 +1,8 @@
-## anyflights 0.3.2
+## anyflights 0.3.3
 
 ## Test environments
 
-  - local OS X install, R 4.1.0
+  - local OS X install, R 4.2.0
   - windows-latest on GitHub Actions (release, 3.6)
   - ubuntu 16.04 on GitHub Actions (release, devel)
   - win-builder (devel)
