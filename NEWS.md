@@ -1,3 +1,7 @@
+## v 0.3.3.9000 (developmental version)
+
+To be released as v0.3.4.
+
 ## v 0.3.3
 
 * Fix HTML5 NOTEs on R devel.

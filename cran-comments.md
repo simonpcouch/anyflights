@@ -1,4 +1,4 @@
-## anyflights 0.3.3
+## anyflights 0.3.4
 
 ## Test environments
 
