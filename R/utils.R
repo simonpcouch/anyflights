@@ -239,9 +239,11 @@ download_month <- function(year, month, dir, flight_exdir, pb, diff_fn) {
 get_flight_data <- function(path, station) {
   
   # read in the data
-  suppressMessages(vroom::vroom(path,
-                   progress = FALSE,
-                   show_col_types = FALSE)) %>%
+  suppressWarnings(
+    suppressMessages(vroom::vroom(path,
+                     progress = FALSE,
+                     show_col_types = FALSE))
+    ) %>%
     # select relevant columns
     dplyr::select(
       year = Year, 
