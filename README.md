@@ -1,12 +1,12 @@
 
-# anyflights <a href='https://anyflights.netlify.app/'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/master/figs/logo.png' align="right" height="300" /></a>
+# anyflights <a href='https://anyflights.netlify.app/'><img src='https://raw.githubusercontent.com/simonpcouch/anyflights/main/figs/logo.png' align="right" height="300" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project.org/package=anyflights)
 [![Build 
 status](https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg)](https://github.com/simonpcouch/anyflights/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/master/graph/badge.svg)](https://app.codecov.io/gh/simonpcouch/anyflights?branch=master)
+coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/main/graph/badge.svg)](https://app.codecov.io/gh/simonpcouch/anyflights?branch=main)
 [![Netlify
 Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://anyflights.netlify.app/)
 
@@ -100,5 +100,5 @@ outputted package to CRAN or similar repositories as original packages.
 Contributions to `anyflights`, whether in the form of bug fixes, issue
 reports, new code or documentation improvements are encouraged and
 welcome. Please see
-[CONTRIBUTING.md](https://github.com/simonpcouch/anyflights/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/simonpcouch/anyflights/blob/main/CONTRIBUTING.md)
 if you’re interested in contributing\!
