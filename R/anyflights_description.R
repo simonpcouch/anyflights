@@ -2,8 +2,6 @@
 #'
 #' @description 
 #'
-#' \if{html}{\figure{logo.png}{options: align='right'}}
-#'
 #' The anyflights package supplies a set of functions to generate
 #' \code{nycflights13}-like datasets and data packages for specified years and 
 #' airports.

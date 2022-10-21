@@ -57,6 +57,8 @@ may take several minutes to download relevant data." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -68,9 +70,15 @@ may take several minutes to download relevant data." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -84,7 +92,7 @@ may take several minutes to download relevant data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anyflights</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -121,7 +129,7 @@ may take several minutes to download relevant data." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Query nycflights13-Like Flights Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/simonpcouch/anyflights/blob/master/R/get_flights.R'><code>R/get_flights.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/simonpcouch/anyflights/blob/main/R/get_flights.R'><code>R/get_flights.R</code></a></small>
     <div class="hidden name"><code>get_flights.Rd</code></div>
     </div>
 
@@ -133,7 +141,7 @@ note that, even with a strong internet connection, this function
 may take several minutes to download relevant data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_flights</span>(<span class='no'>station</span>, <span class='no'>year</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>12</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_flights</span><span class='op'>(</span><span class='va'>station</span>, <span class='va'>year</span>, month <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, dir <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,10 +176,10 @@ to save datasets in. By default, datasets will not be saved to file.</p></td>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>RITA, Bureau of transportation statistics,
- <a href='http://www.transtats.bts.gov'>http://www.transtats.bts.gov</a></p>
+ <a href='https://www.bts.gov'>https://www.bts.gov</a></p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with ~1k-500k rows and 19 variables:</p><dl'>
+    <p>A data frame with ~1k-500k rows and 19 variables:</p><dl>
 <dt><code>year, month, day</code></dt><dd><p>Date of departure</p></dd>
 <dt><code>dep_time, arr_time</code></dt><dd><p>Actual departure and arrival times, UTC.</p></dd>
 <dt><code>sched_dep_time, sched_arr_time</code></dt><dd><p>Scheduled departure and arrival 
@@ -201,6 +209,12 @@ supplied, and <em>then</em> filters out data for relevant stations. Thus,
 the recommended approach to download data for many airports is to supply 
 a vector of airport codes to the <code>station</code> argument rather than 
 iterating over many calls to <code>get_flights()</code>.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>If you are repeatedly getting a timeout error when downloading flights,
+this could be because your download is taking longer than the default timeout
+R option. You can change the timeout value for your R session by running the
+code <code>option(timeout = timeout_value_in_seconds)</code> in your console.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='get_weather.html'>get_weather</a></code> for weather data, 
@@ -212,16 +226,18 @@ or <code><a href='anyflights.html'>anyflights</a></code> for a wrapper function.
 to a data-only package.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># flights out of Portland International in June 2018</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_flights</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
-
-<span class='co'># ...or the original nycflights13 flights dataset</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_flights</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"JFK"</span>, <span class='st'>"LGA"</span>, <span class='st'>"EWR"</span>), <span class='fl'>2013</span>)
-
-<span class='co'># use the dir argument to indicate the folder to </span>
-<span class='co'># save the data in \code{dir} as "flights.rda"</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>get_flights</span>(<span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='co'># flights out of Portland International in June 2018</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>get_flights</span><span class='op'>(</span><span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># ...or the original nycflights13 flights dataset</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>get_flights</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"JFK"</span>, <span class='st'>"LGA"</span>, <span class='st'>"EWR"</span><span class='op'>)</span>, <span class='fl'>2013</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use the dir argument to indicate the folder to </span></span>
+<span class='r-in'><span class='co'># save the data in \code{dir} as "flights.rda"</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>get_flights</span><span class='op'>(</span><span class='st'>"PDX"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>, dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,11 +249,11 @@ to a data-only package.</p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Simon P. Couch.</p>
+  <p><p>Developed by Simon P. Couch.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -245,6 +261,8 @@ to a data-only package.</p></div>
 
   
 
+
+  
 
   </body>
 </html>

@@ -4,7 +4,7 @@
 \alias{get_airlines}
 \title{Query nycflights13-Like Airlines Data}
 \source{
-\url{http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}
+\url{https://www.bts.gov/}
 }
 \usage{
 get_airlines(dir = NULL, flights_data = NULL)
@@ -21,7 +21,8 @@ If not supplied, all carriers/planes will be returned.}
 \value{
 A data frame with <2k rows and 2 variables:
 \describe{
-\item{carrier}{Two letter abbreviation}
+\item{carrier}{Two or three length letter or number abbreviation. In cases whgere the the Unique Carrier Code has been use more than once, a suffix is added.
+               ex. ML, ML (1). This list matches the `Reporting_Airline` field in the BTS documentation for the flights data set}
 \item{name}{Full name}
 }
 }

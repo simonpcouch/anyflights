@@ -22,7 +22,7 @@ as_flights_package <- function(data, name = make.names(deparse(substitute(data))
   check_as_flights_package_arguments(data, name)
   
   usethis::create_package(
-    name,
+    path = name,
     open = FALSE,
     field = list(
       `Authors@R` = 'c(
