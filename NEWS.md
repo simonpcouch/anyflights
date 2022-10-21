@@ -2,6 +2,9 @@
 
 To be released as v0.3.4.
 
+* Fix typo in error message about R session options when
+`utils::download.file()` fails (#18 by `@patrickvossler18`)
+
 ## v 0.3.3
 
 * Fix HTML5 NOTEs on R devel.
