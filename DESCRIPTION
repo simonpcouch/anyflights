@@ -30,7 +30,7 @@ Imports:
     progress
 URL: https://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 Suggests: 
     testthat,

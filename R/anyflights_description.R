@@ -9,6 +9,7 @@
 #' @docType package
 #' @name anyflights_description
 #' @aliases anyflights_package
+#' @aliases anyflights-package
 #' @importFrom dplyr %>%
 "_PACKAGE"
 

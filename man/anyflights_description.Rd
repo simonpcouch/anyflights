@@ -5,6 +5,7 @@
 \alias{anyflights_description}
 \alias{_PACKAGE}
 \alias{anyflights_package}
+\alias{anyflights-package}
 \title{anyflights: `nycflights13`-Like Data for Specified Years and Airports}
 \description{
 The anyflights package supplies a set of functions to generate
