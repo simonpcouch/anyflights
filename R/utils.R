@@ -455,7 +455,7 @@ get_planes_data <- function(year, dir, flights_data) {
   
   # put together the url to query the planes data at
   planes_src <- paste0(
-    "http://registry.faa.gov/database/yearly/ReleasableAircraft.", 
+    "https://registry.faa.gov/database/yearly/ReleasableAircraft.", 
     year, 
     ".zip"
   )
@@ -466,8 +466,13 @@ get_planes_data <- function(year, dir, flights_data) {
   
   # download the planes data
   planes_tmp <- tempfile(fileext = ".zip")
-  download_file_wrapper(planes_src, planes_tmp, quiet = TRUE)
-  
+  planes_response <- 
+    httr::GET(
+      planes_src, 
+      httr::user_agent("anyflights"), 
+      httr::write_disk(planes_tmp, overwrite = TRUE)
+    )
+
   # ...and unzip it!
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
   
@@ -515,10 +520,12 @@ process_planes_ref <- function(planes_lcl) {
   # download the planes acftref data 
   planes_tmp <- tempfile(fileext = ".zip")
   
-  download_file_wrapper(
-    "http://registry.faa.gov/database/yearly/ReleasableAircraft.2019.zip", 
-    planes_tmp, 
-    quiet = TRUE) 
+  planes_response <- 
+    httr::GET(
+      "https://registry.faa.gov/database/yearly/ReleasableAircraft.2019.zip", 
+      httr::user_agent("anyflights"), 
+      httr::write_disk(planes_tmp, overwrite = TRUE)
+    )
   
   # ...and unzip it!
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
