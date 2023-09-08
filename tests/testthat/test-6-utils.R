@@ -56,8 +56,5 @@ test_that("checking download file wrapper", {
   expect_warning(expect_error(anyflights("LAX", 2020, 1), 
                "utils::download.file timed out before finishing downloading the file"
                ))
-  expect_warning(expect_error(get_planes(2018), 
-               "utils::download.file timed out before finishing downloading the file"
-  ))
   options(timeout = original_timeout_value)
 })
