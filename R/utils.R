@@ -399,14 +399,16 @@ get_weather_for_station <- function(station, year, dir,
   httr::stop_for_status(request) 
   
   # load the data, but fast !
-  weather_raw <- vroom::vroom(file = paste0(dir, 
-                                            "/weather_",
-                                            station,
-                                            ".csv"), 
-                              comment = "#", 
-                              na = "M", 
-                              col_names = TRUE,
-                              col_types = weather_col_types)
+  suppressWarnings(
+    weather_raw <- vroom::vroom(file = paste0(dir, 
+                                              "/weather_",
+                                              station,
+                                              ".csv"), 
+                                comment = "#", 
+                                na = "M", 
+                                col_names = TRUE,
+                                col_types = weather_col_types)
+  )
   
   # delete the raw data
   unlink(paste0(dir, "/weather_", station, ".csv"))
@@ -491,14 +493,14 @@ get_planes_data <- function(year, dir, flights_data) {
 
 
 process_planes_master <- function(planes_lcl) {
-  suppressMessages(
+  suppressMessages(suppressWarnings(
     # read in the data, but fast
     planes_master <- vroom::vroom(paste0(planes_lcl, "/MASTER.txt"),
                                   progress = FALSE) %>%
       # the column names change every year, but the positions have stayed the
       # same -- select by position :-(
       dplyr::select(nnum = 1, code = 3, year = 5)
-  )
+  ))
   
   # delete the temporary folder
   unlink(x = planes_lcl, recursive = TRUE)
@@ -531,15 +533,18 @@ process_planes_ref <- function(planes_lcl) {
   utils::unzip(planes_tmp, exdir = planes_lcl, junkpaths = TRUE)
   
   # read in the data, but fast
-  planes_ref <- vroom::vroom(paste0(planes_lcl, 
-                                    "/", 
-                                    "ACFTREF.txt"),
-                             col_names = planes_ref_col_names,
-                             col_types = planes_ref_col_types,
-                             progress = FALSE,
-                             skip = 1) %>%
-    dplyr::select(code, mfr, model, type_acft, 
-                  type_eng, no_eng, no_seats, speed)
+  suppressMessages(suppressWarnings(
+    planes_ref <- vroom::vroom(paste0(planes_lcl, 
+                                      "/", 
+                                      "ACFTREF.txt"),
+                               col_names = planes_ref_col_names,
+                               col_types = planes_ref_col_types,
+                               progress = FALSE,
+                               skip = 1) %>%
+      dplyr::select(code, mfr, model, type_acft, 
+                    type_eng, no_eng, no_seats, speed)
+  ))
+  
   
   # delete the temporary folder
   unlink(x = planes_lcl, recursive = TRUE)
@@ -548,22 +553,24 @@ process_planes_ref <- function(planes_lcl) {
 }
 
 join_planes_data <- function(planes_master, planes_ref) {
-  planes_master %>%
-    dplyr::inner_join(planes_ref, by = "code") %>%
-    dplyr::select(-code) %>%
-    dplyr::mutate(speed = dplyr::if_else(speed == 0, NA_character_, speed),
-                  no_eng = dplyr::if_else(no_eng == 0, NA_integer_, no_eng),
-                  no_seats = dplyr::if_else(no_seats == 0, NA_integer_, no_seats),
-                  engine = engine_types[type_eng + 1],
-                  type = acft_types[type_acft],
-                  tailnum = paste0("N", nnum),
-                  year = as.integer(year),
-                  speed = as.integer(speed)) %>%
-    dplyr::rename(manufacturer = mfr,
-                  engines = no_eng, 
-                  seats = no_seats) %>%
-    dplyr::select(tailnum, year, type, manufacturer, model, engines,
-                  seats, speed, engine)
+  suppressWarnings(
+    planes_master %>%
+      dplyr::inner_join(planes_ref, by = "code") %>%
+      dplyr::select(-code) %>%
+      dplyr::mutate(speed = dplyr::if_else(speed == 0, NA_character_, speed),
+                    no_eng = dplyr::if_else(no_eng == 0, NA_integer_, no_eng),
+                    no_seats = dplyr::if_else(no_seats == 0, NA_integer_, no_seats),
+                    engine = engine_types[type_eng + 1],
+                    type = acft_types[type_acft],
+                    tailnum = paste0("N", nnum),
+                    year = as.integer(year),
+                    speed = as.integer(speed)) %>%
+      dplyr::rename(manufacturer = mfr,
+                    engines = no_eng, 
+                    seats = no_seats) %>%
+      dplyr::select(tailnum, year, type, manufacturer, model, engines,
+                    seats, speed, engine)
+  )
 }
 
 
