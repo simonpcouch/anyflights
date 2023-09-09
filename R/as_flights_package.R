@@ -1,29 +1,57 @@
 #' Generate a Data Package from `anyflights` Data
-#' 
+#'
 #' Generate a data-only package, including documentation, from data outputted
 #' by the `anyflights()` function. Please do not submit the outputted package to
 #' CRAN or similar repositories as original packages.
-#' 
+#'
 #' @param data A named list of dataframes outputted by 
 #'   \code{\link{anyflights}}.
-#' 
+#'
 #' @param name The desired name of the resulting package as a character string.
 #' The package will check that the supplied package name is valid using the
 #' regular expression \code{.standard_regexps()$valid_package_name}, and save
 #' the output in a directory by the same name. Defaults to 
 #' \code{make.names(deparse(substitute(data)))}.
-#' 
+#' @param ... additional arguments passed through to \link[usethis]{create_package},
+#' including `use_rstudio` and `check_names`. `create_path` can be used to create the
+#' package in a different location
+#'
 #' @return A directory containing a data-only package built around the
 #' supplied data.
-#' 
+#'
 #' @export
-as_flights_package <- function(data, name = make.names(deparse(substitute(data)))) {
-  
+as_flights_package <- function(data,
+                               name = make.names(deparse(substitute(data))), ...) {
+
   check_as_flights_package_arguments(data, name)
-  
+
+  d <- list(...)
+
+  if (!(is.null(d$create_path))) {
+    name <- paste(c(as.character(d$create_path), name), collapse = "/")
+  }
+
+  if (!(is.null(d$check_name))) {
+    cn <- d$check_name
+  } else {
+    cn <- TRUE
+  }
+
+  if (!(is.null(d$use_rstudio))) {
+    rs <- d$use_rstudio
+  } else {
+    # only attempt to create it if we're really sure we can
+    if (rstudioapi::isAvailable() && rlang::is_interactive()) {
+      rs <- TRUE
+    } else {
+      warning_glue("the session is not in an appropriate state to create an .RProj file",
+                   "create one manually using rstudioapi::initializeProject()")
+      rs <- FALSE
+    }
+  }
+
   usethis::create_package(
     path = name,
-    open = FALSE,
     field = list(
       `Authors@R` = 'c(
       person("Simon P.", "Couch", , "simonpatrickcouch@gmail.com", c("aut", "cre")),
@@ -41,13 +69,16 @@ as_flights_package <- function(data, name = make.names(deparse(substitute(data))
       `License` = "CC0",
       `URL` = "http://github.com/simonpcouch/anyflights",
       `BugReports` = "https://github.com/simonpcouch/anyflights/issues",
-      `Suggests` = "anyflights")
+      `Suggests` = "anyflights"),
+    rstudio = rs,
+    check_name = cn,
+    open = FALSE
   )
-  
+
   save_flights_data(data, name)
-  
+
   write_flights_documentation(name)
-  
+
   invisible(TRUE)
-  
+
 }

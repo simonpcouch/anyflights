@@ -27,7 +27,9 @@ Imports:
     curl,
     usethis,
     roxygen2,
-    progress
+    progress,
+    rlang,
+    rstudioapi
 URL: https://github.com/simonpcouch/anyflights
 BugReports: https://github.com/simonpcouch/anyflights/issues
 RoxygenNote: 7.2.3
