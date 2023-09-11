@@ -1,14 +1,4 @@
-destination: docs
+url: https://simonpcouch.github.io/anyflights/
+template:
+  bootstrap: 5
 
-navbar:
-  type: default
-  left:
-  - text: Reference
-    href: reference/index.html      
-  - text: News
-    href: news/index.html
-  - text: How To Contribute
-    href: CONTRIBUTING.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/simonpcouch/anyflights
