@@ -1,0 +1,9 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles: {}
+last_built: 2023-09-11T16:08Z
+urls:
+  reference: https://simonpcouch.github.io/anyflights/reference
+  article: https://simonpcouch.github.io/anyflights/articles
+
