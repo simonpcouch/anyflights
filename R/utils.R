@@ -448,11 +448,11 @@ get_weather_for_station <- function(station, year, dir,
     # remove duplicates / incompletes
     dplyr::group_by(origin, month, day, hour) %>%
     dplyr::filter(dplyr::row_number() == 1) %>%
-    dplyr::ungroup() |> 
+    dplyr::ungroup() %>%
     # reorder columns to match the original dataset
     dplyr::select(origin, year, month, day, hour, temp, dewp, 
                   humid, wind_dir, wind_speed, wind_gust, precip,
-                  pressure, visib, time_hour) 
+                  pressure, visib, time_hour)
 }
 
 
