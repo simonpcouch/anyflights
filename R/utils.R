@@ -445,9 +445,11 @@ get_weather_for_station <- function(station, year, dir,
     dplyr::filter(month %in% !!month) %>%
     # fill in missing values with the only value given in a particular hour
     dplyr::group_by(time_hour) %>%
-    tidyr::fill(temp, dewp, humid, precip, pressure,     # Fill NAs
+    # fill NAs
+    tidyr::fill(temp, dewp, humid, precip, pressure,     
                 .direction = "downup") %>%  
-    dplyr::ungroup() %>% # Ungroup to return to original data structure
+    # ungroup to return to original data structure
+    dplyr::ungroup() %>% 
     # remove duplicates / incompletes
     dplyr::group_by(origin, month, day, hour) %>%
     dplyr::filter(dplyr::row_number() == 1) %>%
