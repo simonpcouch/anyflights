@@ -1,45 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/404.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/index.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/anyflights.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/anyflights_description.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/as_flights_package.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/get_airlines.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/get_airports.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/get_flights.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/get_planes.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/get_weather.html</loc>
-  </url>
-  <url>
-    <loc>https://simonpcouch.github.io/anyflights/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://simonpcouch.github.io/anyflights/404.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/CONTRIBUTING.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/authors.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/index.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/news/index.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/anyflights.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/anyflights_description.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/as_flights_package.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/get_airlines.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/get_airports.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/get_flights.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/get_planes.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/get_weather.html</loc></url>
+<url><loc>https://simonpcouch.github.io/anyflights/reference/index.html</loc></url>
 </urlset>
+
