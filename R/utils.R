@@ -438,9 +438,18 @@ get_weather_for_station <- function(station, year, dir,
                   month = as.integer(lubridate::month(time)),
                   day = lubridate::mday(time),
                   hour = lubridate::hour(time),
-                  time_hour = ISOdatetime(year, month, day, hour, 0, 0)) %>%
+                  # ensure output isn't shifted for current timezone of user
+                  time_hour = ISOdatetime(year, month, day, hour, 0, 0, 
+                                          tz = "GMT")) %>%
     # filter to only relevant rows - necessary for discontinuous month ranges
     dplyr::filter(month %in% !!month) %>%
+    # fill in missing values with the only value given in a particular hour
+    dplyr::group_by(time_hour) %>%
+    # fill NAs
+    tidyr::fill(temp, dewp, humid, precip, pressure,     
+                .direction = "downup") %>%  
+    # ungroup to return to original data structure
+    dplyr::ungroup() %>% 
     # remove duplicates / incompletes
     dplyr::group_by(origin, month, day, hour) %>%
     dplyr::filter(dplyr::row_number() == 1) %>%

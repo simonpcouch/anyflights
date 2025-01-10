@@ -1,6 +1,9 @@
 ## v 0.3.4.9000
 
-
+* Include `tz = "GMT"` argument to `ISOdatetime()` so that weather output isn't 
+  affected by the user's local timezone (#25, @ismayc).
+* Fill in missing values of `temp`, `dewp`, `humid`, `precip`, and `pressure` 
+  since they are only recorded once an hour in the source data (#25, @ismayc).
 
 ## v 0.3.4
 
