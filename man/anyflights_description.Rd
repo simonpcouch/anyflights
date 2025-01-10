@@ -3,7 +3,6 @@
 \docType{package}
 \name{anyflights_description}
 \alias{anyflights_description}
-\alias{_PACKAGE}
 \alias{anyflights_package}
 \alias{anyflights-package}
 \title{anyflights: `nycflights13`-Like Data for Specified Years and Airports}
@@ -16,6 +15,7 @@ airports.
 Useful links:
 \itemize{
   \item \url{https://github.com/simonpcouch/anyflights}
+  \item \url{https://simonpcouch.github.io/anyflights/}
   \item Report bugs at \url{https://github.com/simonpcouch/anyflights/issues}
 }
 

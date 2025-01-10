@@ -31,7 +31,7 @@ Imports:
     tidyr
 URL: https://github.com/simonpcouch/anyflights, https://simonpcouch.github.io/anyflights/
 BugReports: https://github.com/simonpcouch/anyflights/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 Suggests: 
     testthat,
