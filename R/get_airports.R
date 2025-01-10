@@ -20,7 +20,7 @@
 #'     U = unknown. N = no dst.}
 #'  \item{tzone}{IANA time zone, as determined by GeoNames webservice}
 #' }
-#' @source \url{https://openflights.org/data.html}
+#' @source `https://openflights.org/data.html`
 #' 
 #' @examples
 #' 
