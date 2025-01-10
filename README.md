@@ -3,28 +3,26 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/anyflights)](https://cran.r-project.org/package=anyflights)
-[![Build 
-status](https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg)](https://github.com/simonpcouch/anyflights/actions)
+[![R-CMD-check](https://github.com/simonpcouch/anyflights/workflows/R-CMD-check/badge.svg)](https://github.com/simonpcouch/anyflights/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/main/graph/badge.svg)](https://app.codecov.io/gh/simonpcouch/anyflights?branch=main)
+coverage](https://codecov.io/gh/simonpcouch/anyflights/branch/main/graph/badge.svg)](https://codecov.io/gh/simonpcouch/anyflights?branch=main)
 [![Netlify
 Status](https://api.netlify.com/api/v1/badges/da4987b7-5dce-4f76-bd5d-a40b0eaeca5a/deploy-status)](https://anyflights.netlify.app/)
 
 The `anyflights` package supplies a set of functions to generate air
-travel data (and data packages\!) similar to
-[`nycflights13`](https://github.com/tidyverse/nycflights13). With a
+travel data (and data packages!) similar to
+[`nycflights13`](https://github.com/hadley/nycflights13). With a
 user-defined year and airport, the `anyflights` function will grab data
 on:
 
-  - `flights`: all flights that departed a given airport in a given year
-    and month
-  - `weather`: hourly meterological data for a given airport in a given
-    year and month
-  - `airports`: airport names, FAA codes, and locations
-  - `airlines`: translation between two letter carrier (airline) codes
-    and names
-  - `planes`: construction information about each plane found in
-    `flights`
+- `flights`: all flights that departed a given airport in a given year
+  and month
+- `weather`: hourly meterological data for a given airport in a given
+  year and month
+- `airports`: airport names, FAA codes, and locations
+- `airlines`: translation between two letter carrier (airline) codes and
+  names
+- `planes`: construction information about each plane found in `flights`
 
 The package also exports a set of functions to query each of the above
 datasets individually. Each of the functions are named `get_*` followed
@@ -45,9 +43,9 @@ significantly less thoroughly tested than those 2013 and on.
 
 ### Installation
 
------
+------------------------------------------------------------------------
 
-`anyflights` is now on CRAN\! Install with the following code:
+`anyflights` is now on CRAN! Install with the following code:
 
 ``` r
 install.packages("anyflights")
@@ -62,7 +60,7 @@ remotes::install_github("simonpcouch/anyflights")
 
 ### Basic Usage
 
------
+------------------------------------------------------------------------
 
 To grab a named list of 5 dataframes giving `nycflights13`-like air
 travel data for the Portland International Airport during June 2019, you
@@ -87,18 +85,18 @@ pdxflights19 %>%
   as_flights_package("pdxflights")
 ```
 
-and check out the data-only package in the `pdxflights` directory\! 🐛
+and check out the data-only package in the `pdxflights` directory! 🐛
 
 If you have used `anyflights` to create a data package, please link me
-to the repository and I might feature it here\! Please do not submit the
+to the repository and I might feature it here! Please do not submit the
 outputted package to CRAN or similar repositories as original packages.
 
 ## Contributing
 
------
+------------------------------------------------------------------------
 
 Contributions to `anyflights`, whether in the form of bug fixes, issue
 reports, new code or documentation improvements are encouraged and
 welcome. Please see
 [CONTRIBUTING.md](https://github.com/simonpcouch/anyflights/blob/main/CONTRIBUTING.md)
-if you’re interested in contributing\!
+if you’re interested in contributing!
